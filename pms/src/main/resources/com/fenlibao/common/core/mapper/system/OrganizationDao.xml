@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fenlibao.pms.mapper.system.OrganizationDao">
+    <select id="getOrganizationByUserName" parameterType="java.lang.String" resultType="com.fenlibao.pms.model.po.idmt.OrganizationPO">
+        SELECT
+        o.id as id,
+        o.name AS name,
+        o.english_name AS englishName,
+        o.grouptype AS type,
+        o.STATUS AS status,
+        o.order_id as orderId,
+        o.parent_id AS  parentId,
+        o.parent_ids AS  parentIds,
+        o.marks AS marks
+        FROM v2_pms.`idmt_user_organization` uo
+        LEFT JOIN v2_pms.`idmt_organization` o ON  uo.organization_id = o.id
+        LEFT JOIN v2_pms.`idmt_user` u ON  uo.user_id = u.id
+        <where>
+            <if test="userName != null">
+                u.user_name = #{userName,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="getLeaguerListByOrganizationId" parameterType="java.util.HashMap" resultType="com.fenlibao.pms.model.po.idmt.UserPO">
+        SELECT
+        u.`id` as id,
+        u.`user_name` as userName,
+        u.`real_name` as realName,
+        u.`email` AS email,
+        u.`phone` AS phone,
+        u.`create_time` AS createTime
+        FROM v2_pms.`idmt_user_organization` uo
+        LEFT JOIN v2_pms.`idmt_user` u ON uo.user_id = u.id
+        <where>
+            uo.organization_id  = #{organizationId}
+            AND u.status = #{status}
+        </where>
+    </select>
+</mapper>
