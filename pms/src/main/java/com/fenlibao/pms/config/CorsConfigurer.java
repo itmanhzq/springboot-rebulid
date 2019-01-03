@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 @AutoConfigureBefore(SecurityConfig.class)
-public class CorsConfigurer  implements WebMvcConfigurer {
+public class CorsConfigurer implements WebMvcConfigurer {
 
     @Autowired
     private Config config;

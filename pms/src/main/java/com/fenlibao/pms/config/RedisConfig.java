@@ -18,7 +18,7 @@ public class RedisConfig {
     @Autowired
     Environment env;
 
-    @Bean(name="redisTemplate")
+    @Bean(name = "redisTemplate")
     RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory rcf) {
         RedisTemplate<Object, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(rcf);

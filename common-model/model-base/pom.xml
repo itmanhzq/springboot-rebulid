@@ -5,12 +5,16 @@
     <parent>
         <artifactId>common-model</artifactId>
         <groupId>com.fenlibao.v2</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>model-base</artifactId>
     <packaging>jar</packaging>
+
+    <properties>
+        <main.basedir>${basedir}/../..</main.basedir>
+    </properties>
 
     <dependencies>
         <dependency>
