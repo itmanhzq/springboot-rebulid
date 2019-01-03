@@ -20,7 +20,7 @@
     </properties>
 
     <modules>
-        <module>model-example</module>
+        <module>model-pms</module>
     </modules>
 
 </project>
