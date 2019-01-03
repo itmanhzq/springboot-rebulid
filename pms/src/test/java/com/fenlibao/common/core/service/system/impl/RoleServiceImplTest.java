@@ -1,6 +1,7 @@
 package com.fenlibao.common.core.service.system.impl;
 
 import cn.hutool.core.lang.Assert;
+import com.fenlibao.pms.PmsApplication;
 import com.fenlibao.pms.model.po.idmt.RolePO;
 import com.fenlibao.pms.model.po.idmt.RolePermissionPO;
 import com.fenlibao.pms.service.system.RoleService;
@@ -21,7 +22,7 @@ import java.util.Arrays;
  */
 @Slf4j
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = PmsApplication.class)
 public class RoleServiceImplTest {
     @Autowired
     private RoleService roleService;
