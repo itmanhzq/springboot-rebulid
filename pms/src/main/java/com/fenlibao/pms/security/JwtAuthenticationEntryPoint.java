@@ -1,7 +1,7 @@
 package com.fenlibao.pms.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fenlibao.pms.dto.base.Response;
+import com.fenlibao.base.dto.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;

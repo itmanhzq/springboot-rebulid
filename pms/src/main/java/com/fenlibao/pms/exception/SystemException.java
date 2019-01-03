@@ -11,23 +11,22 @@
 
 package com.fenlibao.pms.exception;
 
+import com.fenlibao.common.core.exception.BaseException;
 import com.fenlibao.pms.dto.base.ResponseStatus;
+import lombok.Getter;
 
 /**
  * @author Toby
  * @date 2018/11/3
  */
-public class SystemException extends RuntimeException {
+@Getter
+public class SystemException extends RuntimeException implements BaseException {
     private static final long serialVersionUID = -5279102685099291009L;
     private final String code;
 
     public SystemException(String msg, String code) {
         super(msg);
         this.code = code;
-    }
-
-    public String getCode() {
-        return code;
     }
 
     public SystemException(ResponseStatus response) {

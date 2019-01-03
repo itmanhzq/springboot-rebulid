@@ -1,6 +1,6 @@
 package com.fenlibao.pms.dto.req.system;
 
-import com.fenlibao.pms.dto.base.NonParmsAbstractPagingReq;
+import com.fenlibao.base.dto.NonParmsAbstractPagingReq;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

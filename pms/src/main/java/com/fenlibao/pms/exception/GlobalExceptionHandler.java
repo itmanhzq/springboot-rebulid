@@ -11,7 +11,7 @@
 
 package com.fenlibao.pms.exception;
 
-import com.fenlibao.pms.dto.base.Response;
+import com.fenlibao.base.dto.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;

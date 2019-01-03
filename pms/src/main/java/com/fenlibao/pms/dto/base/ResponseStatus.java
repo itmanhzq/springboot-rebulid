@@ -11,6 +11,7 @@
 
 package com.fenlibao.pms.dto.base;
 
+import com.fenlibao.base.dto.BaseResponseStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -21,7 +22,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum ResponseStatus {
+public enum ResponseStatus implements BaseResponseStatus {
     /**
      *  操作成功不另定义响应码，只返回"编码200,操作成功"
      * 自定义错误码
