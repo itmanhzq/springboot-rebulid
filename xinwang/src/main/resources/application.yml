@@ -1,0 +1,14 @@
+# common configuration
+server:
+  port: 7001
+  compression:
+    enabled: true
+
+spring:
+  profiles:
+    active: dev
+
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: com/fenlibao/xinwang/mapper/**/*.xml
+
