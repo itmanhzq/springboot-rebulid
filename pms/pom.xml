@@ -22,12 +22,17 @@
     <dependencies>
         <dependency>
             <groupId>com.fenlibao.v2</groupId>
-            <artifactId>model-pms</artifactId>
+            <artifactId>common-core</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>com.fenlibao.v2</groupId>
-            <artifactId>common-core</artifactId>
+            <artifactId>model-base</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fenlibao.v2</groupId>
+            <artifactId>model-pms</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>

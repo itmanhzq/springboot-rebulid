@@ -3,7 +3,7 @@ package com.fenlibao.pms.dto.req.system;/**
  * @date 2018/11/20
  */
 
-import com.fenlibao.pms.dto.base.AbstractPagingReq;
+import com.fenlibao.base.dto.AbstractPagingReq;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.EqualsAndHashCode;

@@ -1,6 +1,6 @@
 package com.fenlibao.pms.dto.req.stirmarketing.essay;
 
-import com.fenlibao.pms.dto.base.AbstractPagingReq;
+import com.fenlibao.base.dto.AbstractPagingReq;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
