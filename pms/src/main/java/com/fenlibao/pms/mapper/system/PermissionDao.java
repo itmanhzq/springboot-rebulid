@@ -20,7 +20,7 @@ public interface PermissionDao extends tk.mybatis.mapper.common.Mapper<Permissio
      * @param map
      * @return
      */
-    public List<PermissionPO> getMenuByType(Map map);
+    List<PermissionPO> getMenuByType(Map map);
 
     /**
      * 通过id主键查询权限信息

@@ -1,6 +1,6 @@
 package com.fenlibao.pms.controller.system;
 
-import com.fenlibao.pms.dto.base.Response;
+import com.fenlibao.base.dto.Response;
 import com.fenlibao.pms.service.system.RequestLogService;
 import com.fenlibao.pms.dto.req.system.RequestLogReq;
 import com.fenlibao.pms.dto.resp.system.RequestLogRespBody;

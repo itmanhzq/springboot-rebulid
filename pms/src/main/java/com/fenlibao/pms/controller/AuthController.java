@@ -1,7 +1,7 @@
 package com.fenlibao.pms.controller;
 
+import com.fenlibao.base.dto.Response;
 import com.fenlibao.common.core.redis.RedisPrefix;
-import com.fenlibao.pms.dto.base.Response;
 import com.fenlibao.pms.security.JwtTokenProvider;
 import com.fenlibao.pms.service.IdentifyImageService;
 import com.fenlibao.pms.service.TokenService;

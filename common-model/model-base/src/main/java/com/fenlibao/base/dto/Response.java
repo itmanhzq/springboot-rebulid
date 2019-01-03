@@ -9,9 +9,9 @@
  *
  */
 
-package com.fenlibao.pms.dto.base;
+package com.fenlibao.base.dto;
 
-import com.fenlibao.pms.exception.SystemException;
+import com.fenlibao.common.core.exception.BaseException;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
@@ -72,7 +72,7 @@ public class Response<T> implements Serializable {
                 .build();
     }
 
-    public static Response error(ResponseStatus responseStatus) {
+    public static Response error(BaseResponseStatus responseStatus) {
         return Response.builder()
                 .code(responseStatus.getCode())
                 .msg(responseStatus.getMsg())
@@ -86,7 +86,7 @@ public class Response<T> implements Serializable {
                 .build();
     }
 
-    public static Response error(SystemException e) {
+    public static Response error(BaseException e) {
         return Response.builder()
                 .code(e.getCode())
                 .msg(e.getMessage())
@@ -102,7 +102,7 @@ public class Response<T> implements Serializable {
      * @param body    返回数据
      * @return Response
      */
-    public static Response okOrError(ResponseStatus error, ResponseStatus success, boolean flag, Object... body) {
+    public static Response okOrError(BaseResponseStatus error, BaseResponseStatus success, boolean flag, Object... body) {
         if (flag) {
             return Response.builder()
                     .msg(success.getMsg())

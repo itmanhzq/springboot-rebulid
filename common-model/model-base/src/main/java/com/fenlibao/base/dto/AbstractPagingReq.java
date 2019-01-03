@@ -9,7 +9,7 @@
  *
  */
 
-package com.fenlibao.pms.dto.base;
+package com.fenlibao.base.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -17,10 +17,13 @@ import lombok.Data;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import com.fenlibao.common.core.Constants;
+import lombok.EqualsAndHashCode;
+
 /**
  * @author Toby
  * @date 2018/11/3
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 public abstract class AbstractPagingReq extends BaseReq {
 

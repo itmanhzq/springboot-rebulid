@@ -1,6 +1,6 @@
 package com.fenlibao.pms.dto.req.stirmarketing.frinedlink;
 
-import com.fenlibao.pms.dto.base.BaseReq;
+import com.fenlibao.base.dto.BaseReq;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

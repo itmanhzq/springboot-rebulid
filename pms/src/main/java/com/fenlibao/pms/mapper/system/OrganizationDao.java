@@ -4,6 +4,8 @@ import com.fenlibao.pms.model.po.idmt.OrganizationPO;
 import com.fenlibao.pms.model.po.idmt.UserPO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+import tk.mybatis.mapper.common.Mapper;
+import tk.mybatis.mapper.common.MySqlMapper;
 
 import java.util.List;
 import java.util.Map;
@@ -14,14 +16,14 @@ import java.util.Map;
  * @date 2018/11/21
  */
 @Repository
-public interface OrganizationDao extends tk.mybatis.mapper.common.Mapper<OrganizationPO>, tk.mybatis.mapper.common.MySqlMapper<OrganizationPO> {
+public interface OrganizationDao extends Mapper<OrganizationPO>, MySqlMapper<OrganizationPO> {
 
     /**
      * 获取用户所在组别id
      * @param userName
      * @return
      */
-    public OrganizationPO getOrganizationByUserName(@Param("userName")String userName);
+    OrganizationPO getOrganizationByUserName(@Param("userName")String userName);
 
 
     /**
@@ -29,7 +31,5 @@ public interface OrganizationDao extends tk.mybatis.mapper.common.Mapper<Organiz
      * @param map
      * @return List<UserPo>
      */
-    public List<UserPO> getLeaguerListByOrganizationId(Map map);
-
-
+    List<UserPO> getLeaguerListByOrganizationId(Map map);
 }

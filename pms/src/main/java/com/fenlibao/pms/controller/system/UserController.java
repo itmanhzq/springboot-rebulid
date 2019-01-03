@@ -1,7 +1,7 @@
 package com.fenlibao.pms.controller.system;
 
 
-import com.fenlibao.pms.dto.base.Response;
+import com.fenlibao.base.dto.Response;
 import com.fenlibao.pms.model.convert.RoleConvert;
 import com.fenlibao.pms.model.po.idmt.OrganizationPO;
 import com.fenlibao.pms.security.CurrentUser;

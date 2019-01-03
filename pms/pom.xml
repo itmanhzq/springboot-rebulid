@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.fenlibao.p2p.v2</groupId>
+        <groupId>com.fenlibao.v2</groupId>
         <artifactId>common-parent</artifactId>
         <version>${revision}</version>
         <relativePath>../common-parent</relativePath>
@@ -21,13 +21,18 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.fenlibao.p2p.v2</groupId>
-            <artifactId>model-pms</artifactId>
+            <groupId>com.fenlibao.v2</groupId>
+            <artifactId>common-core</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>
-            <groupId>com.fenlibao.p2p.v2</groupId>
-            <artifactId>common-core</artifactId>
+            <groupId>com.fenlibao.v2</groupId>
+            <artifactId>model-base</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fenlibao.v2</groupId>
+            <artifactId>model-pms</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>

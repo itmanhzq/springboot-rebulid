@@ -9,7 +9,7 @@
  *
  */
 
-package com.fenlibao.pms.dto.base;
+package com.fenlibao.base.dto;
 
 import java.io.Serializable;
 

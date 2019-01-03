@@ -6,7 +6,7 @@
 
     <parent>
         <artifactId>common-parent</artifactId>
-        <groupId>com.fenlibao.p2p.v2</groupId>
+        <groupId>com.fenlibao.v2</groupId>
         <version>${revision}</version>
         <relativePath>../common-parent</relativePath>
     </parent>
@@ -20,6 +20,7 @@
     </properties>
 
     <modules>
+        <module>model-base</module>
         <module>model-pms</module>
     </modules>
 

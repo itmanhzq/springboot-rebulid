@@ -1,6 +1,6 @@
 package com.fenlibao.pms.controller.marketing.publicize;
 
-import com.fenlibao.pms.dto.base.Response;
+import com.fenlibao.base.dto.Response;
 import com.fenlibao.pms.security.CurrentUser;
 import com.fenlibao.pms.security.UserPrincipal;
 import com.fenlibao.pms.dto.req.stirmarketing.frinedlink.FriendLinkDeleteReq;

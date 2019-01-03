@@ -1,6 +1,6 @@
 package com.fenlibao.pms.dto.req;
 
-import com.fenlibao.pms.dto.base.BaseReq;
+import com.fenlibao.base.dto.BaseReq;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
