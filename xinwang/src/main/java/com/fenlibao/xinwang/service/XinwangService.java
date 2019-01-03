@@ -2,7 +2,6 @@ package com.fenlibao.xinwang.service;
 
 import com.fenlibao.xinwang.dto.base.Response;
 import com.fenlibao.xinwang.model.po.BasePO;
-import com.fenlibao.xinwang.model.po.ConfirmCheckfile;
 import com.fenlibao.xinwang.model.po.DownloadCheckFile;
 
 /**
