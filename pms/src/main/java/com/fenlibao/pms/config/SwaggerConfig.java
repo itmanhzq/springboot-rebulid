@@ -34,9 +34,6 @@ public class SwaggerConfig {
     @Autowired
     Environment env;
 
-    @Autowired
-    private TypeResolver typeResolver;
-
     @Bean
     public Docket api() {
         String[] activeProfiles = env.getActiveProfiles();

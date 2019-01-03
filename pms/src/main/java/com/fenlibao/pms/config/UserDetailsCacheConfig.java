@@ -7,25 +7,29 @@ import net.sf.ehcache.CacheManager;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.authentication.CachingUserDetailsService;
 import org.springframework.security.core.userdetails.UserCache;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.cache.EhCacheBasedUserCache;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Constructor;
 
-
+/**
+ * UserDetailsCacheConfig
+ *
+ * @author chen
+ * @date 2019/1/3
+ */
 @Slf4j
-@Configuration
+@Component
 public class UserDetailsCacheConfig {
+    private static final String CACHE_NAME = "userCache";
     @Autowired
     private CustomUserDetailsServiceImpl customUserDetailsService;
 
-    private static  final  String CACHE_NAME = "userCache";
-
     @Bean
-    public UserCache userCache(){
+    public UserCache userCache() {
         try {
             EhCacheBasedUserCache userCache = new EhCacheBasedUserCache();
             val cacheManager = CacheManager.getInstance();
@@ -39,14 +43,14 @@ public class UserDetailsCacheConfig {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(){
+    public UserDetailsService userDetailsService() {
         Constructor<CachingUserDetailsService> ctor = null;
         try {
             ctor = CachingUserDetailsService.class.getDeclaredConstructor(UserDetailsService.class);
+            ctor.setAccessible(true);
         } catch (NoSuchMethodException e) {
-            log.error("[UserDetailsCacheConfig.userDetailsService]",e);
+            log.error("[UserDetailsCacheConfig.userDetailsService]", e);
         }
-        ctor.setAccessible(true);
 
         CachingUserDetailsService cachingUserDetailsService = BeanUtils.instantiateClass(ctor, customUserDetailsService);
         cachingUserDetailsService.setUserCache(userCache());

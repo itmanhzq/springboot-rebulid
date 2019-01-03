@@ -1,19 +1,19 @@
 package com.fenlibao.pms.controller;
 
 import com.fenlibao.base.dto.Response;
-import com.fenlibao.pms.security.JwtTokenProvider;
-import com.fenlibao.pms.service.IdentifyImageService;
-import com.fenlibao.pms.service.TokenService;
-import com.fenlibao.pms.service.system.UserService;
 import com.fenlibao.pms.dto.base.ResponseStatus;
+import com.fenlibao.pms.dto.req.IdentifyReq;
 import com.fenlibao.pms.dto.req.SigninReq;
+import com.fenlibao.pms.dto.resp.SignUpRespBody;
 import com.fenlibao.pms.dto.resp.SigninRespBody;
 import com.fenlibao.pms.exception.BizException;
 import com.fenlibao.pms.model.bo.IdentifyImageBO;
 import com.fenlibao.pms.model.bo.idmt.UserBO;
 import com.fenlibao.pms.model.enums.user.UserStatusEnum;
-import com.fenlibao.pms.dto.req.IdentifyReq;
-import com.fenlibao.pms.dto.resp.SignUpRespBody;
+import com.fenlibao.pms.security.JwtTokenProvider;
+import com.fenlibao.pms.service.IdentifyImageService;
+import com.fenlibao.pms.service.TokenService;
+import com.fenlibao.pms.service.system.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -93,13 +93,13 @@ public class AuthController {
             return Response.ok(SigninRespBody.get(jwt));
         } catch (AuthenticationException e) {
             return Response.error(e.getMessage());
-        }catch (BizException bz){
-            return Response.error(bz.getCode(),bz.getMessage());
+        } catch (BizException bz) {
+            return Response.error(bz.getCode(), bz.getMessage());
         }
     }
 
     @ApiOperation("用户注销")
-    @ApiResponse(code = 200,message = "请求成功",response = SigninRespBody.class)
+    @ApiResponse(code = 200, message = "请求成功", response = SigninRespBody.class)
     @PostMapping("/signup")
     public Response<SignUpRespBody> registerUser(@Valid @RequestBody SigninReq signUpRequest) {
         return Response.ok(SignUpRespBody.builder().build());
@@ -107,7 +107,7 @@ public class AuthController {
 
 
     @ApiOperation("获取滑动验证码图片")
-    @ApiResponse(code = 200,message = "请求成功",response = IdentifyImageBO.class)
+    @ApiResponse(code = 200, message = "请求成功", response = IdentifyImageBO.class)
     @PostMapping("/getIdentifyImg")
     public Response<IdentifyImageBO> getIdentifyImg() {
         try {
@@ -121,7 +121,7 @@ public class AuthController {
     }
 
     @ApiOperation("校验验证码")
-    @ApiResponse(code = 200,message = "请求成功",response = String.class)
+    @ApiResponse(code = 200, message = "请求成功", response = String.class)
     @PostMapping("/validateImg")
     public Response<String> validateImg(@RequestBody @Valid IdentifyReq req) {
         try {
