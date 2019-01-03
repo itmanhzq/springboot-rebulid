@@ -1,7 +1,6 @@
 package com.fenlibao.pms.config;
 
 import cn.hutool.core.util.ArrayUtil;
-import com.fasterxml.classmate.TypeResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,9 +32,6 @@ public class SwaggerConfig {
 
     @Autowired
     Environment env;
-
-    @Autowired
-    private TypeResolver typeResolver;
 
     @Bean
     public Docket api() {
@@ -69,7 +65,7 @@ public class SwaggerConfig {
                 .description("可点击下面（Terms of service）链接生成相关参数,然后在本页调用相关接口进行测试")
                 .version("0.0.1-SNAPSHOT")
                 .termsOfServiceUrl("http://192.168.40.227:7801")
-                .contact(new Contact("Toby","-","toby.xiong@qq.com"))
+                .contact(new Contact("Toby", "-", "toby.xiong@qq.com"))
                 .build();
     }
 
