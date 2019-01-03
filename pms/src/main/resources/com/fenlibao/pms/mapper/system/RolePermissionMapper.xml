@@ -8,7 +8,7 @@
         <result column="permission_id" property="permissionId"/>
         <result column="create_time" property="createTime"/>
         <association property="permission" column="permission_id"
-                     select="com.fenlibao.common.core.mapper.system.PermissionDao.selectById"/>
+                     select="com.fenlibao.pms.mapper.system.PermissionDao.selectById"/>
     </resultMap>
 
     <sql id="rolePermissionBasicSql">
