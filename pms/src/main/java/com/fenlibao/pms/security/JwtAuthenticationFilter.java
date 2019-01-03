@@ -1,13 +1,12 @@
 package com.fenlibao.pms.security;
-
 import com.fenlibao.common.core.WrappedHttpServletRequest;
 import com.fenlibao.pms.common.http.RequestUtil;
 import com.fenlibao.pms.common.http.ResponseUtil;
 import com.fenlibao.pms.common.json.Jackson;
 import com.fenlibao.pms.dto.base.Response;
+import com.fenlibao.pms.dto.base.ResponseStatus;
 import com.fenlibao.pms.mapper.system.UserDao;
 import com.fenlibao.pms.service.TokenService;
-import com.fenlibao.pms.dto.base.ResponseStatus;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +33,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtTokenProvider tokenProvider;
-
-    @Autowired
-    private CustomUserDetailsServiceImpl customUserDetailsServiceImpl;
 
     @Autowired
     private TokenService tokenService;

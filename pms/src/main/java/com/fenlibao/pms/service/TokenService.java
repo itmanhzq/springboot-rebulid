@@ -25,4 +25,10 @@ public interface TokenService {
      */
      boolean checkToken(Integer userId,String token);
 
+    /**
+     * 删除用户缓存
+     * @param userName
+     */
+    void deleteCache(String userName) throws Exception;
+
 }

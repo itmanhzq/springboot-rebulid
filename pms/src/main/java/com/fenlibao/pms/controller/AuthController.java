@@ -1,5 +1,6 @@
 package com.fenlibao.pms.controller;
 
+import com.fenlibao.common.core.redis.RedisPrefix;
 import com.fenlibao.pms.dto.base.Response;
 import com.fenlibao.pms.security.JwtTokenProvider;
 import com.fenlibao.pms.service.IdentifyImageService;
@@ -70,15 +71,18 @@ public class AuthController {
         if (optional.isPresent() && !userBO.getStatus().equals(UserStatusEnum.OPEN.getStatus())) {
             return Response.error(ResponseStatus.USER_NOT_LOGIN_STATUS);
         }
+
         //验证码是否通过
-      /*  String reidsKey = RedisPrefix.IDENTIFY_UUID.getPrefix().concat(loginRequest.getValidateId());
+        String reidsKey = RedisPrefix.IDENTIFY_UUID.getPrefix().concat(loginRequest.getValidateId());
         String uuId = String.valueOf(redisTemplate.boundValueOps(reidsKey).get());
         if (!loginRequest.getValidateId().equals(uuId)) {
             return Response.error(ResponseStatus.USER_LOGIN_VALIDATE_ERROR);
-        }*/
+        }
 
 
         try {
+            //删除存在磁盘的用户缓存,重新获取用户数据
+            tokenService.deleteCache(loginRequest.getUserUniqueSign());
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             loginRequest.getUserUniqueSign(),
@@ -95,6 +99,8 @@ public class AuthController {
             return Response.error(e.getMessage());
         }catch (BizException bz){
             return Response.error(bz.getCode(),bz.getMessage());
+        }catch (Exception ex){
+            return Response.error("系统异常");
         }
     }
 
