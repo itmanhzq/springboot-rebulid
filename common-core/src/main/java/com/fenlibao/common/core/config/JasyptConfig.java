@@ -1,4 +1,4 @@
-package com.fenlibao.pms.config;
+package com.fenlibao.common.core.config;
 
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.springframework.context.annotation.Configuration;
