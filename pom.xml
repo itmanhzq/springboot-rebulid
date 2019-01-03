@@ -39,6 +39,7 @@
         <module>common-model</module>
         <module>pms</module>
         <module>bid</module>
+        <module>user</module>
         <module>xinwang</module>
     </modules>
 </project>
