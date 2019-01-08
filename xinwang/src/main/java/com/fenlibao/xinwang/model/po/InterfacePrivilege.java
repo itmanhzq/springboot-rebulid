@@ -1,10 +1,13 @@
 package com.fenlibao.xinwang.model.po;
 
-import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Table(name = "interface_privilege")
 @NoArgsConstructor

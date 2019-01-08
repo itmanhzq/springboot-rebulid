@@ -1,11 +1,13 @@
 package com.fenlibao.xinwang.model.po;
 
-import java.util.Date;
-import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.Column;
+import javax.persistence.Table;
+import java.util.Date;
 
 @Table(name = "request_log")
 @NoArgsConstructor

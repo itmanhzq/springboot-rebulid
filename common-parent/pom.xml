@@ -32,6 +32,7 @@
         <dockerfile-maven.version>1.4.9</dockerfile-maven.version>
         <mybatis-generator-core.version>1.3.2</mybatis-generator-core.version>
         <qinqiu-java.version>[7.2.0, 7.2.99]</qinqiu-java.version>
+        <aspectj.version>1.9.2</aspectj.version>
         <maven.build.timestamp.format>yyyyMMdd-HHmmss</maven.build.timestamp.format>
     </properties>
 
@@ -103,7 +104,7 @@
             </dependency>
 
             <!-- for test -->
-               <dependency>
+            <dependency>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-core</artifactId>
                 <version>${mybatis-generator-core.version}</version>
@@ -121,6 +122,10 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

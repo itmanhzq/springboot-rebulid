@@ -1,6 +1,5 @@
 package com.fenlibao.xinwang.aop;
 
-import cn.hutool.http.HttpException;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.fenlibao.xinwang.dto.base.Response;
@@ -18,7 +17,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.DuplicateKeyException;
-import org.springframework.retry.annotation.Retryable;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import tk.mybatis.mapper.entity.Example;
