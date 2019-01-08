@@ -2,17 +2,27 @@ package com.fenlibao.xinwang.testcase;
 
 import cn.hutool.core.date.DateUtil;
 import com.fenlibao.xinwang.model.po.*;
-import com.fenlibao.xinwang.service.XinwangService;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.context.WebApplicationContext;
 
-import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -21,11 +31,23 @@ import java.util.*;
  * @author hubert
  * @Date: 2018/12/20 15:29
  */
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@WebAppConfiguration
 @Slf4j
 public class TestInterfaces {
 
-    @Resource
-    XinwangService xinwangService;
+    @Autowired
+    private org.springframework.web.context.WebApplicationContext context;
+
+    @Autowired
+    private WebApplicationContext webApplicationContext;
+    private MockMvc mockMvc;
+
+    @Before
+    public void setUp() throws Exception {
+        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();//建议使用这种
+    }
 
     private static String TIME_STAMP = DateUtil.format(DateUtil.date(),"yyyyMMddHHmmss");
 
@@ -36,13 +58,26 @@ public class TestInterfaces {
     }
 
     @Test
-    public void testCancelDebentureSale() {
-        CancelDebentureSale cancelDebentureSale = new CancelDebentureSale();
+    public void testCancelDebentureSale() throws Exception {
+        /*CancelDebentureSale cancelDebentureSale = new CancelDebentureSale();
         cancelDebentureSale.setTimestamp(TIME_STAMP);
         //CreditsaleRequestNo取的是6260表的creditsale_no
         cancelDebentureSale.setCreditsaleRequestNo("201709121016498aaf95d1-b");
         cancelDebentureSale.setRequestNo("201709121016498aaf95d1-b");
-        this.sendRequest("cancelDebentureSale",cancelDebentureSale);
+        this.sendRequest("cancelDebentureSale",cancelDebentureSale);*/
+
+        CancelDebentureSale cancelDebentureSale = new CancelDebentureSale();
+        cancelDebentureSale.setTimestamp(TIME_STAMP);
+        //CreditsaleRequestNo取的是6260表的creditsale_no
+        cancelDebentureSale.setCreditsaleRequestNo("201709121016498aaf95d11b");
+        cancelDebentureSale.setRequestNo("201709121016498aaf95d11b");
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
+                .post("/xinwang/cancelDebentureSale")
+                .header("accessKey", "aaa")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(cancelDebentureSale.toJson()))
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn();
     }
 
     @Test
