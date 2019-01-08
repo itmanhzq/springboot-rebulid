@@ -172,11 +172,11 @@
                     <pomElements>
                         <name/>
                         <description/>
-                        <developers/>
                         <contributors/>
                         <url/>
                         <scm/>
                         <repositories/>
+                        <parent />
                     </pomElements>
                 </configuration>
                 <executions>
