@@ -37,7 +37,7 @@
         <module>common-parent</module>
         <module>common-core</module>
         <module>common-model</module>
-        <module>pms</module>
+        <module>pms-service</module>
         <module>bid</module>
         <module>user</module>
         <module>xinwang</module>

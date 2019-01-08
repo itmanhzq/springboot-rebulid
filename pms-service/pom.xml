@@ -9,14 +9,15 @@
         <relativePath>../common-parent</relativePath>
     </parent>
 
-    <artifactId>pms</artifactId>
+    <artifactId>pms-service</artifactId>
     <version>${revision}</version>
     <packaging>jar</packaging>
-    <name>pms</name>
+    <name>pms-service</name>
     <description>pms refactoring</description>
 
     <properties>
         <main.basedir>${basedir}/..</main.basedir>
+        <start-class>com.fenlibao.pms.PmsApplication</start-class>
     </properties>
 
     <dependencies>
@@ -169,6 +170,16 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>${start-class}</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>com.spotify</groupId>
