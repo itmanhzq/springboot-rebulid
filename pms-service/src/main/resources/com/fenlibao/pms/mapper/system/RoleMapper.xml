@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fenlibao.pms.mapper.system.RoleDao">
+    <update id="updateRoleByRoleId">
+        UPDATE idmt_role
+        <set>
+            <if test="parentId != null">
+                parent_id = #{parentId},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="sort != null">
+                sort = #{sort},
+            </if>
+            <if test="updatedTime != null">
+                updated_time = #{updatedTime},
+            </if>
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+
+    <resultMap id="roleBasicMap" type="com.fenlibao.pms.model.po.idmt.RolePO">
+        <id column="id" property="id"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="name" property="name"/>
+        <result column="create_time" property="createTime"/>
+        <association property="rolePermission" column="id"
+                     select="com.fenlibao.pms.mapper.system.RolePermissionDao.selectByRoleId"/>
+    </resultMap>
+
+    <sql id="roleBasicSql">
+        SELECT id, parent_id, name, sort, create_time
+        FROM idmt_role
+    </sql>
+
+    <select id="listRoles" resultMap="roleBasicMap">
+        <include refid="roleBasicSql"/>
+        ORDER BY parent_id, sort
+    </select>
+
+    <select id="selectRoleByRoleId" resultMap="roleBasicMap">
+        <include refid="roleBasicSql"/>
+        WHERE id = #{roleId}
+    </select>
+</mapper>
