@@ -289,6 +289,9 @@ public class TestInterface {
 
         try {
 
+            po.setFlbOrderId(11);
+            po.setFlbUserId(9605);
+
             MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
                     .post("/xinwang/"+methode)
                     .header("accessKey", "aaa")

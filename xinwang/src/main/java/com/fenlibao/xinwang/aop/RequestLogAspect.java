@@ -41,12 +41,12 @@ public class RequestLogAspect {
     @Resource
     private InterfacePrivilegeMapper interfacePrivilegeMapper;
 
-    private final static String CODE = "code";
-    private final static String STATUS = "status";
-    private final static String SUCCESS = "SUCCESS";
-    private final static String ZERO = "0";
-    private final static String ONE = "1";
-    private final static String NOT_EXITS = "100007";
+    private static final  String CODE = "code";
+    private static final  String STATUS = "status";
+    private static final  String SUCCESS = "SUCCESS";
+    private static final  String ZERO = "0";
+    private static final  String ONE = "1";
+    private static final  String NOT_EXITS = "100007";
     /**
      *
      * 记录网关请求前记录报文
