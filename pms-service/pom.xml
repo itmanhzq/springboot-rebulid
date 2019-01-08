@@ -9,10 +9,10 @@
         <relativePath>../common-parent</relativePath>
     </parent>
 
-    <artifactId>pms</artifactId>
+    <artifactId>pms-service</artifactId>
     <version>${revision}</version>
     <packaging>jar</packaging>
-    <name>pms</name>
+    <name>pms-service</name>
     <description>pms refactoring</description>
 
     <properties>
