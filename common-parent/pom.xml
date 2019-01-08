@@ -167,32 +167,24 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
-                <version>${flatten-maven-plugin.version}</version>
-                <configuration>
-                    <updatePomFile>true</updatePomFile>
-                    <pomElements>
-                        <name/>
-                        <description/>
-                        <developers/>
-                        <contributors/>
-                        <url/>
-                        <scm/>
-                    </pomElements>
-                </configuration>
+                <inherited>true</inherited>
                 <executions>
                     <execution>
+                        <!-- Tidy up all POMs before they are published -->
                         <id>flatten</id>
                         <phase>process-resources</phase>
                         <goals>
                             <goal>flatten</goal>
                         </goals>
-                    </execution>
-                    <execution>
-                        <id>flatten.clean</id>
-                        <phase>clean</phase>
-                        <goals>
-                            <goal>clean</goal>
-                        </goals>
+                        <configuration>
+                            <updatePomFile>true</updatePomFile>
+                            <flattenMode>oss</flattenMode>
+                            <pomElements>
+                                <parent>expand</parent>
+                                <distributionManagement>remove</distributionManagement>
+                                <repositories>remove</repositories>
+                            </pomElements>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
