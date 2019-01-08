@@ -49,7 +49,7 @@ public enum XinwangInterfaceName {
         this.name = name;
     }
 
-    protected static Map<Class, String> maps = new HashMap<Class, String>();
+    protected static Map<Class, String> maps = new HashMap();
     static {
         for (XinwangInterfaceName xinwangInterfaceName : values()) {
             maps.put(xinwangInterfaceName.basePo,xinwangInterfaceName.serviceName);

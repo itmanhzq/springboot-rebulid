@@ -4,12 +4,25 @@ import cn.hutool.core.date.DateUtil;
 import com.fenlibao.xinwang.model.po.*;
 import com.fenlibao.xinwang.service.XinwangService;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultHandler;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
@@ -20,13 +33,20 @@ import java.util.*;
  * @author Flynn
  * @Date: 2018/12/20 15:29
  */
-//@RunWith(SpringRunner.class)
-//@SpringBootTest
+@RunWith(SpringRunner.class)
+@SpringBootTest
 @Slf4j
 public class TestInterface {
+    @Autowired
+    private WebApplicationContext wac;
     @Resource
     XinwangService xinwangService;
 
+    private MockMvc mockMvc;
+    @Before
+    public void setup() {
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+    }
 
     @Test
     public void queryTransaction() throws Exception {
@@ -244,7 +264,7 @@ public class TestInterface {
         po.setRequestNo(this.createRequestNo());
     }
 
-    public void sendRequest(String methode,BasePO po){
+    public void sendRequest2(String methode,BasePO po){
 
 
         po.setFlbOrderId(11);
@@ -263,5 +283,34 @@ public class TestInterface {
         HttpEntity<String> httpEntity = new HttpEntity(request, headers);
         ResponseEntity<String> strs = restTemplate.postForEntity(url,httpEntity,String.class );
         log.info("响应报文：{}",strs.getBody());
+    }
+
+    public void sendRequest(String methode,BasePO po){
+
+        try {
+
+            po.setFlbOrderId(11);
+            po.setFlbUserId(9605);
+
+            MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
+                    .post("/xinwang/"+methode)
+                    .header("accessKey", "aaa")
+//                    .param("req",po.toJson())
+//                    .param("age","18")
+//                    .param("ageTo","60")
+//                    .param("phone","110")
+//                    .param("size","15")
+//                    .param("page","2")
+//                    .param("sort","age,desc")
+                    .contentType(MediaType.APPLICATION_JSON_UTF8)
+                    .content(po.toJson()))
+                    .andDo(MockMvcResultHandlers.print())
+                    .andReturn();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

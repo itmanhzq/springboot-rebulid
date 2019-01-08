@@ -42,18 +42,18 @@ public class XinwangServiceImpl implements XinwangService {
     @Autowired
     private Config config;
 
-    private final static String GATEWAY = "/gateway";
-    private final static String SERVICE = "/service";
-    private final static String DOWNLOAD = "/download";
+    private static final  String GATEWAY = "/gateway";
+    private static final  String SERVICE = "/service";
+    private static final  String DOWNLOAD = "/download";
     
-    private final static String PLATFORM_NO = "platformNo";
-    private final static String KEY_SERIAL = "keySerial";
-    private final static String SERVICE_NAME = "serviceName";
-    private final static String REQ_DATA = "reqData";
-    private final static String SIGN = "sign";
+    private static final  String PLATFORM_NO = "platformNo";
+    private static final  String KEY_SERIAL = "keySerial";
+    private static final  String SERVICE_NAME = "serviceName";
+    private static final  String REQ_DATA = "reqData";
+    private static final  String SIGN = "sign";
 
-    private final static String KEY = "key";
-    private final static String VALUE = "value";
+    private static final  String KEY = "key";
+    private static final  String VALUE = "value";
     
 
 
