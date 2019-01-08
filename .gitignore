@@ -1,6 +1,7 @@
 /target/
 /RollingFiles/
 !.mvn/wrapper/maven-wrapper.jar
+.flattened-pom.xml
 
 ### STS ###
 .apt_generated
@@ -27,4 +28,3 @@
 **/logs/
 **/target/
 
-## test

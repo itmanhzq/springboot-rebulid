@@ -2,23 +2,24 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>micro-services</artifactId>
         <groupId>com.fenlibao.v2</groupId>
         <version>${revision}</version>
-        <relativePath>../</relativePath>
+        <relativePath>..</relativePath>
     </parent>
 
-    <modelVersion>4.0.0</modelVersion>
-    <packaging>pom</packaging>
     <name>common-parent</name>
-    <description>MicroServices Dependencies</description>
+    <packaging>pom</packaging>
     <artifactId>common-parent</artifactId>
+    <version>${revision}</version>
+    <description>MicroServices Dependencies</description>
 
     <properties>
         <!-- 统一依赖 -->
-        <spring.dependencies.version>2.1.1.RELEASE</spring.dependencies.version>
         <main.basedir>${basedir}/..</main.basedir>
+        <spring.dependencies.version>2.1.1.RELEASE</spring.dependencies.version>
         <java.version>1.8</java.version>
         <jjwt.version>0.9.0</jjwt.version>
         <hutool-all.version>4.1.19</hutool-all.version>
@@ -34,6 +35,8 @@
         <qinqiu-java.version>[7.2.0, 7.2.99]</qinqiu-java.version>
         <aspectj.version>1.9.2</aspectj.version>
         <maven.build.timestamp.format>yyyyMMdd-HHmmss</maven.build.timestamp.format>
+        <flatten-maven-plugin.version>1.1.0</flatten-maven-plugin.version>
+        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -65,7 +68,6 @@
                 <artifactId>jasypt-spring-boot-starter</artifactId>
                 <version>${jasypt-spring-boot-starter.version}</version>
             </dependency>
-
             <!-- For Working with Json Web Tokens (JWT) -->
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
@@ -102,7 +104,6 @@
                 <artifactId>qiniu-java-sdk</artifactId>
                 <version>${qinqiu-java.version}</version>
             </dependency>
-
             <!-- for test -->
             <dependency>
                 <groupId>org.mybatis.generator</groupId>
@@ -110,10 +111,49 @@
                 <version>${mybatis-generator-core.version}</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>com.fenlibao.v2</groupId>
+                <artifactId>common-core</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fenlibao.v2</groupId>
+                <artifactId>model-base</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fenlibao.v2</groupId>
+                <artifactId>model-pms</artifactId>
+                <version>${revision}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring.dependencies.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>dockerfile-maven-plugin</artifactId>
+                    <version>${dockerfile-maven.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>flatten-maven-plugin</artifactId>
+                    <version>${flatten-maven-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -121,11 +161,32 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
+                    <parameters>true</parameters>
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <inherited>true</inherited>
+                <executions>
+                    <execution>
+                        <!-- Tidy up all POMs before they are published -->
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                        <configuration>
+                            <updatePomFile>true</updatePomFile>
+                            <flattenMode>oss</flattenMode>
+                            <pomElements>
+                                <parent>expand</parent>
+                                <distributionManagement>remove</distributionManagement>
+                                <repositories>remove</repositories>
+                            </pomElements>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

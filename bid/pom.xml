@@ -22,12 +22,10 @@
         <dependency>
             <groupId>com.fenlibao.v2</groupId>
             <artifactId>common-core</artifactId>
-            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>com.fenlibao.v2</groupId>
             <artifactId>model-base</artifactId>
-            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
