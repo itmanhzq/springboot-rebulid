@@ -2,14 +2,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>common-model</artifactId>
         <groupId>com.fenlibao.v2</groupId>
         <version>${revision}</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
     <artifactId>model-pms</artifactId>
+    <packaging>jar</packaging>
+    <version>${revision}</version>
 
     <properties>
         <main.basedir>${basedir}/../..</main.basedir>
@@ -19,12 +21,10 @@
         <dependency>
             <groupId>com.fenlibao.v2</groupId>
             <artifactId>common-core</artifactId>
-            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>com.fenlibao.v2</groupId>
             <artifactId>model-base</artifactId>
-            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
