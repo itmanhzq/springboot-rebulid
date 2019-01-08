@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>common-parent</artifactId>
         <groupId>com.fenlibao.v2</groupId>
+        <artifactId>common-parent</artifactId>
         <version>${revision}</version>
         <relativePath>../common-parent</relativePath>
     </parent>
-
-    <artifactId>bid</artifactId>
+    <artifactId>marketing</artifactId>
+    <version>${revision}</version>
     <packaging>jar</packaging>
-    <description>bid service</description>
+    <name>marketing</name>
+    <description>marketing refactoring</description>
 
     <properties>
         <main.basedir>${basedir}/..</main.basedir>
@@ -22,10 +22,7 @@
         <dependency>
             <groupId>com.fenlibao.v2</groupId>
             <artifactId>common-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fenlibao.v2</groupId>
-            <artifactId>model-base</artifactId>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -48,11 +45,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -83,6 +75,11 @@
             <artifactId>pagehelper-spring-boot-starter</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-spring-boot-starter</artifactId>
+        </dependency>
+
         <!-- For Working with Json Web Tokens (JWT) -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
@@ -111,11 +108,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.ctrip.framework.apollo</groupId>
-            <artifactId>apollo-client</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
         </dependency>
@@ -127,6 +119,12 @@
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.qiniu</groupId>
+            <artifactId>qiniu-java-sdk</artifactId>
+        </dependency>
+
         <!-- for test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -134,14 +132,14 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.mybatis.generator</groupId>
             <artifactId>mybatis-generator-core</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fenlibao.v2</groupId>
+            <artifactId>model-pms</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
@@ -165,7 +163,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <repository>docker.fenlibao.com:5000/dev_flb_bid</repository>
+                    <repository>docker.fenlibao.com:5000/dev_flb_marketing</repository>
                     <tag>${project.version}_${maven.build.timestamp}</tag>
                     <buildArgs>
                         <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
