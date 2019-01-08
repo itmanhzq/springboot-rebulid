@@ -14,4 +14,50 @@
   <packaging>pom</packaging>
   <name>common-parent</name>
   <description>MicroServices Dependencies</description>
+  <organization>
+    <name>Fenlibao, Inc.</name>
+    <url>https://www.fenlibao.com</url>
+  </organization>
+  <developers>
+    <developer>
+      <id>xiongwei</id>
+      <email>toby.xiong@qq.com</email>
+      <roles>
+        <role>Developer</role>
+      </roles>
+    </developer>
+  </developers>
+  <distributionManagement>
+    <snapshotRepository>
+      <id>flb-1.0-snapshot</id>
+      <url>http://192.168.40.235:8081/nexus/content/repositories/flb-1.0-snapshot</url>
+    </snapshotRepository>
+  </distributionManagement>
+  <properties>
+    <hutool-all.version>4.1.19</hutool-all.version>
+    <flatten-maven-plugin.version>1.1.0</flatten-maven-plugin.version>
+    <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+    <dockerfile-maven.version>1.4.9</dockerfile-maven.version>
+    <jasypt-spring-boot-starter.version>2.1.0</jasypt-spring-boot-starter.version>
+    <qinqiu-java.version>[7.2.0, 7.2.99]</qinqiu-java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <spring.dependencies.version>2.1.1.RELEASE</spring.dependencies.version>
+    <revision>1.0-SNAPSHOT</revision>
+    <mybatis-generator-core.version>1.3.2</mybatis-generator-core.version>
+    <maven.build.timestamp.format>yyyyMMdd-HHmmss</maven.build.timestamp.format>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <mapper.version>4.0.4</mapper.version>
+    <apollo-client.version>0.10.2</apollo-client.version>
+    <modelmapper.version>2.3.0</modelmapper.version>
+    <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
+    <java.version>1.8</java.version>
+    <pagehelper-spring-boot-starter.version>1.2.9</pagehelper-spring-boot-starter.version>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <jjwt.version>0.9.0</jjwt.version>
+    <aspectj.version>1.9.2</aspectj.version>
+    <mybatis-spring-boot-starter.version>1.3.2</mybatis-spring-boot-starter.version>
+    <main.basedir>D:\flb\micro-services\common-parent/..</main.basedir>
+  </properties>
 </project>

@@ -17,6 +17,9 @@
     <description>MicroServices Dependencies</description>
 
     <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
         <!-- 统一依赖 -->
         <main.basedir>${basedir}/..</main.basedir>
         <spring.dependencies.version>2.1.1.RELEASE</spring.dependencies.version>
@@ -169,14 +172,11 @@
                 <artifactId>flatten-maven-plugin</artifactId>
                 <configuration>
                     <updatePomFile>true</updatePomFile>
+                    <flattenMode>oss</flattenMode>
                     <pomElements>
-                        <name/>
-                        <description/>
-                        <contributors/>
-                        <url/>
-                        <scm/>
                         <repositories/>
                         <parent />
+                        <properties />
                     </pomElements>
                 </configuration>
                 <executions>
