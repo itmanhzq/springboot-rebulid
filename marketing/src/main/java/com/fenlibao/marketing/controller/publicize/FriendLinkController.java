@@ -1,11 +1,9 @@
-package com.fenlibao.pms.controller.marketing.publicize;
+package com.fenlibao.marketing.controller.publicize;
 
 import com.fenlibao.base.dto.Response;
 import com.fenlibao.pms.dto.req.marketing.publicize.frinedlink.*;
-import com.fenlibao.pms.dto.resp.marketing.publicize.FriendLinkRespBody;
-import com.fenlibao.pms.security.CurrentUser;
-import com.fenlibao.pms.security.UserPrincipal;
 import com.fenlibao.pms.dto.resp.marketing.publicize.FriendLinkListRespBody;
+import com.fenlibao.pms.dto.resp.marketing.publicize.FriendLinkRespBody;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -50,8 +48,7 @@ public class FriendLinkController {
     @PostMapping("/addFriendLink")
     @PreAuthorize("hasPermission('friendLink','add')")
     @ApiResponse(code = 200, message = "请求成功", response = Boolean.class)
-    public Response<Boolean> addFriendLink(@ApiIgnore @CurrentUser UserPrincipal userPrincipal,
-                                      @RequestBody @Valid FriendLinkAddReq friendLinkAddReq) {
+    public Response<Boolean> addFriendLink(@RequestBody @Valid FriendLinkAddReq friendLinkAddReq) {
 
         return Response.ok();
     }
@@ -60,8 +57,7 @@ public class FriendLinkController {
     @PostMapping("/updateFriendLink")
     @PreAuthorize("hasPermission('friendLink','update')")
     @ApiResponse(code = 200, message = "请求成功", response = Boolean.class)
-    public Response<Boolean> updateFriendLink(@ApiIgnore @CurrentUser UserPrincipal userPrincipal,
-                                         @RequestBody @Valid FriendLinkUpdateReq friendLinkUpdateReq) {
+    public Response<Boolean> updateFriendLink(@RequestBody @Valid FriendLinkUpdateReq friendLinkUpdateReq) {
 
         return Response.ok();
     }

@@ -41,5 +41,6 @@
         <module>bid</module>
         <module>user</module>
         <module>xinwang</module>
+        <module>marketing</module>
     </modules>
 </project>
