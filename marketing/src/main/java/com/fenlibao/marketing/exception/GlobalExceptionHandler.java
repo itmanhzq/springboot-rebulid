@@ -105,11 +105,4 @@ public class GlobalExceptionHandler {
                 .body(invalidArguments)
                 .build();
     }
-
-    private Response getUnauthorizedResp(RuntimeException e) {
-        return Response.builder()
-                .code(String.valueOf(HttpServletResponse.SC_UNAUTHORIZED))
-                .msg(e.getMessage())
-                .build();
-    }
 }

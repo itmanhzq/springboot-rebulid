@@ -1,4 +1,4 @@
-package com.fenlibao.marketing.controller.publicize;
+package com.fenlibao.pms.controller.marketing.publicize;
 
 import com.fenlibao.base.dto.Response;
 import com.fenlibao.pms.dto.req.marketing.publicize.frinedlink.*;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 

@@ -29,7 +29,7 @@ public class LombokConfig extends PluginAdapter {
 
 
     public LombokConfig() {
-        annotation= new HashMap<String,FullyQualifiedJavaType>();
+        annotation= new HashMap<>();
         FullyQualifiedJavaType annotationDate  = new FullyQualifiedJavaType("lombok.Data");
         FullyQualifiedJavaType annotationBuilder  = new FullyQualifiedJavaType("lombok.Builder");
         FullyQualifiedJavaType annotationAllArgsConstructor = new FullyQualifiedJavaType("lombok.AllArgsConstructor");

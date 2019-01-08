@@ -1,4 +1,4 @@
-package com.fenlibao.marketing.controller.publicize;
+package com.fenlibao.pms.controller.marketing.publicize;
 
 
 import com.fenlibao.base.dto.Response;
