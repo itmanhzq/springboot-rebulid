@@ -44,7 +44,7 @@ public class ArticleRespBody extends BaseReq {
     @ApiModelProperty(value = "排序时间", required = true,example = "yyyy-MM-dd HH:mm:ss")
     private String sortTime;
 
-    @ApiModelProperty(value = "是否置顶 true:是; false:否", required = true)
+    @ApiModelProperty(value = "是否置顶 0:是; 1:否", required = true)
     private Boolean isStickTop;
 
     @ApiModelProperty(value = "文章状态 [1.未发布，2.已发布，3.预发布]", required = true)

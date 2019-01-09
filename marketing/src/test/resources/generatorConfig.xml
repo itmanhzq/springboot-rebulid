@@ -36,9 +36,6 @@
                              targetProject="src/main/java"
                              type="XMLMAPPER"/>
 
-        <table tableName="publicize_article" domainObjectName="ArticlePO"/>
-        <table tableName="publicize_content" domainObjectName="ContentPO"/>
-        <table tableName="publicize_friend_link" domainObjectName="FriendLinkPO"/>
-        <table tableName="publicize_post" domainObjectName="PostPO"/>
-        </context>
+        <table tableName="publicize_bulletin" domainObjectName="BulletinPO"/>
+    </context>
 </generatorConfiguration>

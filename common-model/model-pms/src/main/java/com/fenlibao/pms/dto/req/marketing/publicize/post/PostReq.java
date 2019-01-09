@@ -27,9 +27,9 @@ public class PostReq extends BaseReq {
     @NotBlank(message = "排序时间不能为空")
     private String sortTime;
 
-    @ApiModelProperty(value = "是否置顶 true:是; false:否", required = true)
+    @ApiModelProperty(value = "是否置顶 0:是; 1:否", required = true)
     @NotBlank(message = "是否置顶不能为空")
-    private Boolean topPlace;
+    private Integer topPlace;
 
     @ApiModelProperty(value = "公告状态 [1.未发布，2.已发布，3.预发布]", required = true)
     @NotBlank(message = "请选择文章状态")
