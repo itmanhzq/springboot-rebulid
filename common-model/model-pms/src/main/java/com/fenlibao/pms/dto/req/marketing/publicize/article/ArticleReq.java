@@ -45,7 +45,7 @@ public class ArticleReq extends BaseReq {
     @NotBlank(message = "排序时间不能为空")
     private String sortTime;
 
-    @ApiModelProperty(value = "是否置顶 0:是; 1:否", required = true)
+    @ApiModelProperty(value = "是否置顶 true:是; false:否", required = true)
     @NotBlank(message = "是否置顶不能为空")
     private Boolean isStickTop;
 
