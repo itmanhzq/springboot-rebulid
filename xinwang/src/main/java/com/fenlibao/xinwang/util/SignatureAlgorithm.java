@@ -5,12 +5,17 @@ package com.fenlibao.xinwang.util;
  */
 public enum SignatureAlgorithm {
 
-	SHA1WithRSA("SHA1WithRSA"),
-	
-	MD5WithRSA("MD5WithRSA");
-	
+	/**
+	 *  a
+	 */
+	SHA_1_WITH_RSA("SHA1WithRSA");
+
 	private String signAlgorithm;
 
+	/**
+	 * a
+	 * @param signAlgorithm
+	 */
 	private SignatureAlgorithm(String signAlgorithm) {
 		this.signAlgorithm = signAlgorithm;
 	}
