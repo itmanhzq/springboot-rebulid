@@ -12,10 +12,10 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum ResponseStatus {
 
-    COMMON_OPERATION_SUCCESS(200,"操作成功"),
-    COMMON_OPERATION_FAIL(500,"失败");
+    COMMON_OPERATION_SUCCESS("200","操作成功"),
+    COMMON_OPERATION_FAIL("500","失败");
 
-    private int code;
+    private String code;
 
     private String msg;
 

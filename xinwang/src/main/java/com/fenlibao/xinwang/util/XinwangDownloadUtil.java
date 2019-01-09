@@ -9,8 +9,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
 import java.util.List;
 
@@ -25,13 +23,10 @@ public class XinwangDownloadUtil {
     /**
      * 建议尽量用hutool的http工具，此方法仅限于新网下载对账文件接口，hutool貌似传输文件流有问题
      */
-    public static CloseableHttpResponse post(String url, List<BasicNameValuePair> params) throws Exception {
+    public static CloseableHttpResponse post(String url, List<BasicNameValuePair> params) throws  IOException {
         CloseableHttpResponse response = null;
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
-            HostnameVerifier hv = (urlHostName, session) -> true;
-            HttpsURLConnection.setDefaultHostnameVerifier(hv);
-
             HttpPost httppost = new HttpPost(url);
             RequestConfig requestConfig = RequestConfig
                     .custom()

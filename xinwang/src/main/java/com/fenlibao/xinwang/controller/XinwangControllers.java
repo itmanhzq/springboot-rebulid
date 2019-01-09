@@ -1,6 +1,7 @@
 package com.fenlibao.xinwang.controller;
 
-import com.fenlibao.xinwang.dto.base.Response;
+import com.fenlibao.base.dto.Response;
+import com.fenlibao.xinwang.exception.XinwangException;
 import com.fenlibao.xinwang.model.po.*;
 import com.fenlibao.xinwang.service.XinwangService;
 import io.swagger.annotations.ApiOperation;
@@ -26,7 +27,7 @@ public class XinwangControllers {
 
     @ApiOperation("取消债权转让")
     @PostMapping("/cancelDebentureSale")
-    public Response queryByRequestNo(@RequestBody CancelDebentureSale req) throws Exception {
+    public Response queryByRequestNo(@RequestBody CancelDebentureSale req)  {
         try {
             return xinwangService.serviceRequest(req);
         } catch (Exception e) {

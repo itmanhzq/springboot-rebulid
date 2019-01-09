@@ -2,7 +2,7 @@ package com.fenlibao.xinwang.aop;
 
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.fenlibao.xinwang.dto.base.Response;
+import com.fenlibao.base.dto.Response;
 import com.fenlibao.xinwang.dto.base.ResponseStatus;
 import com.fenlibao.xinwang.mapper.InterfacePrivilegeMapper;
 import com.fenlibao.xinwang.mapper.RequestLogMapper;
@@ -52,7 +52,7 @@ public class RequestLogAspect {
      * 记录网关请求前记录报文
      */
     @Before("execution(* com.fenlibao.xinwang.service.XinwangService.*(..))")
-    public void doBefore(JoinPoint joinPoint) throws Throwable {
+    public void doBefore(JoinPoint joinPoint)  {
          RequestLog requestLog = new RequestLog();
         try {
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
@@ -79,16 +79,13 @@ public class RequestLogAspect {
             requestLog.setStatus(RequestState.DTJ.getCode());
             requestLog.setRequestParams(basePO.toJsonFilterFlb());
             requestLog.setInterfaceUser(interfacePrivilege.getInterfaceUser());
-            try {
-                requestLogMapper.insert(requestLog);
-            } catch (DuplicateKeyException e) {
-            }
+            requestLogMapper.insert(requestLog);
         } catch (Exception e) {
-            log.error("记录请求报文：{}", requestLog.toString());
-            log.error("请求出错信息：{}",e.getMessage());
+            if(!e.getClass().equals(DuplicateKeyException.class.getClass())){
+                log.error("记录请求报文：{}", requestLog.toString());
+                log.error("请求出错信息：{}",e.getMessage());
+            }
         }
-
-
     }
     /**
      *
@@ -119,7 +116,7 @@ public class RequestLogAspect {
             requestLog.setUpdateTime(new Date());
             Object body = response.getBody();
             JSONObject jsonObject = JSONUtil.parseObj(body);
-            if(response.getCode()==ResponseStatus.COMMON_OPERATION_SUCCESS.getCode()){
+            if(ResponseStatus.COMMON_OPERATION_SUCCESS.getCode().equals(response.getCode())){
                 if(ZERO.equals(jsonObject.get(CODE)) && SUCCESS.equals(jsonObject.get(STATUS))){
                     status = RequestState.CG.getCode() ;
                 }
@@ -127,7 +124,7 @@ public class RequestLogAspect {
                     status = RequestState.SB.getCode();
                 }
             }
-            if(response.getCode()==ResponseStatus.COMMON_OPERATION_FAIL.getCode()){
+            if(ResponseStatus.COMMON_OPERATION_FAIL.getCode().equals(response.getCode())){
                 if(ONE.equals(jsonObject.get(CODE))){
                     status = RequestState.SB.getCode();
                 }
@@ -136,8 +133,11 @@ public class RequestLogAspect {
                 }
             }
             requestLog.setStatus(status);
-            Example example = Example.builder(RequestLog.class)
-                    .where(Sqls.custom().andEqualTo("requestNo", requestLog.getRequestNo()))
+            Example example = Example
+                    .builder(RequestLog.class)
+                    .where(Sqls
+                            .custom()
+                            .andEqualTo("requestNo", requestLog.getRequestNo()))
                     .build();
             requestLogMapper.updateByExampleSelective(requestLog,example);
         } catch (Exception e) {
