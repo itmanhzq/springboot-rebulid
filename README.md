@@ -85,7 +85,7 @@ $ git add .
 
 $ git commit -m "update README.md"
 
-$ git substree push -P pms-service pms-service-origin dev
+$ git substree push -P pms-service pms-service-origin dev --quash
 ```
 
 这样就提及到了子项目中。
@@ -95,7 +95,7 @@ $ git substree push -P pms-service pms-service-origin dev
 由于我们是多人协作开发，一个项目可能会有多个人进行开发，所以为了保持代码的一致，我们需要拉取远程仓库中的代码：
 
 ```git
-$ git substree pull -P pms-service pms-service-upstream dev
+$ git substree pull -P pms-service pms-service-upstream dev --quash
 ```
 
 这样就基本大功告成啦！更多详细的命令可以通过`git substree --help`查看。
