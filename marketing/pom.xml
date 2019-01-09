@@ -5,12 +5,12 @@
     <parent>
         <groupId>com.fenlibao.v2</groupId>
         <artifactId>common-parent</artifactId>
-        <version>${revision}</version>
+        <version>1.0-SNAPSHOT</version>
         <relativePath>../common-parent</relativePath>
     </parent>
     <artifactId>marketing</artifactId>
-    <version>${revision}</version>
     <packaging>jar</packaging>
+    <version>1.0-SNAPSHOT</version>
     <name>marketing</name>
     <description>marketing refactoring</description>
 
@@ -22,7 +22,6 @@
         <dependency>
             <groupId>com.fenlibao.v2</groupId>
             <artifactId>common-core</artifactId>
-            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

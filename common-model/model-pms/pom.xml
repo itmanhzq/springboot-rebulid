@@ -6,12 +6,12 @@
     <parent>
         <artifactId>common-model</artifactId>
         <groupId>com.fenlibao.v2</groupId>
-        <version>${revision}</version>
+        <version>1.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>model-pms</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <version>${revision}</version>
 
     <properties>
         <main.basedir>${basedir}/../..</main.basedir>
