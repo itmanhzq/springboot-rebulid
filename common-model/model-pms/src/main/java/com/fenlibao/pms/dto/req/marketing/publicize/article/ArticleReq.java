@@ -15,6 +15,9 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class ArticleReq extends BaseReq {
 
+ @ApiModelProperty(value = "用户id,请求营销服务时使用")
+ private Integer userId;
+
     @ApiModelProperty(value = "文章标题", required = true)
     @NotBlank(message = "文章标题不能为空")
     private String title;
@@ -65,5 +68,6 @@ public class ArticleReq extends BaseReq {
     @ApiModelProperty(value = "文章内容", required = true)
     @NotBlank(message = "文章内容不能为空")
     private String context;
+
 
 }
