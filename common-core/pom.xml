@@ -6,12 +6,13 @@
     <parent>
         <groupId>com.fenlibao.v2</groupId>
         <artifactId>common-parent</artifactId>
-        <version>${revision}</version>
+        <version>1.0-SNAPSHOT</version>
         <relativePath>../common-parent</relativePath>
     </parent>
 
     <artifactId>common-core</artifactId>
     <packaging>jar</packaging>
+    <version>${parent.version}</version>
     <description>common core</description>
 
     <properties>
