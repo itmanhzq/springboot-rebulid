@@ -54,5 +54,5 @@ public class EstablishProject extends BasePO {
     private String platformUserNo;
 
     @ApiModelProperty(value = "标的扩展信息")
-    private Object extend;
+    private AsyncTransaction extend;
 }
