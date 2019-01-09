@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.NotNull;
 
@@ -13,8 +14,9 @@ import javax.validation.constraints.NotNull;
  * @author hubert
  * @Date: 2018/12/12 9:49
  */
-@Builder
+@EqualsAndHashCode(callSuper = true)
 @Data
+@Builder
 @AllArgsConstructor
 @ApiModel(value = "标的信息查询实体类")
 public class QueryProjectInformation extends BasePO {

@@ -169,7 +169,7 @@ public class XinwangServiceImpl implements XinwangService {
      */
     private  String sign(String reqData) throws GeneralSecurityException{
         PrivateKey privateKey = SignatureUtil.getRsaPkcs8PrivateKey(Base64.decodeBase64(config.getPrivateKey()));
-        byte[] sign = SignatureUtil.sign(SignatureAlgorithm.SHA1WithRSA,privateKey, reqData);
+        byte[] sign = SignatureUtil.sign(SignatureAlgorithm.SHA_1_WITH_RSA,privateKey, reqData);
         return Base64.encodeBase64String(sign);
     }
 
