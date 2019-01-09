@@ -16,8 +16,12 @@ import javax.validation.constraints.NotBlank;
 @Data
 @Api("ArticleStickTopReq[设置文章置顶请求类]")
 public class ArticleStickTopReq extends BaseReq {
+
     @ApiModelProperty(value = "是否置顶 0:是; 1:否", required = true)
     @NotBlank(message = "是否置顶不能为空")
     private Boolean isStickTop;
 
+    @ApiModelProperty(value = "文章Id", required = true)
+    @NotBlank(message = "文章Id不能为空")
+    private Integer id;
 }
