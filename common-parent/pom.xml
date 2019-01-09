@@ -17,10 +17,11 @@
     <description>MicroServices Dependencies</description>
 
     <properties>
+        <!-- 统一依赖 -->
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
-        <!-- 统一依赖 -->
+
         <main.basedir>${basedir}/..</main.basedir>
         <spring.dependencies.version>2.1.1.RELEASE</spring.dependencies.version>
         <java.version>1.8</java.version>
@@ -166,27 +167,6 @@
                     <target>${java.version}</target>
                     <parameters>true</parameters>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>flatten-maven-plugin</artifactId>
-                <configuration>
-                    <updatePomFile>true</updatePomFile>
-                    <flattenMode>bom</flattenMode>
-                    <pomElements>
-                        <repositories/>
-                        <parent />
-                    </pomElements>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>flatten</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>flatten</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
