@@ -1,6 +1,7 @@
 package com.fenlibao.common.core;
 
 import cn.hutool.core.lang.Assert;
+import com.fenlibao.pms.PmsApplication;
 import lombok.extern.slf4j.Slf4j;
 import org.jasypt.encryption.StringEncryptor;
 import org.junit.Test;
@@ -16,7 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  * @date 2018/11/3
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = PmsApplication.class)
 @Slf4j
 public class PmsApplicationTests {
 
