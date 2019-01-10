@@ -1,7 +1,7 @@
 package com.fenlibao.xinwang.controller;
 
 import com.fenlibao.base.dto.Response;
-import com.fenlibao.xinwang.model.po.*;
+import com.fenlibao.xinwang.request.*;
 import com.fenlibao.xinwang.service.XinwangService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;

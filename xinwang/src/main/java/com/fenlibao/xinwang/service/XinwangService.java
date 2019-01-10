@@ -1,8 +1,8 @@
 package com.fenlibao.xinwang.service;
 
 import com.fenlibao.base.dto.Response;
-import com.fenlibao.xinwang.model.po.BasePO;
-import com.fenlibao.xinwang.model.po.DownloadCheckFile;
+import com.fenlibao.xinwang.request.BasePO;
+import com.fenlibao.xinwang.request.DownloadCheckFile;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;

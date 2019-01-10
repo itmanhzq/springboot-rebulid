@@ -1,7 +1,7 @@
 package com.fenlibao.xinwang.testcase;
 
 import cn.hutool.core.date.DateUtil;
-import com.fenlibao.xinwang.model.po.*;
+import com.fenlibao.xinwang.request.*;
 import com.fenlibao.xinwang.service.XinwangService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
@@ -16,10 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultHandler;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;

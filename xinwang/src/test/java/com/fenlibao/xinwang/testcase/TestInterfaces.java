@@ -1,26 +1,20 @@
 package com.fenlibao.xinwang.testcase;
 
 import cn.hutool.core.date.DateUtil;
-import com.fenlibao.xinwang.model.po.*;
-import com.google.gson.Gson;
+import com.fenlibao.xinwang.request.*;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.math.BigDecimal;
@@ -38,15 +32,12 @@ import java.util.*;
 public class TestInterfaces {
 
     @Autowired
-    private org.springframework.web.context.WebApplicationContext context;
-
-    @Autowired
     private WebApplicationContext webApplicationContext;
     private MockMvc mockMvc;
 
     @Before
-    public void setUp() throws Exception {
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();//建议使用这种
+    public void setUp() {
+        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
     private static String TIME_STAMP = DateUtil.format(DateUtil.date(),"yyyyMMddHHmmss");
@@ -58,26 +49,13 @@ public class TestInterfaces {
     }
 
     @Test
-    public void testCancelDebentureSale() throws Exception {
-        /*CancelDebentureSale cancelDebentureSale = new CancelDebentureSale();
-        cancelDebentureSale.setTimestamp(TIME_STAMP);
-        //CreditsaleRequestNo取的是6260表的creditsale_no
-        cancelDebentureSale.setCreditsaleRequestNo("201709121016498aaf95d1-b");
-        cancelDebentureSale.setRequestNo("201709121016498aaf95d1-b");
-        this.sendRequest("cancelDebentureSale",cancelDebentureSale);*/
-
+    public void testCancelDebentureSale() {
         CancelDebentureSale cancelDebentureSale = new CancelDebentureSale();
         cancelDebentureSale.setTimestamp(TIME_STAMP);
         //CreditsaleRequestNo取的是6260表的creditsale_no
         cancelDebentureSale.setCreditsaleRequestNo("201709121016498aaf95d11b");
         cancelDebentureSale.setRequestNo("201709121016498aaf95d11b");
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
-                .post("/xinwang/cancelDebentureSale")
-                .header("accessKey", "aaa")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(cancelDebentureSale.toJson()))
-                .andDo(MockMvcResultHandlers.print())
-                .andReturn();
+        this.sendRequest("cancelDebentureSale",cancelDebentureSale);
     }
 
     @Test
@@ -222,18 +200,28 @@ public class TestInterfaces {
         this.sendRequest("queryAuthorizationEntrustPayRecord",queryAuthorizationEntrustPayRecord);
     }
 
-    public void sendRequest(String methode,BasePO po){
-        String url = "http://192.168.40.120:7001/xinwang/"+methode;
-        String request = new Gson().toJson(po);
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("accessKey", "aaa");
-        MediaType type = MediaType.parseMediaType("application/json; charset=UTF-8");
-        headers.setContentType(type);
-        HttpEntity<String> httpEntity = new HttpEntity(request, headers);
-        ResponseEntity<String> strs = restTemplate.postForEntity(url,httpEntity,String.class );
-        log.info("\""+ methode + "\"响应报文：{}",strs.getBody());
+    public void sendRequest(String methode,BasePO po) {
+//        String url = "http://192.168.40.120:7001/xinwang/"+methode;
+//        String request = new Gson().toJson(po);
+//        RestTemplate restTemplate = new RestTemplate();
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.set("accessKey", "aaa");
+//        MediaType type = MediaType.parseMediaType("application/json; charset=UTF-8");
+//        headers.setContentType(type);
+//        HttpEntity<String> httpEntity = new HttpEntity(request, headers);
+//        ResponseEntity<String> strs = restTemplate.postForEntity(url,httpEntity,String.class );
+//        log.info("\""+ methode + "\"响应报文：{}",strs.getBody());
+
+        try {
+            mockMvc.perform(MockMvcRequestBuilders
+                    .post("/xinwang/" + methode)
+                    .header("accessKey", "aaa")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(po.toJson()))
+                    .andDo(MockMvcResultHandlers.print())
+                    .andReturn();
+        } catch (Exception e) {
+            log.error(methode + "请求失败",e.getMessage());
+        }
     }
-
-
 }

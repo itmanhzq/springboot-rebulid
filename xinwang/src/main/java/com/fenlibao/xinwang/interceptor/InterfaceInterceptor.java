@@ -3,7 +3,7 @@ package com.fenlibao.xinwang.interceptor;
 import com.fenlibao.xinwang.exception.XinwangException;
 import com.fenlibao.xinwang.mapper.InterfacePrivilegeMapper;
 import com.fenlibao.xinwang.model.enums.RequestHeaderEnum;
-import com.fenlibao.xinwang.model.po.InterfacePrivilege;
+import com.fenlibao.xinwang.request.InterfacePrivilege;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
