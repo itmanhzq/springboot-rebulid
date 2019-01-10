@@ -85,7 +85,7 @@ $ git add .
 
 $ git commit -m "update README.md"
 
-$ git substree push -P pms-service pms-service-origin dev --quash
+$ git subtree push -P pms-service pms-service-origin dev --squash
 ```
 
 这样就提及到了子项目中。
