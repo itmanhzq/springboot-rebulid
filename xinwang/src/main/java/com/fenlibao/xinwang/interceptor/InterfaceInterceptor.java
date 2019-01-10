@@ -12,25 +12,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
  * 接口权限拦截器
+ *
  * @author Administrator
  */
 @Slf4j
-public class InterfaceInterceptor implements HandlerInterceptor  {
+public class InterfaceInterceptor implements HandlerInterceptor {
 
 
     private static final String XINWANG = "xinwang";
 
     @Autowired
     private InterfacePrivilegeMapper interfacePrivilegeMapper;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String access = request.getHeader(RequestHeaderEnum.ACCESS_KEY.getValue());
         if (request.getRequestURI().contains(XINWANG)) {
             InterfacePrivilege privilege = interfacePrivilegeMapper.selectByPrimaryKey(access);
-            if(privilege==null){
-                throw  new XinwangException("500","无调用接口权限，请传输正确的accessKey:"+access);
+            if (privilege == null) {
+                throw new XinwangException("500", "无调用接口权限，请传输正确的accessKey:" + access);
             }
 
         }

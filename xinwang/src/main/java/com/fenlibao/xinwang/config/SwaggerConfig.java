@@ -31,7 +31,6 @@ public class SwaggerConfig {
     private static final String PACKAGE = "com.fenlibao.xinwang.controller";
 
 
-
     @Bean
     public Docket api(Environment env) {
         String[] activeProfiles = env.getActiveProfiles();

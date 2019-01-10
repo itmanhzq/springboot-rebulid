@@ -23,7 +23,7 @@ public class XinwangDownloadUtil {
     /**
      * 建议尽量用hutool的http工具，此方法仅限于新网下载对账文件接口，hutool貌似传输文件流有问题
      */
-    public static CloseableHttpResponse post(String url, List<BasicNameValuePair> params) throws  IOException {
+    public static CloseableHttpResponse post(String url, List<BasicNameValuePair> params) throws IOException {
         CloseableHttpResponse response = null;
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
