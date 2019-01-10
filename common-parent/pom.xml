@@ -131,6 +131,11 @@
                 <artifactId>model-pms</artifactId>
                 <version>${version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.fenlibao.v2</groupId>
+                <artifactId>model-xinwang</artifactId>
+                <version>${version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
