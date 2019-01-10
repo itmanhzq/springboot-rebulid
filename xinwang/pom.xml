@@ -170,6 +170,10 @@
             <artifactId>mybatis-generator-core</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.fenlibao.v2</groupId>
+            <artifactId>model-xinwang</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
