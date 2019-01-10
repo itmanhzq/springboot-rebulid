@@ -1,7 +1,6 @@
 package com.fenlibao.xinwang.controller;
 
 import com.fenlibao.base.dto.Response;
-import com.fenlibao.xinwang.exception.XinwangException;
 import com.fenlibao.xinwang.model.po.*;
 import com.fenlibao.xinwang.service.XinwangService;
 import io.swagger.annotations.ApiOperation;
