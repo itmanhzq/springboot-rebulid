@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public enum XinwangInterfaceName {
     PERSONAL_REGISTER_EXPAND(PersonalRegisterExpand.class,"PERSONAL_REGISTER_EXPAND", "个人绑卡注册"),
-    QUERY_USER_INFORMATION(QueryProjectInformation.class,"QUERY_USER_INFORMATION", "查询用户的所有信息"),
+    QUERY_USER_INFORMATION(QueryUserInformation.class,"QUERY_USER_INFORMATION", "查询用户的所有信息"),
     RECHARGE(Recharge.class,"RECHARGE", "充值"),
     WITHDRAW(Withdraw.class,"WITHDRAW", "提现"),
     USER_PRE_TRANSACTION(UserAutoPreTransaction.class,"USER_PRE_TRANSACTION", "用户预处理"),
