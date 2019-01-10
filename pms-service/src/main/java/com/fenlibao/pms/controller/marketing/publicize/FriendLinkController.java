@@ -28,10 +28,10 @@ import javax.validation.Valid;
 public class FriendLinkController {
 
     @ApiOperation("友情链接列表")
-    @PostMapping("/getFriendLink")
+    @PostMapping("/getFriendLinkList")
     @PreAuthorize("hasPermission('friendLink','view')")
     @ApiResponse(code = 200, message = "请求成功", response = FriendLinkListRespBody.class)
-    public Response<FriendLinkListRespBody> getFriendLink(@RequestBody @Valid FriendLinkGetListReq friendLinkGetListReq) {
+    public Response<FriendLinkListRespBody> getFriendLinkList(@RequestBody @Valid FriendLinkGetListReq friendLinkGetListReq) {
         return Response.ok();
     }
 

@@ -30,7 +30,6 @@ import java.util.List;
 public class SwaggerConfig {
 
     public static final String PRO = "pro";
-    private static final String ACCESS_KEY = "accessKey";
     private static final String PACKAGE = "com.fenlibao.marketing.controller";
 
     @Autowired
@@ -43,23 +42,6 @@ public class SwaggerConfig {
             return getProDocket();
         }
         return getInternalDocket();
-    }
-
-    private List<Parameter> getParameters() {
-        List<Parameter> parameters = new ArrayList<>();
-        parameters.add(getHeaderParameter(ACCESS_KEY, "接入密钥，每个微服务独立密钥，不要共用"));
-        return parameters;
-    }
-
-    private Parameter getHeaderParameter(String headerName, String description) {
-        ParameterBuilder parameterBuilder = new ParameterBuilder();
-        parameterBuilder.name(headerName)
-                .description(description)
-                .modelRef(new ModelRef("string"))
-                .parameterType("header")
-                .required(true)
-                .build();
-        return parameterBuilder.build();
     }
 
     private ApiInfo apiInfo() {
@@ -75,7 +57,6 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.basePackage(PACKAGE))
                 .paths(PathSelectors.any())
                 .build()
-                .globalOperationParameters(getParameters())
                 .apiInfo(apiInfo());
     }
 

@@ -15,6 +15,9 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class FriendLinkReq extends BaseReq {
 
+    @ApiModelProperty(value = "用户id,请求营销服务时使用")
+    private Integer userId;
+
     @ApiModelProperty(value = "网站名称", required = true)
     @NotBlank(message = "网站名称不能为空")
     private String websiteName;
