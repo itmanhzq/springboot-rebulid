@@ -1,8 +1,11 @@
 package com.fenlibao.xinwang.service;
 
-import com.fenlibao.xinwang.dto.base.Response;
+import com.fenlibao.base.dto.Response;
 import com.fenlibao.xinwang.model.po.BasePO;
 import com.fenlibao.xinwang.model.po.DownloadCheckFile;
+
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 
 /**
  * @author Flynn
@@ -16,7 +19,7 @@ public interface XinwangService {
      * @return 受理状况响应报文
      * @throws Exception
      */
-    Response serviceRequest( BasePO basePO) throws Exception;
+    Response serviceRequest(BasePO basePO) throws  GeneralSecurityException, IOException;
 
 
     /**
@@ -25,7 +28,7 @@ public interface XinwangService {
      * @return
      * @throws Exception
      */
-    Response gatewayRequest(BasePO basePO)throws Exception;
+    Response gatewayRequest(BasePO basePO) throws  GeneralSecurityException, IOException;
 
 
     /**
@@ -34,6 +37,6 @@ public interface XinwangService {
      * @return
      * @throws Exception
      */
-    Response download(DownloadCheckFile downloadCheckFile)throws Exception;
+    Response download(DownloadCheckFile downloadCheckFile) throws  GeneralSecurityException, IOException;
 
 }

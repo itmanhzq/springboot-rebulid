@@ -23,7 +23,7 @@ public class AsyncTransaction extends BasePO {
 
     @NotNull(message = "交易明细不能为空")
     @ApiModelProperty(required = true,value = "交易明细")
-    private List<Map<String, Object>> bizDetails;
+    private List<Map<String, String>> bizDetails;
 
     @NotNull(message = "交易类型不能为空")
     @ApiModelProperty(required = true,value = "交易类型",example = "COMPENSATORY")
@@ -37,7 +37,7 @@ public class AsyncTransaction extends BasePO {
 
     @NotNull(message = "业务明细不能为空")
     @ApiModelProperty(required = true,value = "业务明细")
-    private List<Map<String, Object>> details;
+    private List<Map<String, String>> details;
 
     @NotNull(message = "业务类型不能为空")
     @ApiModelProperty(required = true,value = "业务类型",example = "COMPENSATORY")

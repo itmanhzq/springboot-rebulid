@@ -30,7 +30,7 @@ public class SignatureUtil {
 		return keyFactory.generatePrivate(new PKCS8EncodedKeySpec(encodedKey));
 	}
 
-	public static byte[] sign(SignatureAlgorithm algorithm, PrivateKey privateKey,String data)throws GeneralSecurityException {
+	public static byte[] sign(SignatureAlgorithm algorithm, PrivateKey privateKey,String data) throws GeneralSecurityException, IOException {
 		return sign(algorithm, privateKey, data, DEFAULT_CHARSET);
 	}
 
@@ -38,17 +38,14 @@ public class SignatureUtil {
 
 	public static byte[] sign(SignatureAlgorithm algorithm, PrivateKey privateKey,
 			String data, Charset charset)
-			throws GeneralSecurityException {
+			throws GeneralSecurityException, IOException {
 		return sign(algorithm, privateKey, data.getBytes(charset));
 	}
 
-	public static byte[] sign(SignatureAlgorithm algorithm, PrivateKey privateKey,byte[] data) throws GeneralSecurityException {
+	public static byte[] sign(SignatureAlgorithm algorithm, PrivateKey privateKey,byte[] data) throws GeneralSecurityException, IOException {
 		ByteArrayInputStream input = new ByteArrayInputStream(data);
-		try {
-			return sign(algorithm, privateKey, input);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+		return sign(algorithm, privateKey, input);
+
 	}
 
 	public static byte[] sign(SignatureAlgorithm algorithm, PrivateKey privateKey,InputStream data) throws GeneralSecurityException,IOException {
