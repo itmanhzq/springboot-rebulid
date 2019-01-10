@@ -131,13 +131,13 @@ public class TestInterface {
 
 
         establishProject.setPlatformUserNo("BORROWERS9234");
-        establishProject.setProjectNo("hhher");
+        establishProject.setProjectNo(this.createRequestNo());
         establishProject.setRepaymentWay("ONE_TIME_SERVICING");
         establishProject.setProjectAmount(new BigDecimal("1000"));
         establishProject.setProjectType("STANDARDPOWDER");
         establishProject.setProjectPeriod(31);
         establishProject.setAnnnualInterestRate(new BigDecimal("0.1"));
-        establishProject.setProjectName("哈哈测aaa试aaa啊");
+        establishProject.setProjectName("哈哈测aaa试a3333aa啊");
         this.sendRequest("establishProject",establishProject);
     }
 
@@ -147,6 +147,7 @@ public class TestInterface {
         QueryProjectInformation queryProjectInformation = new  QueryProjectInformation();
 
 
+        queryProjectInformation.setTimestamp(DateUtil.format(DateUtil.date(),"yyyyMMddHHmmss"));
         queryProjectInformation.setProjectNo("haaha");
 
         this.sendRequest("queryProjectInformation",queryProjectInformation);
@@ -197,6 +198,7 @@ public class TestInterface {
     public void debentureSale(){
         DebentureSale debentureSale = new DebentureSale();
         this.init(debentureSale);
+        debentureSale.setPlatformUserNo("INVESTOR9605");
         debentureSale.setProjectNo("2159031");
         debentureSale.setSaleShare(new BigDecimal(10000));
         this.sendRequest("debentureSale",debentureSale);
