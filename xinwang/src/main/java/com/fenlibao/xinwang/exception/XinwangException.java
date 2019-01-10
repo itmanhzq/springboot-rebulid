@@ -14,7 +14,7 @@ import lombok.Setter;
 public class XinwangException extends RuntimeException {
     private final String code;
 
-    public XinwangException(String code , String msg) {
+    public XinwangException(String code, String msg) {
         super(msg);
         this.code = code;
     }

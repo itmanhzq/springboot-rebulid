@@ -13,7 +13,6 @@ public enum RequestHeaderEnum {
     ACCESS_KEY("accessKey");
 
 
-
     private final String value;
 
     RequestHeaderEnum(String key) {
