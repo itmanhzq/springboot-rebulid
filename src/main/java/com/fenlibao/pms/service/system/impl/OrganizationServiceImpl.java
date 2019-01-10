@@ -71,10 +71,10 @@ public class OrganizationServiceImpl implements OrganizationService {
         Map<String, Object> params = new HashMap<>(2);
         params.put("organizationId", organizationId);
         params.put("status", status);
-        PageInfo<UserPO> userPOPageInfo =  PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(() -> organizationDao.getLeaguerListByOrganizationId(params));
+        PageInfo<UserPO> userPOPageInfo = PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(() -> organizationDao.getLeaguerListByOrganizationId(params));
         PageInfo<UserBO> userBOPageInfo = new PageInfo<>();
-        BeanUtils.copyProperties(userPOPageInfo,userBOPageInfo);
-        return  userBOPageInfo;
+        BeanUtils.copyProperties(userPOPageInfo, userBOPageInfo);
+        return userBOPageInfo;
     }
 
     @Override
