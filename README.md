@@ -65,11 +65,11 @@ git subtree split -P <prefix> [OPTIONS] [<commit>]
 建立好了新的项目后，你需要在`micro-services`项目中添加子项目，这里我用`pms-service`做示范：
 
 ```git
-$ git remote add -f pms-service-upstream ssh://gitlab.fenlibao.com:10086/f_java/pms-service
+$ git remote add -f pms-service-upstream ssh://git@gitlab.fenlibao.com:10086/f_java/pms-service.git
 
-$ git remote add -f pms-service-origin ssh://gitlab.fenlibao.com:10086/leixinxin/pms-service #个人的仓库
+$ git remote add -f pms-service-origin ssh://git@gitlab.fenlibao.com:10086/leixinxin/pms-service.git #个人的仓库
 
-$ git subtree add -P pms-service ssh://gitlab.fenlibao.com:10086/f_java/pms-service master --squash
+$ git subtree add -P pms-service ssh://git@gitlab.fenlibao.com:10086/f_java/pms-service.git master --squash
 ```
 
 这样，就将一个子项目添加到了项目中。
