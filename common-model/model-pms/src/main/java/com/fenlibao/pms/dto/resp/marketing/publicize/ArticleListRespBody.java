@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 /**
  * @author WangBoRan
  * @date 2018-12-26
@@ -39,11 +41,11 @@ public class ArticleListRespBody {
     @ApiModelProperty(value = "文章状态 [1.未发布，2.已发布，3.预发布]", required = true)
     private String state;
 
-    @ApiModelProperty(value = "展示时间", required = true,example = "yyyy-MM-dd HH:mm:ss")
-    private String showTime;
+    @ApiModelProperty(value = "展示时间", required = true)
+    private Date showTime;
 
-    @ApiModelProperty(value = "排序时间", required = true,example = "yyyy-MM-dd HH:mm:ss")
-    private String sortTime;
+    @ApiModelProperty(value = "排序时间", required = true)
+    private Date sortTime;
 
     @ApiModelProperty(value = "发布者", required = true)
     private String userName;

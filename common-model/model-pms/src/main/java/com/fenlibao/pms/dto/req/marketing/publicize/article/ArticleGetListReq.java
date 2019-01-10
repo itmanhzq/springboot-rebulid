@@ -6,6 +6,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.Date;
+
 /**
  * @author WangBoRan
  * @date 2018-12-26
@@ -21,11 +23,11 @@ public class ArticleGetListReq extends AbstractPagingReq {
     @ApiModelProperty("发布者")
     private String userName;
 
-    @ApiModelProperty(value = "展示时间（开始）",example = "yyyy-MM-dd HH:mm:ss")
-    private String showStartTime;
+    @ApiModelProperty(value = "展示时间（开始）")
+    private Date showStartTime;
 
-    @ApiModelProperty(value = "展示时间（结束）",example = "yyyy-MM-dd HH:mm:ss")
-    private String showEndTime;
+    @ApiModelProperty(value = "展示时间（结束）")
+    private Date showEndTime;
 
     @ApiModelProperty("分类 [1.行业新闻，2.媒体报道，3.公司动态]")
     private Integer type;

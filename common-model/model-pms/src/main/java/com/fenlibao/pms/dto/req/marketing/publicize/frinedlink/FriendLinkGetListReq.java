@@ -6,6 +6,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.Date;
+
 /**
  * @author WangBoRan
  * @date 2018-12-27
@@ -21,10 +23,10 @@ public class FriendLinkGetListReq extends AbstractPagingReq {
     @ApiModelProperty("发布者")
     private String userName;
 
-    @ApiModelProperty(value = "修改时间（开始）",example = "yyyy-MM-dd HH:mm:ss")
-    private String updatedStartTime;
+    @ApiModelProperty(value = "修改时间（开始）")
+    private Date updatedStartTime;
 
-    @ApiModelProperty(value = "修改时间（结束）",example = "yyyy-MM-dd HH:mm:ss")
-    private String updatedEndTime;
+    @ApiModelProperty(value = "修改时间（结束）")
+    private Date updatedEndTime;
 
 }

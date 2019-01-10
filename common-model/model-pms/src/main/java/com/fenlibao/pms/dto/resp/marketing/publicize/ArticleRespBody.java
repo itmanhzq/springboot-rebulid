@@ -5,6 +5,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
+import javax.print.DocFlavor;
+import java.util.Date;
+
 
 /**
  * @author WangBoRan
@@ -24,7 +27,7 @@ public class ArticleRespBody extends BaseReq {
     private String title;
 
    @ApiModelProperty(value = "文章类型 [1.行业新闻，2.媒体报道，3.公司动态]", required = true)
-    private Integer type;
+   private String type;
 
     @ApiModelProperty(value = "文章来源", required = true)
     private String source;
@@ -35,23 +38,23 @@ public class ArticleRespBody extends BaseReq {
     @ApiModelProperty("原文链接")
     private String originalUrl;
 
-    @ApiModelProperty(value = "展示时间", required = true,example = "yyyy-MM-dd HH:mm:ss")
-    private String showTime;
+    @ApiModelProperty(value = "展示时间", required = true)
+    private Date showTime;
 
     @ApiModelProperty(value = "列表页图片", required = true)
     private String imageUrl;
 
-    @ApiModelProperty(value = "排序时间", required = true,example = "yyyy-MM-dd HH:mm:ss")
-    private String sortTime;
+    @ApiModelProperty(value = "排序时间", required = true)
+    private Date sortTime;
 
     @ApiModelProperty(value = "是否置顶 true:是; false:否", required = true)
     private Boolean isStickTop;
 
     @ApiModelProperty(value = "文章状态 [1.未发布，2.已发布，3.预发布]", required = true)
-    private Integer state;
+    private String state;
 
-    @ApiModelProperty(value = "预发布时间",example = "yyyy-MM-dd HH:mm:ss")
-    private String onlineTime;
+    @ApiModelProperty(value = "预发布时间")
+    private Date onlineTime;
 
     @ApiModelProperty(value = "文章关键字")
     private String keyword;
