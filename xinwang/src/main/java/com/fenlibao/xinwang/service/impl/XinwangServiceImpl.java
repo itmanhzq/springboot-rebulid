@@ -7,7 +7,6 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.fenlibao.base.dto.Response;
 import com.fenlibao.xinwang.config.Config;
-import com.fenlibao.xinwang.exception.XinwangException;
 import com.fenlibao.xinwang.model.po.BasePO;
 import com.fenlibao.xinwang.model.po.DownloadCheckFile;
 import com.fenlibao.xinwang.model.po.XinwangInterfaceName;
@@ -61,7 +60,7 @@ public class XinwangServiceImpl implements XinwangService {
 
     @Retryable(value= {HttpException.class},maxAttempts = 3)
     @Override
-    public Response serviceRequest( BasePO basePO) throws XinwangException, GeneralSecurityException, IOException {
+    public Response serviceRequest( BasePO basePO) throws  GeneralSecurityException, IOException {
         String url= config.getUrl() + SERVICE;
         String reqData = basePO.toJsonFilterFlb();
         HashMap<String,Object> map = new HashMap<>(5);
@@ -89,7 +88,7 @@ public class XinwangServiceImpl implements XinwangService {
 
 
     @Override
-    public Response gatewayRequest(BasePO  basePO) throws XinwangException, GeneralSecurityException, IOException {
+    public Response gatewayRequest(BasePO  basePO) throws  GeneralSecurityException, IOException {
         String url=config.getUrl() + GATEWAY;
         Map<String,Object> map=new HashMap<>();
         List<Map<String,String>> postParams=new ArrayList<>();
@@ -135,7 +134,7 @@ public class XinwangServiceImpl implements XinwangService {
 
 
     @Override
-    public Response download(DownloadCheckFile downloadCheckFile) throws XinwangException, GeneralSecurityException, IOException {
+    public Response download(DownloadCheckFile downloadCheckFile) throws  GeneralSecurityException, IOException {
         String url = config.getUrl() + DOWNLOAD;
         String reqData = downloadCheckFile.toJsonFilterFlb();
         HashMap<String,Object> map = new HashMap<>(5);
