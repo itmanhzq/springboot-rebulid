@@ -41,31 +41,31 @@ public class RequestLogAspect {
     @Resource
     private InterfacePrivilegeMapper interfacePrivilegeMapper;
 
-    private static final  String CODE = "code";
-    private static final  String STATUS = "status";
-    private static final  String SUCCESS = "SUCCESS";
-    private static final  String ZERO = "0";
-    private static final  String ONE = "1";
-    private static final  String NOT_EXITS = "100007";
+    private static final String CODE = "code";
+    private static final String STATUS = "status";
+    private static final String SUCCESS = "SUCCESS";
+    private static final String ZERO = "0";
+    private static final String ONE = "1";
+    private static final String NOT_EXITS = "100007";
+
     /**
-     *
      * 记录网关请求前记录报文
      */
     @Before("execution(* com.fenlibao.xinwang.service.XinwangService.*(..))")
-    public void doBefore(JoinPoint joinPoint)  {
-         RequestLog requestLog = new RequestLog();
+    public void doBefore(JoinPoint joinPoint) {
+        RequestLog requestLog = new RequestLog();
         try {
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 
             Object[] obj = joinPoint.getArgs();
             BasePO basePO = (BasePO) obj[0];
 
-            String serviceName =XinwangInterfaceName.getServiceName(basePO.getClass()) ;
+            String serviceName = XinwangInterfaceName.getServiceName(basePO.getClass());
             //排除查询接口
-            if(serviceName.equals(XinwangInterfaceName.getServiceName(QueryTransaction.class))
-                    ||serviceName.equals(XinwangInterfaceName.getServiceName(QueryProjectInformation.class))
-                    ||serviceName.equals(XinwangInterfaceName.getServiceName(QueryUserInformation.class))
-                    ){
+            if (serviceName.equals(XinwangInterfaceName.getServiceName(QueryTransaction.class))
+                    || serviceName.equals(XinwangInterfaceName.getServiceName(QueryProjectInformation.class))
+                    || serviceName.equals(XinwangInterfaceName.getServiceName(QueryUserInformation.class))
+                    ) {
                 return;
             }
             String accessKey = request.getHeader(RequestHeaderEnum.ACCESS_KEY.getValue());
@@ -81,54 +81,54 @@ public class RequestLogAspect {
             requestLog.setInterfaceUser(interfacePrivilege.getInterfaceUser());
             requestLogMapper.insert(requestLog);
         } catch (Exception e) {
-            if(!e.getClass().equals(DuplicateKeyException.class.getClass())){
+            if (!e.getClass().equals(DuplicateKeyException.class.getClass())) {
                 log.error("记录请求报文：{}", requestLog.toString());
-                log.error("请求出错信息：{}",e.getMessage());
+                log.error("请求出错信息：{}", e.getMessage());
             }
         }
     }
+
     /**
-     *
      * 后置通知，记录相应报文
      */
     @AfterReturning(pointcut = "execution(* com.fenlibao.xinwang.service.XinwangService.*(..))", returning = "response")
-    public void doAfter(JoinPoint joinPoint,Response response) {
+    public void doAfter(JoinPoint joinPoint, Response response) {
         RequestLog requestLog = new RequestLog();
         try {
             int status = RequestState.DQR.getCode();
             Object[] obj = joinPoint.getArgs();
-            BasePO basePO =  (BasePO)obj[0];
+            BasePO basePO = (BasePO) obj[0];
             requestLog.setRequestNo(basePO.getRequestNo());
 
-            String serviceName =XinwangInterfaceName.getServiceName(basePO.getClass()) ;
-            if(serviceName.equals(XinwangInterfaceName.getServiceName(DownloadCheckFile.class))){
+            String serviceName = XinwangInterfaceName.getServiceName(basePO.getClass());
+            if (serviceName.equals(XinwangInterfaceName.getServiceName(DownloadCheckFile.class))) {
                 // 下载的文件流无法转json
-                if(response.getCode()== ResponseStatus.COMMON_OPERATION_SUCCESS.getCode()){
+                if (response.getCode() == ResponseStatus.COMMON_OPERATION_SUCCESS.getCode()) {
                     requestLog.setResponseMsg(response.toString());
                     status = RequestState.CG.getCode();
-                }else{
+                } else {
                     requestLog.setResponseMsg(response.toString());
                     status = RequestState.SB.getCode();
                 }
-            }else {
+            } else {
                 requestLog.setResponseMsg(new Gson().toJson(response));
             }
             requestLog.setUpdateTime(new Date());
             Object body = response.getBody();
             JSONObject jsonObject = JSONUtil.parseObj(body);
-            if(ResponseStatus.COMMON_OPERATION_SUCCESS.getCode().equals(response.getCode())){
-                if(ZERO.equals(jsonObject.get(CODE)) && SUCCESS.equals(jsonObject.get(STATUS))){
-                    status = RequestState.CG.getCode() ;
+            if (ResponseStatus.COMMON_OPERATION_SUCCESS.getCode().equals(response.getCode())) {
+                if (ZERO.equals(jsonObject.get(CODE)) && SUCCESS.equals(jsonObject.get(STATUS))) {
+                    status = RequestState.CG.getCode();
                 }
-                if(ONE.equals(jsonObject.get(CODE))){
+                if (ONE.equals(jsonObject.get(CODE))) {
                     status = RequestState.SB.getCode();
                 }
             }
-            if(ResponseStatus.COMMON_OPERATION_FAIL.getCode().equals(response.getCode())){
-                if(ONE.equals(jsonObject.get(CODE))){
+            if (ResponseStatus.COMMON_OPERATION_FAIL.getCode().equals(response.getCode())) {
+                if (ONE.equals(jsonObject.get(CODE))) {
                     status = RequestState.SB.getCode();
                 }
-                if(NOT_EXITS.equals(jsonObject.get(CODE))){
+                if (NOT_EXITS.equals(jsonObject.get(CODE))) {
                     status = RequestState.BCZ.getCode();
                 }
             }
@@ -139,10 +139,10 @@ public class RequestLogAspect {
                             .custom()
                             .andEqualTo("requestNo", requestLog.getRequestNo()))
                     .build();
-            requestLogMapper.updateByExampleSelective(requestLog,example);
+            requestLogMapper.updateByExampleSelective(requestLog, example);
         } catch (Exception e) {
             log.error("记录响应报文出错：{}", requestLog.toString());
-            log.error("响应出错信息：{}",e.getMessage());
+            log.error("响应出错信息：{}", e.getMessage());
         }
 
     }

@@ -10,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * 拦截器链
+ *
  * @author Flynn
  * @date 2018/11/14
  */
@@ -17,11 +18,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class InterceptorChainConfig implements WebMvcConfigurer {
 
     @Bean
-    public HandlerInterceptor interfaceInterceptor(){
+    public HandlerInterceptor interfaceInterceptor() {
         return new InterfaceInterceptor();
     }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor( interfaceInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(interfaceInterceptor()).addPathPatterns("/**");
     }
 }
