@@ -9,9 +9,9 @@
         <relativePath>../common-parent</relativePath>
     </parent>
 
-    <artifactId>user</artifactId>
+    <artifactId>user-service</artifactId>
     <packaging>jar</packaging>
-    <name>user</name>
+    <name>user-service</name>
     <version>1.0-SNAPSHOT</version>
     <description>user refactoring</description>
 
