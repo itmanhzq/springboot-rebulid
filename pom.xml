@@ -39,7 +39,7 @@
         <module>common-model</module>
         <module>pms-service</module>
         <module>bid</module>
-        <module>user</module>
+        <module>user-service</module>
         <module>xinwang</module>
         <module>marketing</module>
     </modules>
