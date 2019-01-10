@@ -7,8 +7,8 @@ import com.fenlibao.xinwang.dto.base.ResponseStatus;
 import com.fenlibao.xinwang.mapper.InterfacePrivilegeMapper;
 import com.fenlibao.xinwang.mapper.RequestLogMapper;
 import com.fenlibao.xinwang.model.enums.RequestHeaderEnum;
-import com.fenlibao.xinwang.model.po.*;
-import com.fenlibao.xinwang.model.po.enums.RequestState;
+import com.fenlibao.xinwang.request.*;
+import com.fenlibao.xinwang.request.enums.RequestState;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -48,13 +48,13 @@ public class RequestLogAspect {
     private static final  String SUCCESS_CODE = "0";
     private static final  String FAIL_CODE = "1";
     private static final  String NOT_EXITS = "100007";
+
     /**
-     *
      * 记录网关请求前记录报文
      */
     @Before("execution(* com.fenlibao.xinwang.service.XinwangService.*(..))")
-    public void doBefore(JoinPoint joinPoint)  {
-         RequestLog requestLog = new RequestLog();
+    public void doBefore(JoinPoint joinPoint) {
+        RequestLog requestLog = new RequestLog();
         try {
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 
@@ -87,12 +87,12 @@ public class RequestLogAspect {
             }
         }
     }
+
     /**
-     *
      * 后置通知，记录相应报文
      */
     @AfterReturning(pointcut = "execution(* com.fenlibao.xinwang.service.XinwangService.*(..))", returning = "response")
-    public void doAfter(JoinPoint joinPoint,Response response) {
+    public void doAfter(JoinPoint joinPoint, Response response) {
         RequestLog requestLog = new RequestLog();
         try {
             int status = RequestState.DQR.getCode();
@@ -108,7 +108,7 @@ public class RequestLogAspect {
 
             if(basePO.getClass().isAssignableFrom(DownloadCheckFile.class)){
                 // 下载的文件流无法转json
-               requestLog.setResponseMsg(response.toString());
+                requestLog.setResponseMsg(response.toString());
             }else {
                 requestLog.setResponseMsg(new Gson().toJson(response));
             }

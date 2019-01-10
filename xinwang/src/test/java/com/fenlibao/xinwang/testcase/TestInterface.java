@@ -1,7 +1,7 @@
 package com.fenlibao.xinwang.testcase;
 
 import cn.hutool.core.date.DateUtil;
-import com.fenlibao.xinwang.model.po.*;
+import com.fenlibao.xinwang.request.*;
 import com.fenlibao.xinwang.service.XinwangService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
@@ -16,10 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultHandler;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
@@ -30,6 +28,7 @@ import java.util.*;
 
 /**
  * test用例
+ *
  * @author Flynn
  * @Date: 2018/12/20 15:29
  */
@@ -43,6 +42,7 @@ public class TestInterface {
     XinwangService xinwangService;
 
     private MockMvc mockMvc;
+
     @Before
     public void setup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
@@ -59,7 +59,7 @@ public class TestInterface {
         queryTransaction.setPlatformUserNo("INVESTOR9605");
         queryTransaction.setTransactionType(XinwangInterfaceName.getServiceName(Withdraw.class));
         queryTransaction.setRequestNo("20181222175304uu9f9c12bf");
-        this.sendRequest("queryTransaction",queryTransaction);
+        this.sendRequest("queryTransaction", queryTransaction);
     }
 
 
@@ -76,12 +76,12 @@ public class TestInterface {
         recharge.setRequestNo(this.createRequestNo());
         recharge.setExpectPayCompany("YEEPAY");
         recharge.setBankcode("ICBK");
-        this.sendRequest("recharge",recharge);
+        this.sendRequest("recharge", recharge);
 
     }
 
     @Test
-    public void withDraw() throws Exception{
+    public void withDraw() throws Exception {
 
         Withdraw withdraw = new Withdraw();
 
@@ -94,7 +94,7 @@ public class TestInterface {
         withdraw.setWithdrawType("NORMAL_URGENT");
         withdraw.setCommission(new BigDecimal(2));
         withdraw.setTimestamp("20181221114935");
-        this.sendRequest("withdraw",withdraw);
+        this.sendRequest("withdraw", withdraw);
     }
 
 
@@ -107,67 +107,64 @@ public class TestInterface {
 
         resetPassword.setRedirectUrl("aaaa");
 
-        this.sendRequest("resetPassword",resetPassword);
+        this.sendRequest("resetPassword", resetPassword);
     }
 
 
     @Test
-    public void modifyMobileExpand(){
+    public void modifyMobileExpand() {
         ModifyMobileExpand modifyMobileExpand = new ModifyMobileExpand();
         this.init(modifyMobileExpand);
         modifyMobileExpand.setCheckType("LIMIT");
         modifyMobileExpand.setMobile("18819155128");
         modifyMobileExpand.setRedirectUrl("http://192.168.40.215:90/cg/modify_reserved_phone");
 
-        this.sendRequest("modifyMobileExpand",modifyMobileExpand);
+        this.sendRequest("modifyMobileExpand", modifyMobileExpand);
 
     }
 
     @Test
-    public void establishProject(){
+    public void establishProject() {
         EstablishProject establishProject = new EstablishProject();
         this.init(establishProject);
 
 
-
         establishProject.setPlatformUserNo("BORROWERS9234");
-        establishProject.setProjectNo(this.createRequestNo());
+        establishProject.setProjectNo("hhher");
         establishProject.setRepaymentWay("ONE_TIME_SERVICING");
         establishProject.setProjectAmount(new BigDecimal("1000"));
         establishProject.setProjectType("STANDARDPOWDER");
         establishProject.setProjectPeriod(31);
         establishProject.setAnnnualInterestRate(new BigDecimal("0.1"));
-        establishProject.setProjectName("哈哈测aaa试a3333aa啊");
-        this.sendRequest("establishProject",establishProject);
+        establishProject.setProjectName("哈哈测aaa试aaa啊");
+        this.sendRequest("establishProject", establishProject);
     }
 
 
     @Test
-    public void queryProjectInformation(){
-        QueryProjectInformation queryProjectInformation = new  QueryProjectInformation();
-
-
-        queryProjectInformation.setTimestamp(DateUtil.format(DateUtil.date(),"yyyyMMddHHmmss"));
+    public void queryProjectInformation() {
+        QueryProjectInformation queryProjectInformation = new QueryProjectInformation();
+        queryProjectInformation.setTimestamp(DateUtil.format(DateUtil.date(), "yyyyMMddHHmmss"));
         queryProjectInformation.setProjectNo("haaha");
 
-        this.sendRequest("queryProjectInformation",queryProjectInformation);
+        this.sendRequest("queryProjectInformation", queryProjectInformation);
 
     }
 
     @Test
-    public void userAutoPreTransaction(){
+    public void userAutoPreTransaction() {
         UserAutoPreTransaction userAutoPreTransaction = new UserAutoPreTransaction();
         this.init(userAutoPreTransaction);
 
         userAutoPreTransaction.setBizType("TENDER");
         userAutoPreTransaction.setAmount(BigDecimal.TEN);
         userAutoPreTransaction.setProjectNo("2159948");
-        this.sendRequest("userAutoPreTransaction",userAutoPreTransaction);
+        this.sendRequest("userAutoPreTransaction", userAutoPreTransaction);
 
     }
 
     @Test
-    public void syncTransaction(){
+    public void syncTransaction() {
         SyncTransaction syncTransaction = new SyncTransaction();
         this.init(syncTransaction);
 
@@ -183,64 +180,65 @@ public class TestInterface {
         List<Details> detailsList = new ArrayList<>();
         detailsList.add(details);
         syncTransaction.setDetails(detailsList);
-        this.sendRequest("syncTransaction",syncTransaction);
+        this.sendRequest("syncTransaction", syncTransaction);
 
     }
 
     @Test
-    public void asyncTransaction(){
+    public void asyncTransaction() {
         AsyncTransaction asyncTransaction = new AsyncTransaction();
         this.init(asyncTransaction);
 
-        this.sendRequest("asyncTransaction",asyncTransaction);
+        this.sendRequest("asyncTransaction", asyncTransaction);
     }
+
     @Test
-    public void debentureSale(){
+    public void debentureSale() {
         DebentureSale debentureSale = new DebentureSale();
         this.init(debentureSale);
         debentureSale.setPlatformUserNo("INVESTOR9605");
         debentureSale.setProjectNo("2159031");
         debentureSale.setSaleShare(new BigDecimal(10000));
-        this.sendRequest("debentureSale",debentureSale);
+        this.sendRequest("debentureSale", debentureSale);
 
     }
 
     //TODO 文件流传不过来？
     @Test
-    public void download() throws  Exception{
+    public void download() throws Exception {
         DownloadCheckFile downloadCheckFile = new DownloadCheckFile();
         this.init(downloadCheckFile);
 //        downloadCheckFile.setAccessKey("aaa");
         downloadCheckFile.setRequestNo(this.createRequestNo());
         downloadCheckFile.setFileDate("20181221");
-        downloadCheckFile.setTimestamp(DateUtil.format(DateUtil.date(),"yyyyMMddHHmmss"));
+        downloadCheckFile.setTimestamp(DateUtil.format(DateUtil.date(), "yyyyMMddHHmmss"));
 
 
 //        xinwangService.download(downloadCheckFile);
-        this.sendRequest("downloadCheckFile",downloadCheckFile);
+        this.sendRequest("downloadCheckFile", downloadCheckFile);
 
     }
 
     @Test
-    public void confirmCheckfile() throws  Exception{
+    public void confirmCheckfile() throws Exception {
         ConfirmCheckfile confirmCheckfile = new ConfirmCheckfile();
 //        confirmCheckfile.setAccessKey("aaa");
         confirmCheckfile.setRequestNo(this.createRequestNo());
 //        confirmCheckfile.setPlatformUserNo("6000000311");
         confirmCheckfile.setFileDate("20181221");
-        confirmCheckfile.setTimestamp(DateUtil.format(DateUtil.date(),"yyyyMMddHHmmss"));
+        confirmCheckfile.setTimestamp(DateUtil.format(DateUtil.date(), "yyyyMMddHHmmss"));
 
-        Map<String,String> aa = new HashMap<>();
-        Map<String,String> aa1 = new HashMap<>();
-        Map<String,String> aa2 = new HashMap<>();
-        Map<String,String> aa3 = new HashMap<>();
-        Map<String,String> aa4 = new HashMap<>();
+        Map<String, String> aa = new HashMap<>();
+        Map<String, String> aa1 = new HashMap<>();
+        Map<String, String> aa2 = new HashMap<>();
+        Map<String, String> aa3 = new HashMap<>();
+        Map<String, String> aa4 = new HashMap<>();
 
-        aa.put("fileType","RECHARGE");
-        aa1.put("fileType","WITHDRAW");
-        aa2.put("fileType","COMMISSION");
-        aa3.put("fileType","TRANSACTION");
-        aa4.put("fileType","BACKROLL_RECHARGE");
+        aa.put("fileType", "RECHARGE");
+        aa1.put("fileType", "WITHDRAW");
+        aa2.put("fileType", "COMMISSION");
+        aa3.put("fileType", "TRANSACTION");
+        aa4.put("fileType", "BACKROLL_RECHARGE");
 
         List list = new ArrayList<>();
         list.add(aa);
@@ -250,23 +248,24 @@ public class TestInterface {
         list.add(aa4);
         confirmCheckfile.setDetail(list);
 
-        this.sendRequest("confirmCheckfile",confirmCheckfile);
+        this.sendRequest("confirmCheckfile", confirmCheckfile);
 
 
     }
 
 
-    public synchronized  String createRequestNo(){
+    public synchronized String createRequestNo() {
         String uuid = UUID.randomUUID().toString();
-        String randomString = uuid.substring(0,8);
-        return DateUtil.format(DateUtil.date(),"yyyyMMddHHmmss") +"uu" + randomString;
+        String randomString = uuid.substring(0, 8);
+        return DateUtil.format(DateUtil.date(), "yyyyMMddHHmmss") + "uu" + randomString;
     }
-    public void init(BasePO po){
-        po.setTimestamp(DateUtil.format(DateUtil.date(),"yyyyMMddHHmmss") );
+
+    public void init(BasePO po) {
+        po.setTimestamp(DateUtil.format(DateUtil.date(), "yyyyMMddHHmmss"));
         po.setRequestNo(this.createRequestNo());
     }
 
-    public void sendRequest2(String methode,BasePO po){
+    public void sendRequest2(String methode, BasePO po) {
 
 
         po.setFlbOrderId(11);
@@ -277,17 +276,17 @@ public class TestInterface {
         MediaType type = MediaType.parseMediaType("application/json; charset=UTF-8");
         headers.setContentType(type);
 
-        String url = "http://192.168.40.188:7001/xinwang/"+methode;
+        String url = "http://192.168.40.188:7001/xinwang/" + methode;
 
         String request = po.toJson();
         System.out.println("请求json参数:" + request);
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<String> httpEntity = new HttpEntity(request, headers);
-        ResponseEntity<String> strs = restTemplate.postForEntity(url,httpEntity,String.class );
-        log.info("响应报文：{}",strs.getBody());
+        ResponseEntity<String> strs = restTemplate.postForEntity(url, httpEntity, String.class);
+        log.info("响应报文：{}", strs.getBody());
     }
 
-    public void sendRequest(String methode,BasePO po){
+    public void sendRequest(String methode, BasePO po) {
 
         try {
 
@@ -295,7 +294,7 @@ public class TestInterface {
             po.setFlbUserId(9605);
 
             MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
-                    .post("/xinwang/"+methode)
+                    .post("/xinwang/" + methode)
                     .header("accessKey", "aaa")
 //                    .param("req",po.toJson())
 //                    .param("age","18")
