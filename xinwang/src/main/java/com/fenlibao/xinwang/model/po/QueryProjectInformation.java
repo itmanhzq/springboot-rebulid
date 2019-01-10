@@ -1,6 +1,5 @@
 package com.fenlibao.xinwang.model.po;
 
-import cn.hutool.core.date.DateUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -17,6 +16,7 @@ import javax.validation.constraints.NotNull;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 @ApiModel(value = "标的信息查询实体类")
 public class QueryProjectInformation extends BasePO {
@@ -24,8 +24,4 @@ public class QueryProjectInformation extends BasePO {
     @NotNull(message = "标的号不能为空")
     @ApiModelProperty(required = true,value = "标的号",example = "hhher")
     private String projectNo;
-
-    public QueryProjectInformation() {
-        setTimestamp(DateUtil.format(DateUtil.date(),"yyyyMMddHHmmss"));
-    }
 }

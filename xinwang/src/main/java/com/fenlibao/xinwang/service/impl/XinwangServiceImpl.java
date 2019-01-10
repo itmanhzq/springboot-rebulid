@@ -5,8 +5,9 @@ import cn.hutool.http.HttpRequest;
 import cn.hutool.json.JSONException;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import com.fenlibao.base.dto.Response;
 import com.fenlibao.xinwang.config.Config;
-import com.fenlibao.xinwang.dto.base.Response;
+import com.fenlibao.xinwang.exception.XinwangException;
 import com.fenlibao.xinwang.model.po.BasePO;
 import com.fenlibao.xinwang.model.po.DownloadCheckFile;
 import com.fenlibao.xinwang.model.po.XinwangInterfaceName;
@@ -23,6 +24,7 @@ import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.security.GeneralSecurityException;
 import java.security.PrivateKey;
@@ -59,7 +61,7 @@ public class XinwangServiceImpl implements XinwangService {
 
     @Retryable(value= {HttpException.class},maxAttempts = 3)
     @Override
-    public Response serviceRequest( BasePO basePO) throws Exception {
+    public Response serviceRequest( BasePO basePO) throws XinwangException, GeneralSecurityException, IOException {
         String url= config.getUrl() + SERVICE;
         String reqData = basePO.toJsonFilterFlb();
         HashMap<String,Object> map = new HashMap<>(5);
@@ -87,7 +89,7 @@ public class XinwangServiceImpl implements XinwangService {
 
 
     @Override
-    public Response gatewayRequest(BasePO  basePO)throws Exception {
+    public Response gatewayRequest(BasePO  basePO) throws XinwangException, GeneralSecurityException, IOException {
         String url=config.getUrl() + GATEWAY;
         Map<String,Object> map=new HashMap<>();
         List<Map<String,String>> postParams=new ArrayList<>();
@@ -133,7 +135,7 @@ public class XinwangServiceImpl implements XinwangService {
 
 
     @Override
-    public Response download(DownloadCheckFile downloadCheckFile) throws Exception {
+    public Response download(DownloadCheckFile downloadCheckFile) throws XinwangException, GeneralSecurityException, IOException {
         String url = config.getUrl() + DOWNLOAD;
         String reqData = downloadCheckFile.toJsonFilterFlb();
         HashMap<String,Object> map = new HashMap<>(5);
@@ -167,7 +169,7 @@ public class XinwangServiceImpl implements XinwangService {
      * @return
      * @throws GeneralSecurityException
      */
-    private  String sign(String reqData) throws GeneralSecurityException{
+    private  String sign(String reqData) throws GeneralSecurityException, IOException {
         PrivateKey privateKey = SignatureUtil.getRsaPkcs8PrivateKey(Base64.decodeBase64(config.getPrivateKey()));
         byte[] sign = SignatureUtil.sign(SignatureAlgorithm.SHA_1_WITH_RSA,privateKey, reqData);
         return Base64.encodeBase64String(sign);

@@ -31,12 +31,10 @@ public class SwaggerConfig {
     private static final String ACCESS_KEY = "accessKey";
     private static final String PACKAGE = "com.fenlibao.xinwang.controller";
 
-    @Autowired
-    private Environment env;
 
 
     @Bean
-    public Docket api() {
+    public Docket api(Environment env) {
         String[] activeProfiles = env.getActiveProfiles();
         if (ArrayUtil.isNotEmpty(activeProfiles) && activeProfiles[0].equalsIgnoreCase(PRO)) {
             return getProDocket();

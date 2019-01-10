@@ -72,8 +72,9 @@ public class BasePO implements Serializable{
                     .create()
                     .toJson(this);
         } catch (Exception e) {
-            log.error(e.getMessage());
             log.error("转换json失败：{}",this);
+            log.error(e.getMessage());
+
         }
         return json;
     }
