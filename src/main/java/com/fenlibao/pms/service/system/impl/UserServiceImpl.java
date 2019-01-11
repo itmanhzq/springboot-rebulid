@@ -1,8 +1,8 @@
 package com.fenlibao.pms.service.system.impl;
 
-import com.fenlibao.pms.mapper.system.UserDao;
-import com.fenlibao.pms.mapper.system.UserOrganizationDao;
-import com.fenlibao.pms.mapper.system.UserRoleDao;
+import com.fenlibao.pms.mapper.system.UserMapper;
+import com.fenlibao.pms.mapper.system.UserOrganizationMapper;
+import com.fenlibao.pms.mapper.system.UserRoleMapper;
 import com.fenlibao.pms.model.po.idmt.OrganizationPO;
 import com.fenlibao.pms.service.system.UserService;
 import com.fenlibao.pms.dto.base.ResponseStatus;
@@ -36,16 +36,16 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserDao userDao;
+    private UserMapper userMapper;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private UserOrganizationDao userOrganizationDao;
+    private UserOrganizationMapper userOrganizationMapper;
 
     @Autowired
-    private UserRoleDao userRoleDao;
+    private UserRoleMapper userRoleMapper;
 
     private static final String USER_ID_PROPERTY = "userId";
 
@@ -73,12 +73,12 @@ public class UserServiceImpl implements UserService {
         userPO.setStatus(Integer.valueOf(saveUserReq.getStatus()));
         userPO.setCreateTime(new Date());
         userPO.setErrorNumber(ERROR_NUM);
-        userDao.insertUseGeneratedKeys(userPO);
+        userMapper.insertUseGeneratedKeys(userPO);
 
         IdmtUserOrganizationPO idmtUserOrganizationPO = new IdmtUserOrganizationPO();
         idmtUserOrganizationPO.setOrganizationId(Integer.valueOf(saveUserReq.getOrganizationId()));
         idmtUserOrganizationPO.setUserId(userPO.getId());
-        userOrganizationDao.insertUseGeneratedKeys(idmtUserOrganizationPO);
+        userOrganizationMapper.insertUseGeneratedKeys(idmtUserOrganizationPO);
 
     }
 
@@ -88,17 +88,17 @@ public class UserServiceImpl implements UserService {
         if (!saveUserReq.getPassword().equals(saveUserReq.getComfirmPassword())) {
             throw new SystemException(ResponseStatus.SYSTEM_USER_PASSWORD_ERROR);
         }
-        UserPO userPO = userDao.selectByPrimaryKey(saveUserReq.getUserId());
+        UserPO userPO = userMapper.selectByPrimaryKey(saveUserReq.getUserId());
         userPO.setUserName(saveUserReq.getUserName());
         userPO.setPassword(passwordEncoder.encode(saveUserReq.getPassword()));
         userPO.setRealName(saveUserReq.getRealName());
         userPO.setPhone(saveUserReq.getPhone());
         userPO.setEmail(saveUserReq.getEmail());
-        userDao.updateByPrimaryKey(userPO);
+        userMapper.updateByPrimaryKey(userPO);
         Example example = Example.builder(IdmtUserOrganizationPO.class).where(Sqls.custom().andEqualTo(USER_ID_PROPERTY, userPO.getId())).build();
-        IdmtUserOrganizationPO idmtUserOrganizationPO = userOrganizationDao.selectOneByExample(example);
+        IdmtUserOrganizationPO idmtUserOrganizationPO = userOrganizationMapper.selectOneByExample(example);
         idmtUserOrganizationPO.setOrganizationId(Integer.valueOf(saveUserReq.getOrganizationId()));
-        userOrganizationDao.updateByPrimaryKey(idmtUserOrganizationPO);
+        userOrganizationMapper.updateByPrimaryKey(idmtUserOrganizationPO);
     }
 
     @Override
@@ -108,17 +108,17 @@ public class UserServiceImpl implements UserService {
         if (!StringUtil.isEmpty(name)) {
             params.put("name", name);
         }
-        return PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(() -> userDao.getSearchUser(params));
+        return PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(() -> userMapper.getSearchUser(params));
     }
 
     @Transactional(rollbackFor = Exception.class)
     @Override
     public int delUser(Integer userId) {
-        int count = userDao.deleteByPrimaryKey(userId);
+        int count = userMapper.deleteByPrimaryKey(userId);
         Example userRoleExample = Example.builder(UserRolePO.class).where(Sqls.custom().andEqualTo(USER_ID_PROPERTY, userId)).build();
-        userRoleDao.deleteByExample(userRoleExample);
+        userRoleMapper.deleteByExample(userRoleExample);
         Example organizationExample = Example.builder(IdmtUserOrganizationPO.class).where(Sqls.custom().andEqualTo(USER_ID_PROPERTY, userId)).build();
-        userOrganizationDao.deleteByExample(organizationExample);
+        userOrganizationMapper.deleteByExample(organizationExample);
         return count;
     }
 
@@ -130,7 +130,7 @@ public class UserServiceImpl implements UserService {
      */
     private boolean existsUsername(String userName) {
         Example userRoleExample = Example.builder(UserPO.class).where(Sqls.custom().andEqualTo("userName", userName)).build();
-        UserPO user = this.userDao.selectOneByExample(userRoleExample);
+        UserPO user = this.userMapper.selectOneByExample(userRoleExample);
         return user != null;
     }
 
@@ -138,7 +138,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserBO getUser(String name) {
         Example example = Example.builder(UserPO.class).where(Sqls.custom().andEqualTo("userName", name)).build();
-        UserPO userPO = userDao.selectOneByExample(example);
+        UserPO userPO = userMapper.selectOneByExample(example);
         UserBO userBO = new UserBO();
         if(userPO!=null) {
             BeanUtils.copyProperties(userPO, userBO);
@@ -150,12 +150,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserPO> listUserByRoleId(Integer pageNum, Integer pageSize, Integer roleId) {
         PageHelper.startPage(pageSize, pageNum);
-        return userDao.listUserByRoleId(roleId);
+        return userMapper.listUserByRoleId(roleId);
     }
 
     @Override
     public void updatePassword(Integer userId, String oldPassword, String newPassword) {
-        UserPO userPO = userDao.selectByPrimaryKey(userId);
+        UserPO userPO = userMapper.selectByPrimaryKey(userId);
         if(!passwordEncoder.matches(oldPassword,userPO.getPassword())){
             throw new SystemException(ResponseStatus.SYSTEM_USER_OLD_PASSWORD_ERROR);
         }
@@ -163,7 +163,7 @@ public class UserServiceImpl implements UserService {
             throw new SystemException(ResponseStatus.SYSTEM_USER_PASSWORD_ALIKE);
         }
         userPO.setPassword(passwordEncoder.encode(newPassword));
-        userDao.updateByPrimaryKey(userPO);
+        userMapper.updateByPrimaryKey(userPO);
 
     }
 }

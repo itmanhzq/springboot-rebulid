@@ -1,6 +1,6 @@
 package com.fenlibao.pms.service.system.impl;
 
-import com.fenlibao.pms.mapper.system.RequestLogDao;
+import com.fenlibao.pms.mapper.system.RequestLogMapper;
 import com.fenlibao.pms.model.po.idmt.RequestLogPO;
 import com.fenlibao.pms.model.bo.idmt.RequestLogBO;
 import com.fenlibao.pms.dto.req.system.RequestLogReq;
@@ -19,19 +19,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class RequestLogServiceImpl implements RequestLogService {
     @Autowired
-    private RequestLogDao requestLogDao;
+    private RequestLogMapper requestLogMapper;
 
     @Override
     public void saveLog(RequestLogBO bo) {
         RequestLogPO po=new RequestLogPO();
         BeanUtils.copyProperties(bo,po);
         po.setCostTime(bo.getEndTime()-bo.getStartTime());
-        requestLogDao.insert(po);
+        requestLogMapper.insert(po);
     }
 
     @Override
     public PageInfo<RequestLogRespBody> getLogList(RequestLogReq requestLogReq) {
         return PageHelper.startPage(requestLogReq.getPageNum(), requestLogReq.getPageSize())
-                .doSelectPageInfo(() -> requestLogDao.selectView(requestLogReq));
+                .doSelectPageInfo(() -> requestLogMapper.selectView(requestLogReq));
     }
 }

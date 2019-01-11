@@ -1,7 +1,7 @@
 package com.fenlibao.pms.service.impl;
 
 import com.fenlibao.common.core.redis.RedisPrefix;
-import com.fenlibao.pms.mapper.IdentifyImageDao;
+import com.fenlibao.pms.mapper.IdentifyImageMapper;
 import com.fenlibao.pms.model.bo.IdentifyImageBO;
 import com.fenlibao.pms.model.po.IdentifyImagePO;
 import com.fenlibao.pms.service.IdentifyImageService;
@@ -28,14 +28,14 @@ public class IdentifyImageServiceImpl implements IdentifyImageService {
     private static final int RANDOMNUM = 8;
 
     @Autowired
-    IdentifyImageDao identifyImageDao;
+    IdentifyImageMapper identifyImageMapper;
     private Random random = new Random();
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
     @Override
     public IdentifyImageBO randomImg() {
-        List<IdentifyImagePO> identifyImagePOs = identifyImageDao.selectAll();
+        List<IdentifyImagePO> identifyImagePOs = identifyImageMapper.selectAll();
         String uuid = UUID.randomUUID().toString().replaceAll("-", "");
         String reidsKey = RedisPrefix.IDENTIFY_UUID.getPrefix().concat(uuid);
         IdentifyImagePO identifyImagePO = identifyImagePOs.get(random.nextInt(identifyImagePOs.size() - 1));

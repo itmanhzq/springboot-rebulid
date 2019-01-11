@@ -1,5 +1,6 @@
 package com.fenlibao.pms.mapper.system;
 
+import com.fenlibao.common.core.BaseMapper;
 import com.fenlibao.pms.model.po.idmt.UserPO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -14,7 +15,7 @@ import java.util.Map;
  * @date 2018/11/21
  */
 @Repository
-public interface UserDao extends Mapper<UserPO>, MySqlMapper<UserPO> {
+public interface UserMapper extends BaseMapper<UserPO> {
 
     /**
      * 复杂查询示例
