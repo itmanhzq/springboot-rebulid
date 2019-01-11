@@ -1,9 +1,9 @@
 package com.fenlibao.pms.service.system.impl;
 
 import cn.hutool.core.date.DateUtil;
-import com.fenlibao.pms.mapper.system.RoleDao;
-import com.fenlibao.pms.mapper.system.RolePermissionDao;
-import com.fenlibao.pms.mapper.system.UserRoleDao;
+import com.fenlibao.pms.mapper.system.RoleMapper;
+import com.fenlibao.pms.mapper.system.RolePermissionMapper;
+import com.fenlibao.pms.mapper.system.UserRoleMapper;
 import com.fenlibao.pms.service.system.RoleService;
 import com.fenlibao.pms.dto.base.ResponseStatus;
 import com.fenlibao.pms.exception.BizException;
@@ -34,19 +34,19 @@ import java.util.stream.Collectors;
 @Service
 public class RoleServiceImpl implements RoleService {
     @Autowired
-    private RoleDao systemRoleDao;
+    private RoleMapper systemRoleMapper;
 
     @Autowired
-    private UserRoleDao userRoleDao;
+    private UserRoleMapper userRoleMapper;
 
     @Autowired
-    private RolePermissionDao rolePermissionDao;
+    private RolePermissionMapper rolePermissionMapper;
 
     @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean saveRole(RolePO rolePO) {
         rolePO.setCreateTime(DateUtil.date());
-        boolean saveRoleResult = systemRoleDao.insert(rolePO) > 0;
+        boolean saveRoleResult = systemRoleMapper.insert(rolePO) > 0;
         if (saveRoleResult) {
             return true;
         } else {
@@ -56,7 +56,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public List<RolePO> listRoles() {
-        return systemRoleDao.listRoles();
+        return systemRoleMapper.listRoles();
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -70,12 +70,12 @@ public class RoleServiceImpl implements RoleService {
             log.warn("角色权限为NULL");
             return false;
         }
-        boolean updateRoleResult = systemRoleDao.updateRoleByRoleId(rolePO) > 0;
+        boolean updateRoleResult = systemRoleMapper.updateRoleByRoleId(rolePO) > 0;
         List<RolePermissionPO> saveRolePermissionPOS = configurationPermission(rolePO);
 
         boolean saveRolePermissionResult = true;
         if (!saveRolePermissionPOS.isEmpty()) {
-            saveRolePermissionResult = rolePermissionDao.insertList(saveRolePermissionPOS) > 0;
+            saveRolePermissionResult = rolePermissionMapper.insertList(saveRolePermissionPOS) > 0;
         }
 
         if (updateRoleResult && saveRolePermissionResult) {
@@ -93,7 +93,7 @@ public class RoleServiceImpl implements RoleService {
      */
     private List<RolePermissionPO> configurationPermission(RolePO rolePO) {
         // 查询这个角色所有的权限信息
-        RolePO role = systemRoleDao.selectRoleByRoleId(rolePO.getId());
+        RolePO role = systemRoleMapper.selectRoleByRoleId(rolePO.getId());
         Set<Integer> notRemoveRolePermissionIdSet = new HashSet<>(16);
         rolePO.getRolePermission()
                 .forEach(permissionPO -> role.getRolePermission()
@@ -110,12 +110,12 @@ public class RoleServiceImpl implements RoleService {
                 .build();
         if (notRemoveRolePermissionIdSet.isEmpty()) {
             // 移除该角色所有的权限
-            rolePermissionDao.deleteByExample(rolePermissionExample);
+            rolePermissionMapper.deleteByExample(rolePermissionExample);
         } else {
             // 移除，已经取消了的权限
             rolePermissionExample.and(rolePermissionExample.createCriteria()
                     .andNotIn("permissionId", notRemoveRolePermissionIdSet));
-            rolePermissionDao.deleteByExample(rolePermissionExample);
+            rolePermissionMapper.deleteByExample(rolePermissionExample);
         }
 
         // 获取需要保存的权限集合
@@ -139,20 +139,20 @@ public class RoleServiceImpl implements RoleService {
         }
         // 先删除用户对应的角色
         boolean userRoleRemoveResult = true;
-        if (userRoleDao.selectCount(UserRolePO.builder().roleId(roleId).build()) > 0) {
-            userRoleRemoveResult = userRoleDao.delete(UserRolePO.builder().roleId(roleId).build()) > 0;
+        if (userRoleMapper.selectCount(UserRolePO.builder().roleId(roleId).build()) > 0) {
+            userRoleRemoveResult = userRoleMapper.delete(UserRolePO.builder().roleId(roleId).build()) > 0;
         }
         // 然后删除角色对应的权限
         boolean rolePermissionRemoveResult = true;
-        if (rolePermissionDao.selectCount(RolePermissionPO.builder().roleId(roleId).build()) > 0) {
-            rolePermissionRemoveResult = rolePermissionDao.delete(RolePermissionPO.builder().roleId(roleId).build()) > 0;
+        if (rolePermissionMapper.selectCount(RolePermissionPO.builder().roleId(roleId).build()) > 0) {
+            rolePermissionRemoveResult = rolePermissionMapper.delete(RolePermissionPO.builder().roleId(roleId).build()) > 0;
         }
         // 最后删除角色以及子集
-        boolean roleRemoveResult = systemRoleDao.deleteByPrimaryKey(roleId) > 0;
+        boolean roleRemoveResult = systemRoleMapper.deleteByPrimaryKey(roleId) > 0;
 
         // 通过父级ID查询出相关的子集，并且删除相关的角色以及角色相对应的权限
         Example removeChildrenRoleExample = Example.builder(RolePO.class).where(Sqls.custom().andEqualTo("parentId", roleId)).build();
-        List<RolePO> childrenRole = systemRoleDao.selectByExample(removeChildrenRoleExample);
+        List<RolePO> childrenRole = systemRoleMapper.selectByExample(removeChildrenRoleExample);
         if (!childrenRole.isEmpty()) {
             for (RolePO rolePO : childrenRole) {
                 if (rolePO.getId() != null) {
@@ -174,7 +174,7 @@ public class RoleServiceImpl implements RoleService {
         Example example = Example.builder(RolePO.class)
                 .where(Sqls.custom().andEqualTo("id", req.getRoleId()))
                 .build();
-        return systemRoleDao.updateByExampleSelective(RolePO.builder()
+        return systemRoleMapper.updateByExampleSelective(RolePO.builder()
                 .parentId(req.getParentId())
                 .sort(req.getSort())
                 .build(), example) > 0;

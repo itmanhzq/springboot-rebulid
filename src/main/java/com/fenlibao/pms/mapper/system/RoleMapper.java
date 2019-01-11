@@ -1,5 +1,6 @@
 package com.fenlibao.pms.mapper.system;
 
+import com.fenlibao.common.core.BaseMapper;
 import com.fenlibao.pms.model.po.idmt.RolePO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -15,7 +16,7 @@ import java.util.List;
  * @date 2018/11/26
  */
 @Repository
-public interface RoleDao extends Mapper<RolePO>, MySqlMapper<RolePO> {
+public interface RoleMapper extends BaseMapper<RolePO> {
 
     /**
      * 查询所有角色
