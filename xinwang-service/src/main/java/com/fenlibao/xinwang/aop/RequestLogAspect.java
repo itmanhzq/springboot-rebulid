@@ -41,12 +41,13 @@ public class RequestLogAspect {
     @Resource
     private InterfacePrivilegeMapper interfacePrivilegeMapper;
 
-    private static final String CODE = "code";
-    private static final String STATUS = "status";
-    private static final String SUCCESS = "SUCCESS";
-    private static final String ZERO = "0";
-    private static final String ONE = "1";
-    private static final String NOT_EXITS = "100007";
+    private static final  String CODE_STR = "code";
+    private static final  String MSG_ERROR_CODE = "errorCode";
+    private static final  String STATUS_STR = "status";
+    private static final  String SUCCESS_STR = "SUCCESS";
+    private static final  String SUCCESS_CODE = "0";
+    private static final  String FAIL_CODE = "1";
+    private static final  String NOT_EXITS = "100007";
 
     /**
      * 记录网关请求前记录报文
@@ -60,12 +61,11 @@ public class RequestLogAspect {
             Object[] obj = joinPoint.getArgs();
             BasePO basePO = (BasePO) obj[0];
 
-            String serviceName = XinwangInterfaceName.getServiceName(basePO.getClass());
             //排除查询接口
-            if (serviceName.equals(XinwangInterfaceName.getServiceName(QueryTransaction.class))
-                    || serviceName.equals(XinwangInterfaceName.getServiceName(QueryProjectInformation.class))
-                    || serviceName.equals(XinwangInterfaceName.getServiceName(QueryUserInformation.class))
-                    ) {
+            if(basePO.getClass().isAssignableFrom(QueryTransaction.class)
+                    ||basePO.getClass().isAssignableFrom(QueryProjectInformation.class)
+                    ||basePO.getClass().isAssignableFrom(QueryUserInformation.class)
+                    ){
                 return;
             }
             String accessKey = request.getHeader(RequestHeaderEnum.ACCESS_KEY.getValue());
@@ -81,9 +81,9 @@ public class RequestLogAspect {
             requestLog.setInterfaceUser(interfacePrivilege.getInterfaceUser());
             requestLogMapper.insert(requestLog);
         } catch (Exception e) {
-            if (!e.getClass().equals(DuplicateKeyException.class.getClass())) {
+            if(!e.getClass().isAssignableFrom(DuplicateKeyException.class)){
                 log.error("记录请求报文：{}", requestLog.toString());
-                log.error("请求出错信息：{}", e.getMessage());
+                log.error("请求出错信息：{}",e.getMessage());
             }
         }
     }
@@ -97,41 +97,43 @@ public class RequestLogAspect {
         try {
             int status = RequestState.DQR.getCode();
             Object[] obj = joinPoint.getArgs();
-            BasePO basePO = (BasePO) obj[0];
+            BasePO basePO =  (BasePO)obj[0];
+            //排除查询接口
+            if(basePO.getClass().isAssignableFrom(QueryProjectInformation.class)
+                    ||basePO.getClass().isAssignableFrom(QueryUserInformation.class)
+                    ){
+                return;
+            }
             requestLog.setRequestNo(basePO.getRequestNo());
 
-            String serviceName = XinwangInterfaceName.getServiceName(basePO.getClass());
-            if (serviceName.equals(XinwangInterfaceName.getServiceName(DownloadCheckFile.class))) {
+            if(basePO.getClass().isAssignableFrom(DownloadCheckFile.class)){
                 // 下载的文件流无法转json
-                if (response.getCode() == ResponseStatus.COMMON_OPERATION_SUCCESS.getCode()) {
-                    requestLog.setResponseMsg(response.toString());
-                    status = RequestState.CG.getCode();
-                } else {
-                    requestLog.setResponseMsg(response.toString());
-                    status = RequestState.SB.getCode();
-                }
-            } else {
+                requestLog.setResponseMsg(response.toString());
+            }else {
                 requestLog.setResponseMsg(new Gson().toJson(response));
             }
             requestLog.setUpdateTime(new Date());
-            Object body = response.getBody();
-            JSONObject jsonObject = JSONUtil.parseObj(body);
-            if (ResponseStatus.COMMON_OPERATION_SUCCESS.getCode().equals(response.getCode())) {
-                if (ZERO.equals(jsonObject.get(CODE)) && SUCCESS.equals(jsonObject.get(STATUS))) {
-                    status = RequestState.CG.getCode();
+
+            if(ResponseStatus.COMMON_OPERATION_SUCCESS.getCode().equals(response.getCode())){
+                Object body = response.getBody();
+                JSONObject jsonObject = JSONUtil.parseObj(body);
+                if(SUCCESS_CODE.equals(jsonObject.get(CODE_STR)) && SUCCESS_STR.equals(jsonObject.get(STATUS_STR))){
+                    status = RequestState.CG.getCode() ;
                 }
-                if (ONE.equals(jsonObject.get(CODE))) {
+                if(FAIL_CODE.equals(jsonObject.get(CODE_STR))){
                     status = RequestState.SB.getCode();
                 }
-            }
-            if (ResponseStatus.COMMON_OPERATION_FAIL.getCode().equals(response.getCode())) {
-                if (ONE.equals(jsonObject.get(CODE))) {
-                    status = RequestState.SB.getCode();
-                }
-                if (NOT_EXITS.equals(jsonObject.get(CODE))) {
+            }else {
+                Object msgStr = response.getMsg();
+                JSONObject msgJson = JSONUtil.parseObj(msgStr);
+
+                if(NOT_EXITS.equals(msgJson.get(MSG_ERROR_CODE))){
                     status = RequestState.BCZ.getCode();
+                }else{
+                    status = RequestState.SB.getCode();
                 }
             }
+
             requestLog.setStatus(status);
             Example example = Example
                     .builder(RequestLog.class)
@@ -139,10 +141,10 @@ public class RequestLogAspect {
                             .custom()
                             .andEqualTo("requestNo", requestLog.getRequestNo()))
                     .build();
-            requestLogMapper.updateByExampleSelective(requestLog, example);
+            requestLogMapper.updateByExampleSelective(requestLog,example);
         } catch (Exception e) {
             log.error("记录响应报文出错：{}", requestLog.toString());
-            log.error("响应出错信息：{}", e.getMessage());
+            log.error("响应出错信息：{}",e.getMessage());
         }
 
     }

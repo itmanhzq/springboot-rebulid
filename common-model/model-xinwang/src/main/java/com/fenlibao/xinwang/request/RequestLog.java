@@ -37,7 +37,7 @@ public class RequestLog {
     /**
      * 请求状态
      */
-    private int status;
+    private Integer status;
 
     @Column(name = "create_time")
     private Date createTime;
