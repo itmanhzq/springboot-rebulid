@@ -10,6 +10,7 @@ import lombok.*;
  * @author WangBoRan
  * @date 2018-12-27
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
 @AllArgsConstructor

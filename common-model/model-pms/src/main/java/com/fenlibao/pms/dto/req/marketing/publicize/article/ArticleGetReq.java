@@ -1,6 +1,6 @@
 package com.fenlibao.pms.dto.req.marketing.publicize.article;
 
-import com.fenlibao.base.dto.AbstractPagingReq;
+import com.fenlibao.base.dto.BaseReq;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -15,7 +15,7 @@ import javax.validation.constraints.NotBlank;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @ApiModel("ArticleGetListReq[获取文章列表请求类]")
-public class ArticleGetReq extends AbstractPagingReq {
+public class ArticleGetReq extends BaseReq {
 
     @ApiModelProperty(value = "文章Id", required = true)
     @NotBlank(message = "文章Id不能为空")

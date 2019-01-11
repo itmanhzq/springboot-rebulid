@@ -1,6 +1,7 @@
 package com.fenlibao.pms.dto.req.marketing.publicize.article;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -12,5 +13,6 @@ import lombok.EqualsAndHashCode;
 @Data
 @ApiModel("ArticleAddReq[新增文章请求类]")
 public class ArticleAddReq extends ArticleReq {
-
+    @ApiModelProperty(value = "user_id")
+    private Integer userId;
 }

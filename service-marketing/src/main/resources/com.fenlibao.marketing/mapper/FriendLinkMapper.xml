@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fenlibao.marketing.mapper.publicize.FriendLinkMapper">
+    <resultMap id="BaseResultMap" type="com.fenlibao.marketing.model.po.FriendLinkPO">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="updated_time" property="updatedTime" jdbcType="TIMESTAMP"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="website_name" property="websiteName" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="views" property="views" jdbcType="INTEGER"/>
+    </resultMap>
+</mapper>
