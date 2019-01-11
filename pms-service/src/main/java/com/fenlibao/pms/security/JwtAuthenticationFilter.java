@@ -6,7 +6,7 @@ import com.fenlibao.pms.common.http.RequestUtil;
 import com.fenlibao.pms.common.http.ResponseUtil;
 import com.fenlibao.pms.common.json.Jackson;
 import com.fenlibao.pms.dto.base.ResponseStatus;
-import com.fenlibao.pms.mapper.system.UserDao;
+import com.fenlibao.pms.mapper.system.UserMapper;
 import com.fenlibao.pms.service.TokenService;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
@@ -42,7 +42,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private UserDetailsService userDetailsService;
 
     @Autowired
-    private UserDao userDao;
+    private UserMapper userMapper;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -60,7 +60,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     ResponseUtil.response(Jackson.getBaseJsonData(resp), response);
                     return;
                 }
-                String userName = userDao.selectByPrimaryKey(userId).getUserName();
+                String userName = userMapper.selectByPrimaryKey(userId).getUserName();
                 UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
