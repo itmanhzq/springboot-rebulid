@@ -35,7 +35,7 @@ public class PostRespBody extends BaseReq {
     private Boolean topPlace;
 
     @ApiModelProperty(value = "公告状态 [1.未发布，2.已发布，3.预发布]", required = true)
-    private String status;
+    private String state;
 
     @ApiModelProperty(value = "预发布时间")
     private Date onlineTime;
@@ -47,5 +47,5 @@ public class PostRespBody extends BaseReq {
     private String summary;
 
     @ApiModelProperty(value = "文章内容", required = true)
-    private String context;
+    private String content;
 }

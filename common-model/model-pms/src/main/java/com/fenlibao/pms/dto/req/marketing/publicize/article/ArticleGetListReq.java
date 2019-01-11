@@ -34,4 +34,7 @@ public class ArticleGetListReq extends AbstractPagingReq {
 
     @ApiModelProperty("文章状态 [1.未发布，2.已发布，3.预发布]")
     private Integer state;
+
+    @ApiModelProperty("user_id")
+    private Integer userId;
 }

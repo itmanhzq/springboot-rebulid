@@ -29,4 +29,6 @@ public class FriendLinkGetListReq extends AbstractPagingReq {
     @ApiModelProperty(value = "修改时间（结束）")
     private Date updatedEndTime;
 
+    @ApiModelProperty(value = "user_id")
+    private Integer userId;
 }

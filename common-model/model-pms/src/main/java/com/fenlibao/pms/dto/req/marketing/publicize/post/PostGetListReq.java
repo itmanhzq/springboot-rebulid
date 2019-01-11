@@ -30,6 +30,8 @@ public class PostGetListReq extends AbstractPagingReq {
     private Date showEndTime;
 
     @ApiModelProperty("公告状态 [1.未发布，2.已发布，3.预发布]")
-    private Integer status;
+    private Integer state;
 
+    @ApiModelProperty(value = "user_id")
+    private Integer userId;
 }

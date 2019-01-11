@@ -63,6 +63,6 @@ public class ArticleRespBody extends BaseReq {
     private String summary;
 
     @ApiModelProperty(value = "文章内容", required = true)
-    private String context;
+    private String content;
 
 }

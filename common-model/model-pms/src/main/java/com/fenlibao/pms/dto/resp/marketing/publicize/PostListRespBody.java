@@ -46,4 +46,7 @@ public class PostListRespBody {
 
     @ApiModelProperty(value = "是否置顶 true:是; false:否", required = true)
     private Boolean isStickTop;
+
+    @ApiModelProperty(value = "user_id")
+    private String userId;
 }

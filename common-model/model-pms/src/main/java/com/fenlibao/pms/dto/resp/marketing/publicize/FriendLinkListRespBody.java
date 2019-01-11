@@ -44,4 +44,6 @@ public class FriendLinkListRespBody {
     @ApiModelProperty(value = "位置排序", required = true)
     private Integer sort;
 
+    @ApiModelProperty(value = "user_id")
+    private String userId;
 }
