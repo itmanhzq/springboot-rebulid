@@ -37,8 +37,8 @@
         <module>common-parent</module>
         <module>common-core</module>
         <module>common-model</module>
-        <module>pms-service</module>
-        <module>bid-service</module>
+        <module>service-pms</module>
+        <module>service-bid</module>
         <module>user-service</module>
         <module>xinwang-service</module>
         <module>marketing</module>
