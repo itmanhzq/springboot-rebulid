@@ -38,18 +38,21 @@
         <module>common-core</module>
         <module>common-model</module>
         <module>pms-service</module>
-        <module>bid</module>
+        <module>bid-service</module>
         <module>user-service</module>
         <module>xinwang</module>
         <module>marketing</module>
     </modules>
-
 
     <distributionManagement>
         <snapshotRepository>
             <id>flb-1.0-snapshot</id>
             <url>http://192.168.40.235:8081/nexus/content/repositories/flb-1.0-snapshot</url>
         </snapshotRepository>
+        <repository>
+            <id>flb-release</id>
+            <url>http://192.168.40.235:8081/nexus/content/repositories/flb-release</url>
+        </repository>
     </distributionManagement>
 
 </project>

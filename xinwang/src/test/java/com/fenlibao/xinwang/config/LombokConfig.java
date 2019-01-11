@@ -12,27 +12,23 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
- *  @author Flynn
- *
- *  @Description: 整合Lombok
- *
- *
+ * @author Flynn
+ * @Description: 整合Lombok
  */
 public class LombokConfig extends PluginAdapter {
 
-    private Map<String,FullyQualifiedJavaType> annotation;
+    private Map<String, FullyQualifiedJavaType> annotation;
 
     public LombokConfig() {
-        annotation= new HashMap<String,FullyQualifiedJavaType>();
-        FullyQualifiedJavaType annotationDate  = new FullyQualifiedJavaType("lombok.Data");
-        FullyQualifiedJavaType annotationBuilder  = new FullyQualifiedJavaType("lombok.Builder");
+        annotation = new HashMap<String, FullyQualifiedJavaType>();
+        FullyQualifiedJavaType annotationDate = new FullyQualifiedJavaType("lombok.Data");
+        FullyQualifiedJavaType annotationBuilder = new FullyQualifiedJavaType("lombok.Builder");
         FullyQualifiedJavaType annotationAllArgsConstructor = new FullyQualifiedJavaType("lombok.AllArgsConstructor");
         FullyQualifiedJavaType annotationNoArgsConstructor = new FullyQualifiedJavaType("lombok.NoArgsConstructor");
-        annotation.put("@Data",annotationDate);
-        annotation.put("@Builder",annotationBuilder);
-        annotation.put("@NoArgsConstructor",annotationNoArgsConstructor);
-        annotation.put("@AllArgsConstructor",annotationAllArgsConstructor);
+        annotation.put("@Data", annotationDate);
+        annotation.put("@Builder", annotationBuilder);
+        annotation.put("@NoArgsConstructor", annotationNoArgsConstructor);
+        annotation.put("@AllArgsConstructor", annotationAllArgsConstructor);
     }
 
     @Override
@@ -48,7 +44,7 @@ public class LombokConfig extends PluginAdapter {
      * @return
      */
     @Override
-    public boolean modelBaseRecordClassGenerated(TopLevelClass topLevelClass,IntrospectedTable introspectedTable) {
+    public boolean modelBaseRecordClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
         addDataAnnotation(topLevelClass);
         return true;
     }
@@ -61,7 +57,7 @@ public class LombokConfig extends PluginAdapter {
      * @return
      */
     @Override
-    public boolean modelPrimaryKeyClassGenerated(TopLevelClass topLevelClass,IntrospectedTable introspectedTable) {
+    public boolean modelPrimaryKeyClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
         addDataAnnotation(topLevelClass);
         return true;
     }
@@ -125,7 +121,7 @@ public class LombokConfig extends PluginAdapter {
      * @param topLevelClass
      */
     protected void addDataAnnotation(TopLevelClass topLevelClass) {
-        for(String key:annotation.keySet()){
+        for (String key : annotation.keySet()) {
             topLevelClass.addAnnotation(key);
             topLevelClass.addImportedType(annotation.get(key));
         }

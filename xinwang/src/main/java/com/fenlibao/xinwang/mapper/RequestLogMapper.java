@@ -1,7 +1,7 @@
 package com.fenlibao.xinwang.mapper;
 
 import com.fenlibao.xinwang.common.BaseMapper;
-import com.fenlibao.xinwang.model.po.RequestLog;
+import com.fenlibao.xinwang.request.RequestLog;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface RequestLogMapper extends BaseMapper<RequestLog> {
-
 
 
 }

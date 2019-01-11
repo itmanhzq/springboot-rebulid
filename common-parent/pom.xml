@@ -17,13 +17,12 @@
     <description>MicroServices Dependencies</description>
 
     <properties>
+        <main.basedir>${basedir}/..</main.basedir>
         <!-- 统一依赖 -->
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
-
-        <main.basedir>${basedir}/..</main.basedir>
-        <spring.dependencies.version>2.1.1.RELEASE</spring.dependencies.version>
+        <spring.dependencies.version>2.0.7.RELEASE</spring.dependencies.version>
         <java.version>1.8</java.version>
         <jjwt.version>0.9.0</jjwt.version>
         <hutool-all.version>4.1.19</hutool-all.version>
@@ -42,6 +41,9 @@
         <flatten-maven-plugin.version>1.1.0</flatten-maven-plugin.version>
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
+        <common-core.version>1.0-SNAPSHOT</common-core.version>
+        <model-base.version>1.0-SNAPSHOT</model-base.version>
+        <model-pms.version>1.0-SNAPSHOT</model-pms.version>
     </properties>
 
     <dependencyManagement>
@@ -116,21 +118,28 @@
                 <version>${mybatis-generator-core.version}</version>
                 <scope>test</scope>
             </dependency>
+            <!-- internal dependencies start -->
             <dependency>
                 <groupId>com.fenlibao.v2</groupId>
                 <artifactId>common-core</artifactId>
-                <version>${version}</version>
+                <version>${common-core.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.fenlibao.v2</groupId>
                 <artifactId>model-base</artifactId>
-                <version>${version}</version>
+                <version>${model-base.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.fenlibao.v2</groupId>
                 <artifactId>model-pms</artifactId>
+                <version>${model-pms.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fenlibao.v2</groupId>
+                <artifactId>model-xinwang</artifactId>
                 <version>${version}</version>
             </dependency>
+            <!-- internal dependencies end -->
         </dependencies>
     </dependencyManagement>
 
