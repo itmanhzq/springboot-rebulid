@@ -13,7 +13,7 @@
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>xinwang-service</name>
-    <description>xinwang-service refactoring</description>
+    <description>xinwang refactoring</description>
 
     <organization>
         <name>Fenlibao, Inc.</name>
