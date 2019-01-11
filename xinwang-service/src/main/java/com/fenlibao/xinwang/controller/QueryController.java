@@ -26,7 +26,7 @@ public class QueryController {
     private XinwangService xinwangService;
 
     @ApiOperation("用户信息查询")
-    @PostMapping("/queryProjectInformation")
+    @PostMapping("/queryUserInformation")
     public Response queryUserInformation(@RequestBody QueryUserInformation req) {
         try {
             return xinwangService.serviceRequest(req);
