@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.cglib.beans.BeanMap;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -144,8 +145,7 @@ public class TestInterface {
     @Test
     public void queryProjectInformation() {
         QueryProjectInformation queryProjectInformation = new QueryProjectInformation();
-
-
+        queryProjectInformation.setTimestamp(DateUtil.format(DateUtil.date(), "yyyyMMddHHmmss"));
         queryProjectInformation.setProjectNo("haaha");
 
         this.sendRequest("queryProjectInformation", queryProjectInformation);
@@ -197,6 +197,7 @@ public class TestInterface {
     public void debentureSale() {
         DebentureSale debentureSale = new DebentureSale();
         this.init(debentureSale);
+        debentureSale.setPlatformUserNo("INVESTOR9605");
         debentureSale.setProjectNo("2159031");
         debentureSale.setSaleShare(new BigDecimal(10000));
         this.sendRequest("debentureSale", debentureSale);

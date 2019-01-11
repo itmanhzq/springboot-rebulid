@@ -19,6 +19,6 @@ import javax.validation.constraints.NotNull;
 public class QueryProjectInformation extends BasePO {
 
     @NotNull(message = "标的号不能为空")
-    @ApiModelProperty(required = true,value = "标的号",example = "hhher")
+    @ApiModelProperty(required = true,value = "标的号",example = "123")
     private String projectNo;
 }

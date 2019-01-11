@@ -10,13 +10,18 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
- *
+ *@author Flynn
  */
 @Slf4j
 public class XinwangDownloadUtil {
+    /**
+     * 超时时间
+     */
+    private static final int OUT_TIMES = 12000;
     private XinwangDownloadUtil() {
     }
 
@@ -30,12 +35,13 @@ public class XinwangDownloadUtil {
             HttpPost httppost = new HttpPost(url);
             RequestConfig requestConfig = RequestConfig
                     .custom()
-                    .setConnectTimeout(10000)
-                    .setConnectionRequestTimeout(10000)
-                    .setSocketTimeout(120000).build();
+                    .setConnectTimeout(OUT_TIMES)
+                    .setConnectionRequestTimeout(OUT_TIMES)
+                    .setSocketTimeout(OUT_TIMES)
+                    .build();
             httppost.setConfig(requestConfig);
             if (null != params) {
-                UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(params, "UTF-8");
+                UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(params, StandardCharsets.UTF_8);
                 httppost.setEntity(uefEntity);
             }
             response = httpclient.execute(httppost);

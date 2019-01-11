@@ -1,5 +1,6 @@
 package com.fenlibao.xinwang.interceptor;
 
+import com.fenlibao.xinwang.dto.base.ResponseStatus;
 import com.fenlibao.xinwang.exception.XinwangException;
 import com.fenlibao.xinwang.mapper.InterfacePrivilegeMapper;
 import com.fenlibao.xinwang.model.enums.RequestHeaderEnum;
@@ -19,9 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 public class InterfaceInterceptor implements HandlerInterceptor {
 
-
     private static final String XINWANG = "xinwang";
-
     @Autowired
     private InterfacePrivilegeMapper interfacePrivilegeMapper;
 
@@ -31,9 +30,8 @@ public class InterfaceInterceptor implements HandlerInterceptor {
         if (request.getRequestURI().contains(XINWANG)) {
             InterfacePrivilege privilege = interfacePrivilegeMapper.selectByPrimaryKey(access);
             if (privilege == null) {
-                throw new XinwangException("500", "无调用接口权限，请传输正确的accessKey:" + access);
+                throw new XinwangException(ResponseStatus.COMMON_OPERATION_FAIL.getCode(), "无调用接口权限，请传输正确的accessKey:" + access);
             }
-
         }
         return true;
     }

@@ -56,6 +56,10 @@ public class XinwangServiceImpl implements XinwangService {
     private static final String KEY = "key";
     private static final String VALUE = "value";
 
+    /**
+     * 超时时间
+     */
+    private static final int OUT_TIMES = 12000;
 
     @Retryable(value = {HttpException.class}, maxAttempts = 3)
     @Override
@@ -70,7 +74,7 @@ public class XinwangServiceImpl implements XinwangService {
         map.put(SIGN, sign(reqData));
         String result = HttpRequest.post(url)
                 .form(map)
-                .timeout(120000)
+                .timeout(OUT_TIMES)
                 .execute()
                 .body();
 
