@@ -23,5 +23,4 @@ public class FileUploadReq extends BaseReq implements Serializable {
     @ApiModelProperty(value = "base64位字符串", required = true)
     @NotBlank
     private String file;
-
 }
