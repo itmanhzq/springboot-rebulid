@@ -1,7 +1,7 @@
 package com.fenlibao.pms.service.system.impl;
 
-import com.fenlibao.pms.mapper.system.PermissionDao;
-import com.fenlibao.pms.mapper.system.RolePermissionDao;
+import com.fenlibao.pms.mapper.system.PermissionMapper;
+import com.fenlibao.pms.mapper.system.RolePermissionMapper;
 import com.fenlibao.pms.model.convert.RolePermissionConvert;
 import com.fenlibao.pms.model.po.idmt.PermissionPO;
 import com.fenlibao.pms.service.system.UserRoleService;
@@ -34,10 +34,10 @@ import java.util.*;
 public class PermissionServiceImpl implements PermissionService {
 
     @Autowired
-    PermissionDao permissionDao;
+    PermissionMapper permissionMapper;
 
     @Autowired
-    RolePermissionDao systemRolePermissionDao;
+    RolePermissionMapper systemRolePermissionMapper;
 
     @Autowired
     private UserRoleService userRoleService;
@@ -47,7 +47,7 @@ public class PermissionServiceImpl implements PermissionService {
         Map<String, Object> params = new HashMap<>(2);
         params.put("userId", userId);
         params.put("component", "Home");
-        List<PermissionPO> permissionPOs = permissionDao.getMenuByType(params);
+        List<PermissionPO> permissionPOs = permissionMapper.getMenuByType(params);
         if (permissionPOs != null && !permissionPOs.isEmpty()) {
             for (PermissionPO permissionPO : permissionPOs) {
                 recursionMenu(permissionPO, userId);
@@ -61,7 +61,7 @@ public class PermissionServiceImpl implements PermissionService {
         params.put("userId", userId);
         params.put("parentId", permissionPO.getId());
         params.put("type", "menu");
-        List<PermissionPO> children = permissionDao.getMenuByType(params);
+        List<PermissionPO> children = permissionMapper.getMenuByType(params);
         permissionPO.setChildren(children);
         for (PermissionPO permission : children) {
             recursionMenu(permission, userId);
@@ -71,7 +71,7 @@ public class PermissionServiceImpl implements PermissionService {
     @Override
     public PermissionBO getPermissionList() {
         Example example = Example.builder(PermissionPO.class).where(Sqls.custom().andEqualTo("pid", 0)).build();
-        PermissionPO permissionPO = permissionDao.selectOneByExample(example);
+        PermissionPO permissionPO = permissionMapper.selectOneByExample(example);
         if (permissionPO != null) {
             //递归子集
             recursionOrganization(permissionPO);
@@ -87,7 +87,7 @@ public class PermissionServiceImpl implements PermissionService {
     public PermissionBO getPermissionListByRoleId(UserRoleBO userRoleBO) {
         Example example = Example.builder(PermissionPO.class).build();
         example.setOrderByClause("parent_id,sort");
-        List<PermissionPO> permissionPOS = permissionDao.selectByExample(example);
+        List<PermissionPO> permissionPOS = permissionMapper.selectByExample(example);
         PermissionBO root = PermissionBO.builder().build();
         if (Objects.nonNull(permissionPOS) && !permissionPOS.isEmpty()) {
             // 获取第一个权限
@@ -117,7 +117,7 @@ public class PermissionServiceImpl implements PermissionService {
                 !userRoleBO.getRole().getParentId().equals(0);
         if (notNullAndNotAdmin) {
             // 如果，不是root用户将获取这个角色的权限
-            List<RolePermissionPO> rolePermissionPOS = systemRolePermissionDao.selectByRoleId(userRoleBO.getRole().getId());
+            List<RolePermissionPO> rolePermissionPOS = systemRolePermissionMapper.selectByRoleId(userRoleBO.getRole().getId());
             for (RolePermissionPO rolePermissionPO : rolePermissionPOS) {
                 rolePermissionBOS.add(RolePermissionConvert.poConvertBO(rolePermissionPO));
             }
@@ -182,7 +182,7 @@ public class PermissionServiceImpl implements PermissionService {
      */
     public void recursionOrganization(PermissionPO permissionPO) {
         Example example = Example.builder(PermissionPO.class).where(Sqls.custom().andEqualTo("pid", permissionPO.getId())).build();
-        List<PermissionPO> childrenList = permissionDao.selectByExample(example);
+        List<PermissionPO> childrenList = permissionMapper.selectByExample(example);
         permissionPO.setChildren(childrenList);
         for (PermissionPO permission : childrenList) {
             recursionOrganization(permission);
@@ -194,7 +194,7 @@ public class PermissionServiceImpl implements PermissionService {
     public void addOrUpdatePermission(AddPermissionReq req) {
         if (!StringUtil.isEmpty(req.getId())) {
             //更新
-            PermissionPO permissionPO = permissionDao.selectByPrimaryKey(req.getId());
+            PermissionPO permissionPO = permissionMapper.selectByPrimaryKey(req.getId());
             permissionPO.setName(req.getName());
             permissionPO.setDescription(req.getMarks());
             permissionPO.setCode(req.getCode());
@@ -203,11 +203,11 @@ public class PermissionServiceImpl implements PermissionService {
             permissionPO.setType(req.getType());
             permissionPO.setComponent(req.getComponent());
             permissionPO.setIcon(req.getIcon());
-            permissionDao.updateByPrimaryKey(permissionPO);
+            permissionMapper.updateByPrimaryKey(permissionPO);
         } else {
             //添加
             Example example = Example.builder(PermissionPO.class).where(Sqls.custom().andEqualTo("code", req.getCode())).build();
-            int count = permissionDao.selectCountByExample(example);
+            int count = permissionMapper.selectCountByExample(example);
             if (count > 0) {
                 throw new BizException(ResponseStatus.SYSTEM_PERMISSION_ALREADY_EXIST);
             }
@@ -222,19 +222,19 @@ public class PermissionServiceImpl implements PermissionService {
             permissionPO.setComponent(req.getComponent());
             permissionPO.setPid(Integer.valueOf(req.getParentId()));
             permissionPO.setIcon(req.getIcon());
-            permissionDao.insert(permissionPO);
+            permissionMapper.insert(permissionPO);
         }
     }
 
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void deletePermission(Integer id) {
-        PermissionPO permissionPO = permissionDao.selectByPrimaryKey(id);
+        PermissionPO permissionPO = permissionMapper.selectByPrimaryKey(id);
         if (permissionPO == null) {
             throw new BizException(ResponseStatus.COMMON_OPERATION_SUCCESS);
         }
-        permissionDao.deleteByPrimaryKey(id);
+        permissionMapper.deleteByPrimaryKey(id);
         Example example = Example.builder(RolePermissionPO.class).where(Sqls.custom().andEqualTo("permissionId", id)).build();
-        systemRolePermissionDao.deleteByExample(example);
+        systemRolePermissionMapper.deleteByExample(example);
     }
 }
