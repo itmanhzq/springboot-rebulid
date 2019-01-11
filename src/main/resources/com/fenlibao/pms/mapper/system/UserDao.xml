@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fenlibao.pms.mapper.system.UserMapper">
+
+    <select id="getUserByUserNameOrUserId" parameterType="java.util.HashMap"
+            resultType="com.fenlibao.pms.model.po.idmt.UserPO">
+        SELECT
+        u.`id` as id,
+        u.`user_name` as userName,
+        u.`real_name` as realName,
+        u.`password` as password,
+        u.`phone` AS phone,
+        u.`email` AS email,
+        u.`avatar` AS avatar,
+        u.`status` AS status,
+        u.`create_id` AS createId,
+        u.`dimission` AS dimission,
+        u.`error_number` AS errorNumber
+        FROM v2_pms.`idmt_user` u
+        <where>
+            <if test="userName != null">
+                AND u.`user_name` = #{userName}
+            </if>
+            <if test="userId != null and userId != 0">
+                AND u.`id` = #{userId}
+            </if>
+        </where>
+    </select>
+
+    <select id="getSearchUser" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT
+        u.`id` as id,
+        u.`user_name` ,
+        u.`real_name` ,
+        u.`phone` AS phone,
+        u.`email` AS email,
+        u.`avatar` AS avatar,
+        u.`status` AS status,
+        u.`create_id` AS createId,
+        u.`dimission` AS dimission,
+        u.`error_number` AS errorNumber,
+        r.`id` AS roleId,
+        r.`name` AS roleName,
+        o.`id` AS organizationId,
+        o.`name` AS organizationName
+        FROM v2_pms.`idmt_user` u
+        LEFT JOIN v2_pms.idmt_user_role ur ON ur.user_id = u.id
+        LEFT JOIN v2_pms.idmt_role r ON r.id = ur.role_id
+        LEFT JOIN v2_pms.idmt_user_organization uo ON uo.user_id = u.id
+        LEFT JOIN v2_pms.idmt_organization o ON o.id = uo.organization_id
+        <where>
+            o.`id` IN
+            <foreach collection="organization" item="item" open="(" separator="," close=")">
+                #{item.id}
+            </foreach>
+            <if test="name != null">
+                AND u.real_name = #{name}
+            </if>
+        </where>
+        ORDER BY u.create_time DESC
+    </select>
+
+    <select id="listUserByRoleId" resultMap="BaseResultMap">
+        SELECT pmsUser.id,
+               pmsUser.user_name,
+               pmsUser.real_name,
+               pmsUser.phone,
+               pmsUser.email,
+               pmsUser.avatar,
+               pmsUser.create_id,
+               pmsUser.create_time,
+               pmsUser.last_changepwd_time,
+               pmsUser.dimission,
+               pmsUser.error_number,
+               o.`id`   AS organizationId,
+               o.`name` AS organizationName
+        FROM `idmt_user` pmsUser
+                 INNER JOIN idmt_user_role userRole ON userRole.user_id = pmsUser.id
+                 LEFT JOIN v2_pms.idmt_user_organization uo ON uo.user_id = pmsUser.id
+                 LEFT JOIN v2_pms.idmt_organization o ON o.id = uo.organization_id
+        WHERE userRole.role_id = #{roleId}
+    </select>
+
+    <resultMap id="BaseResultMap" type="com.fenlibao.pms.model.po.idmt.UserPO">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="real_name" property="realName" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="BIT"/>
+        <result column="dimission" property="dimission" jdbcType="TINYINT"/>
+        <result column="createId" property="createId" jdbcType="INTEGER"/>
+        <collection property="roles" javaType="list" ofType="com.fenlibao.pms.model.po.idmt.RolePO">
+            <id property="id" column="roleId"/>
+            <result property="name" column="roleName"/>
+        </collection>
+        <collection property="organization" ofType="com.fenlibao.pms.model.po.idmt.OrganizationPO">
+            <id property="id" column="organizationId"/>
+            <result property="name" column="organizationName"/>
+        </collection>
+    </resultMap>
+
+</mapper>
