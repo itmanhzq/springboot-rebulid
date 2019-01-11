@@ -1,6 +1,6 @@
 package com.fenlibao.pms.service.system.impl;
 
-import com.fenlibao.pms.mapper.system.UserRoleDao;
+import com.fenlibao.pms.mapper.system.UserRoleMapper;
 import com.fenlibao.pms.model.convert.RoleConvert;
 import com.fenlibao.pms.service.system.RoleService;
 import com.fenlibao.pms.service.system.UserRoleService;
@@ -25,13 +25,13 @@ import java.util.*;
 @Service
 public class UserRoleServiceImpl implements UserRoleService {
     @Autowired
-    private UserRoleDao userRoleDao;
+    private UserRoleMapper userRoleMapper;
     @Autowired
     private RoleService roleService;
 
     @Override
     public List<UserRolePO> listUserRoleByUserId(Integer userId) {
-        return userRoleDao.listUserRoleByUserId(userId);
+        return userRoleMapper.listUserRoleByUserId(userId);
     }
 
     @Override
@@ -110,7 +110,7 @@ public class UserRoleServiceImpl implements UserRoleService {
                             .roleId(roleId)
                             .build()));
             if (!saveUserRoleList.isEmpty()) {
-                saveUserRole = userRoleDao.insertList(saveUserRoleList) > 0;
+                saveUserRole = userRoleMapper.insertList(saveUserRoleList) > 0;
             }
         }
 
@@ -125,13 +125,13 @@ public class UserRoleServiceImpl implements UserRoleService {
                 .build();
         if (notRemoveRoleId.isEmpty()) {
             // 移除用户的所有角色
-            return userRoleDao.deleteByExample(removeUserRoleExample) > 0;
+            return userRoleMapper.deleteByExample(removeUserRoleExample) > 0;
         } else {
             // 移除已取消的角色
             removeUserRoleExample
                     .and(removeUserRoleExample.createCriteria()
                             .andNotIn("roleId", notRemoveRoleId));
-            return userRoleDao.deleteByExample(removeUserRoleExample) > 0;
+            return userRoleMapper.deleteByExample(removeUserRoleExample) > 0;
         }
     }
 }

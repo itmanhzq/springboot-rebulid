@@ -19,24 +19,6 @@
         <main.basedir>${basedir}/..</main.basedir>
         <start-class>com.fenlibao.pms.PmsApplication</start-class>
     </properties>
-    <repositories>
-        <repository>
-            <id>p2p-snapshots</id>
-            <url>http://192.168.40.235:8081/nexus/content/repositories/flb-1.0-snapshot/</url>
-            <layout>default</layout>
-            <releases>
-                <enabled>false</enabled>
-                <updatePolicy>always</updatePolicy>
-                <checksumPolicy>warn</checksumPolicy>
-            </releases>
-
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-                <checksumPolicy>warn</checksumPolicy>
-            </snapshots>
-        </repository>
-    </repositories>
     <dependencies>
         <dependency>
             <groupId>com.fenlibao.v2</groupId>

@@ -1,5 +1,6 @@
 package com.fenlibao.pms.mapper.system;
 
+import com.fenlibao.common.core.BaseMapper;
 import com.fenlibao.pms.model.po.idmt.PermissionPO;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +14,7 @@ import java.util.Map;
  * @date 2018/11/26
  */
 @Repository
-public interface PermissionDao extends tk.mybatis.mapper.common.Mapper<PermissionPO>, tk.mybatis.mapper.common.MySqlMapper<PermissionPO> {
+public interface PermissionMapper extends BaseMapper<PermissionPO> {
 
     /**
      * 获取系统权限菜单
