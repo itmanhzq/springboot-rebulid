@@ -1,5 +1,6 @@
 package com.fenlibao.xinwang.request;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -11,7 +12,13 @@ import java.util.Date;
  * @Date: 2018/12/11 17:14
  */
 @Data
+@Builder
 public class PersonalRegisterExpand extends BasePO {
+
+    /**
+     *  平台用户编号
+     */
+    private String platformUserNo;
     /**
      * 用户真实姓名
      */
@@ -51,7 +58,7 @@ public class PersonalRegisterExpand extends BasePO {
     /**
      * 授权期限
      */
-    private Date failTime;
+    private String failTime;
     /**
      * 授权金额
      */

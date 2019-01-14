@@ -2,7 +2,10 @@ package com.fenlibao.xinwang.request;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 
@@ -12,6 +15,9 @@ import javax.validation.constraints.NotNull;
  */
 @Data
 @ApiModel(value = "修改密码实体类")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ResetPassword extends BasePO {
     /**
      * 变更类型：Remember 为记得密码，主动修改密码；Forget 为忘记密码，重新设置密码；
