@@ -56,13 +56,17 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public ArticleRespBody getArticle(ArticleGetReq articleGetReq) {
         ArticlePO articlePO = articleMapper.selectByPrimaryKey(articleGetReq.getId());
+
         return this.poConvertBody(articlePO);
     }
 
     @Override
     public void addArticle(ArticleAddReq essayAddReq) {
-        articleMapper.insert(this.reqConvertPO(essayAddReq));
-        contentService.addContent(essayAddReq.getContent());
+        ArticlePO articlePO = this.reqConvertPO(essayAddReq);
+        int contentId = contentService.addContent(essayAddReq.getContent());
+        articlePO.setContentId(contentId);
+        articleMapper.insert(articlePO);
+
     }
 
     @Override
