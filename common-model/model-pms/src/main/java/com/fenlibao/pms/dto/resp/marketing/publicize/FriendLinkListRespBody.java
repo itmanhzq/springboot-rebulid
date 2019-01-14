@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 /**
  * @author WangBoRan
  * @date 2018-12-27
@@ -36,10 +38,12 @@ public class FriendLinkListRespBody {
     @ApiModelProperty(value = "链接地址", required = true)
     private String url;
 
-    @ApiModelProperty(value = "最后修改时间", required = true,example = "yyyy-MM-dd HH:mm:ss")
-    private String updatedTime;
+    @ApiModelProperty(value = "最后修改时间", required = true)
+    private Date updatedTime;
 
     @ApiModelProperty(value = "位置排序", required = true)
     private Integer sort;
 
+    @ApiModelProperty(value = "user_id")
+    private String userId;
 }

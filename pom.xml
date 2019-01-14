@@ -41,7 +41,7 @@
         <module>service-bid</module>
         <module>service-user</module>
         <module>xinwang-service</module>
-        <module>marketing</module>
+        <module>service-marketing</module>
     </modules>
 
     <distributionManagement>

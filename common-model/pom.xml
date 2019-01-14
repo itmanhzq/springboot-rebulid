@@ -26,6 +26,7 @@
         <module>model-pms</module>
         <module>model-user</module>
         <module>model-xinwang</module>
+        <module>model-marketing</module>
     </modules>
 
 </project>

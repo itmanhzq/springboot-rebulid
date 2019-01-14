@@ -6,6 +6,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.Date;
+
 /**
  * @author WangBoRan
  * @date 2018-12-27
@@ -21,13 +23,15 @@ public class PostGetListReq extends AbstractPagingReq {
     @ApiModelProperty("发布者")
     private String userName;
 
-    @ApiModelProperty(value = "展示时间（开始）",example = "yyyy-MM-dd HH:mm:ss")
-    private String showStartTime;
+    @ApiModelProperty(value = "展示时间（开始）")
+    private Date showStartTime;
 
-    @ApiModelProperty(value = "展示时间（结束）",example = "yyyy-MM-dd HH:mm:ss")
-    private String showEndTime;
+    @ApiModelProperty(value = "展示时间（结束）")
+    private Date showEndTime;
 
     @ApiModelProperty("公告状态 [1.未发布，2.已发布，3.预发布]")
-    private Integer status;
+    private Integer state;
 
+    @ApiModelProperty(value = "user_id")
+    private Integer userId;
 }
