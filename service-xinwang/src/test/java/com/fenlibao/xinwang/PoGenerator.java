@@ -28,7 +28,7 @@ public class PoGenerator {
         boolean overwrite = true;
         ConfigurationParser cp = new ConfigurationParser(warnings);
         Configuration config =
-                cp.parseConfiguration(getResourceAsStream(Application.class.getClassLoader(), CONFIG_NAME));
+                cp.parseConfiguration(getResourceAsStream(XinwangApplication.class.getClassLoader(), CONFIG_NAME));
         DefaultShellCallback callback = new DefaultShellCallback(overwrite);
         MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
         myBatisGenerator.generate(null);

@@ -20,8 +20,6 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class ModifyMobileExpand extends BasePO {
 
-    @ApiModelProperty(value = "平台用户编号",example = "INVESTOR9605")
-    private String platformUserNo;
 
     @ApiModelProperty(value = "更新后用户手机号",example = "15815888888")
     private String mobile;
