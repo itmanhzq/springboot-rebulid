@@ -74,8 +74,8 @@ public class RequestLogAspect {
             requestLog.setInterfaceName(XinwangInterfaceName.getServiceName(basePO.getClass()));
             requestLog.setRequestNo(basePO.getRequestNo());
             requestLog.setCreateTime(new Date());
-            requestLog.setOrderId(basePO.getFlbOrderId());
-            requestLog.setUserId(basePO.getFlbUserId());
+            requestLog.setOrderId(basePO.getFlbOrderId()==null?0:basePO.getFlbOrderId());
+            requestLog.setUserId(basePO.getFlbUserId()==null?0:basePO.getFlbUserId());
             requestLog.setStatus(RequestState.DTJ.getCode());
             requestLog.setRequestParams(basePO.toJsonFilterFlb());
             requestLog.setInterfaceUser(interfacePrivilege.getInterfaceUser());

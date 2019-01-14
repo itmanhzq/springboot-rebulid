@@ -14,4 +14,6 @@ public class UnbindBankcard extends BasePO {
      */
     private String redirectUrl;
 
+    private String platformUserNo;
+
 }

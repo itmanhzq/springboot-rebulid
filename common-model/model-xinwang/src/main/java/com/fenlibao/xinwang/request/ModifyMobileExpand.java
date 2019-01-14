@@ -2,7 +2,10 @@ package com.fenlibao.xinwang.request;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 
@@ -12,7 +15,13 @@ import javax.validation.constraints.NotNull;
  */
 @Data
 @ApiModel(value = "预留手机号更新实体类")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ModifyMobileExpand extends BasePO {
+
+    @ApiModelProperty(value = "平台用户编号",example = "INVESTOR9605")
+    private String platformUserNo;
 
     @ApiModelProperty(value = "更新后用户手机号",example = "15815888888")
     private String mobile;
