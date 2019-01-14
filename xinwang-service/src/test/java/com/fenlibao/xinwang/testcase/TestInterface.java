@@ -14,12 +14,14 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -36,6 +38,7 @@ import java.util.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Slf4j
+@Rollback
 public class TestInterface {
     @Autowired
     private WebApplicationContext wac;
@@ -50,6 +53,7 @@ public class TestInterface {
     }
 
     @Test
+    @Transactional
     public void queryTransaction() throws Exception {
 
         QueryTransaction queryTransaction = new QueryTransaction();
@@ -65,6 +69,7 @@ public class TestInterface {
 
 
     @Test
+    @Transactional
     public void recharge() throws Exception {
         Recharge recharge = new Recharge();
         this.init(recharge);
@@ -82,6 +87,7 @@ public class TestInterface {
     }
 
     @Test
+    @Transactional
     public void withDraw() throws Exception {
 
         Withdraw withdraw = new Withdraw();
@@ -100,6 +106,7 @@ public class TestInterface {
 
 
     @Test
+    @Transactional
     public void resetPassword() throws Exception {
 
         ResetPassword resetPassword = new ResetPassword();
@@ -113,6 +120,7 @@ public class TestInterface {
 
 
     @Test
+    @Transactional
     public void modifyMobileExpand() {
         ModifyMobileExpand modifyMobileExpand = new ModifyMobileExpand();
         this.init(modifyMobileExpand);
@@ -125,6 +133,7 @@ public class TestInterface {
     }
 
     @Test
+    @Transactional
     public void establishProject() {
         EstablishProject establishProject = new EstablishProject();
         this.init(establishProject);
@@ -143,6 +152,7 @@ public class TestInterface {
 
 
     @Test
+    @Transactional
     public void queryProjectInformation() {
         QueryProjectInformation queryProjectInformation = new QueryProjectInformation();
         queryProjectInformation.setTimestamp(DateUtil.format(DateUtil.date(), "yyyyMMddHHmmss"));
@@ -153,6 +163,7 @@ public class TestInterface {
     }
 
     @Test
+    @Transactional
     public void userAutoPreTransaction() {
         UserAutoPreTransaction userAutoPreTransaction = new UserAutoPreTransaction();
         this.init(userAutoPreTransaction);
@@ -165,6 +176,7 @@ public class TestInterface {
     }
 
     @Test
+    @Transactional
     public void syncTransaction() {
         SyncTransaction syncTransaction = new SyncTransaction();
         this.init(syncTransaction);
@@ -186,6 +198,7 @@ public class TestInterface {
     }
 
     @Test
+    @Transactional
     public void asyncTransaction() {
         AsyncTransaction asyncTransaction = new AsyncTransaction();
         this.init(asyncTransaction);
@@ -194,6 +207,7 @@ public class TestInterface {
     }
 
     @Test
+    @Transactional
     public void debentureSale() {
         DebentureSale debentureSale = new DebentureSale();
         this.init(debentureSale);
@@ -206,6 +220,7 @@ public class TestInterface {
 
     //TODO 文件流传不过来？
     @Test
+    @Transactional
     public void download() throws Exception {
         DownloadCheckFile downloadCheckFile = new DownloadCheckFile();
         this.init(downloadCheckFile);
@@ -221,6 +236,8 @@ public class TestInterface {
     }
 
     @Test
+    @Transactional
+    @Rollback
     public void confirmCheckfile() throws Exception {
         ConfirmCheckfile confirmCheckfile = new ConfirmCheckfile();
 //        confirmCheckfile.setAccessKey("aaa");

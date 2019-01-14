@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fenlibao.marketing.mapper.publicize.ArticleMapper">
+    <resultMap id="BaseResultMap" type="com.fenlibao.marketing.model.po.ArticlePO">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="updated_time" property="updatedTime" jdbcType="TIMESTAMP"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="source" property="source" jdbcType="VARCHAR"/>
+        <result column="author" property="author" jdbcType="VARCHAR"/>
+        <result column="original_url" property="originalUrl" jdbcType="VARCHAR"/>
+        <result column="show_time" property="showTime" jdbcType="TIMESTAMP"/>
+        <result column="image_url" property="imageUrl" jdbcType="VARCHAR"/>
+        <result column="sort_time" property="sortTime" jdbcType="TIMESTAMP"/>
+        <result column="is_stick_top" property="isStickTop" jdbcType="BIT"/>
+        <result column="state" property="state" jdbcType="INTEGER"/>
+        <result column="keyword" property="keyword" jdbcType="VARCHAR"/>
+        <result column="summary" property="summary" jdbcType="VARCHAR"/>
+        <result column="pre_online_time" property="preOnlineTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+</mapper>

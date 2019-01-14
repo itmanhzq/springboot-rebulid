@@ -4,6 +4,8 @@ import lombok.Data;
 import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Date;
 
@@ -16,11 +18,12 @@ import java.util.Date;
 public class BasePO {
     @Id
     @KeySql(useGeneratedKeys = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(name = "create_time", nullable = false)
     private Date createTime = new Date();
 
-    @Column(nullable = false)
+    @Column(name = "updated_time", nullable = false)
     private Date updatedTime = new Date();
 }

@@ -9,12 +9,14 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.math.BigDecimal;
@@ -30,6 +32,7 @@ import java.util.*;
 @SpringBootTest
 @WebAppConfiguration
 @Slf4j
+@Rollback
 public class TestInterfaces {
 
     @Autowired
@@ -50,16 +53,18 @@ public class TestInterfaces {
     }
 
     @Test
+    @Transactional
     public void testCancelDebentureSale() {
         CancelDebentureSale cancelDebentureSale = new CancelDebentureSale();
         cancelDebentureSale.setTimestamp(TIME_STAMP);
         //CreditsaleRequestNo取的是6260表的creditsale_no
-        cancelDebentureSale.setCreditsaleRequestNo("201709121016498aaf95d11b");
-        cancelDebentureSale.setRequestNo("201709121016498aaf95d11b");
+        cancelDebentureSale.setCreditsaleRequestNo("201709121016498aaf95d11b5");
+        cancelDebentureSale.setRequestNo("201709121016498aaf95d11b5");
         this.sendRequest("cancelDebentureSale", cancelDebentureSale);
     }
 
     @Test
+    @Transactional
     public void testPersonalBindBankcardExpand() {
         PersonalBindBankcardExpand personalBindBankcardExpand = new PersonalBindBankcardExpand();
         personalBindBankcardExpand.setTimestamp(TIME_STAMP);
@@ -71,6 +76,7 @@ public class TestInterfaces {
     }
 
     @Test
+    @Transactional
     public void testModifyProject() {
         ModifyProject modifyProject = new ModifyProject();
         modifyProject.setRequestNo("2018122116014571003480-b");
@@ -81,6 +87,7 @@ public class TestInterfaces {
     }
 
     @Test
+    @Transactional
     public void testEnterpriseInformationUpdate() {
         EnterpriseInformationUpdate enterpriseInformationUpdate = new EnterpriseInformationUpdate();
         enterpriseInformationUpdate.setTimestamp(TIME_STAMP);
@@ -91,6 +98,7 @@ public class TestInterfaces {
     }
 
     @Test
+    @Transactional
     public void testEnterpriseRegister() {
         EnterpriseRegister enterpriseRegister = new EnterpriseRegister();
         enterpriseRegister.setTimestamp(TIME_STAMP);
@@ -101,6 +109,7 @@ public class TestInterfaces {
     }
 
     @Test
+    @Transactional
     public void testCancelPreTransaction() {
         CancelPreTransaction cancelPreTransaction = new CancelPreTransaction();
         cancelPreTransaction.setTimestamp(TIME_STAMP);
@@ -111,6 +120,7 @@ public class TestInterfaces {
     }
 
     @Test
+    @Transactional
     public void testEnterpriseBindBankcard() {
         EnterpriseBindBankcard enterpriseBindBankcard = new EnterpriseBindBankcard();
         enterpriseBindBankcard.setTimestamp(TIME_STAMP);
@@ -123,6 +133,7 @@ public class TestInterfaces {
     }
 
     @Test
+    @Transactional
     public void testConfirmCheckfile() {
         ConfirmCheckfile confirmCheckfile = new ConfirmCheckfile();
         confirmCheckfile.setTimestamp(TIME_STAMP);
@@ -149,6 +160,7 @@ public class TestInterfaces {
     }
 
     @Test
+    @Transactional
     public void testActivateStockedUser() {
         ActivateStockedUser activateStockedUser = new ActivateStockedUser();
         activateStockedUser.setTimestamp(TIME_STAMP);
@@ -160,6 +172,7 @@ public class TestInterfaces {
     }
 
     @Test
+    @Transactional
     public void testCancelUserAuthorization() {
         CancelUserAuthorization cancelUserAuthorization = new CancelUserAuthorization();
         cancelUserAuthorization.setTimestamp(TIME_STAMP);
@@ -170,6 +183,7 @@ public class TestInterfaces {
     }
 
     @Test
+    @Transactional
     public void testUserAuthorization() {
         UserAuthorization userAuthorization = new UserAuthorization();
         userAuthorization.setTimestamp(TIME_STAMP);
@@ -181,6 +195,7 @@ public class TestInterfaces {
     }
 
     @Test
+    @Transactional
     public void testAuthorizationEntrustPay() {
         AuthorizationEntrustPay authorizationEntrustPay = new AuthorizationEntrustPay();
         authorizationEntrustPay.setTimestamp(TIME_STAMP);
@@ -194,6 +209,7 @@ public class TestInterfaces {
     }
 
     @Test
+    @Transactional
     public void testQueryAuthorizationEntrustPayRecord() {
         QueryAuthorizationEntrustPayRecord queryAuthorizationEntrustPayRecord = new QueryAuthorizationEntrustPayRecord();
         queryAuthorizationEntrustPayRecord.setTimestamp(TIME_STAMP);
