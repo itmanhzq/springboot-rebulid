@@ -10,10 +10,10 @@
     </parent>
 
     <groupId>com.fenlibao</groupId>
-    <artifactId>xinwang-service</artifactId>
+    <artifactId>service-xinwang</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>xinwang-service</name>
+    <name>service-xinwang</name>
     <description>xinwang-service refactoring</description>
 
     <organization>
