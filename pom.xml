@@ -40,7 +40,7 @@
         <module>service-pms</module>
         <module>service-bid</module>
         <module>service-user</module>
-        <module>xinwang-service</module>
+        <module>service-xinwang</module>
         <module>service-marketing</module>
     </modules>
 

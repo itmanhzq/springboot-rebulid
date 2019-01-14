@@ -17,6 +17,10 @@ public class ModifyMobileExpand extends BasePO {
     @ApiModelProperty(value = "更新后用户手机号",example = "15815888888")
     private String mobile;
 
+    @NotNull(message = "平台用户编号不能为空")
+    @ApiModelProperty(required = true,value = "平台用户编号",example = "INVESTOR9605")
+    private String platformUserNo;
+
     @NotNull(message = "页面回跳URL不能为空")
     @ApiModelProperty(required = true,value = "页面回跳URL",example = "http://192.168.40.215:90/cg/modify_reserved_phone")
     private String redirectUrl;
