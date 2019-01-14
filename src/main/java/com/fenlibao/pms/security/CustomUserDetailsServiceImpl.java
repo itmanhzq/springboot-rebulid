@@ -1,8 +1,8 @@
 package com.fenlibao.pms.security;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.fenlibao.pms.mapper.system.UserDao;
-import com.fenlibao.pms.mapper.system.UserRoleDao;
+import com.fenlibao.pms.mapper.system.UserMapper;
+import com.fenlibao.pms.mapper.system.UserRoleMapper;
 import com.fenlibao.pms.model.convert.RoleConvert;
 import com.fenlibao.pms.dto.base.ResponseStatus;
 import com.fenlibao.pms.model.bo.idmt.RoleBO;
@@ -37,10 +37,10 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
 
 
     @Autowired
-    UserRoleDao userRoleDao;
+    UserRoleMapper userRoleMapper;
 
     @Autowired
-    UserDao userDao;
+    UserMapper userMapper;
 
     @Override
     public UserDetails loadUserByUsername(String usernameOrEmail) {
@@ -55,10 +55,10 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
         Map<String, Object> map = new HashMap<>(2);
         map.put("userId", userId);
         map.put("userName", userName);
-        UserPO userPO = userDao.getUserByUserNameOrUserId(map);
+        UserPO userPO = userMapper.getUserByUserNameOrUserId(map);
         if (userPO != null) {
             List<UserRoleBO> userRoleBOs = new ArrayList<>();
-            List<UserRolePO> userRolePOS = userRoleDao.listUserRoleByUserId(userPO.getId());
+            List<UserRolePO> userRolePOS = userRoleMapper.listUserRoleByUserId(userPO.getId());
             try {
                 userRolePOS.forEach(
                         userRolePO -> {

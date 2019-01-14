@@ -92,6 +92,7 @@ public class AuthController {
             String jwt = tokenProvider.generateToken(authentication);
             //保存token到redis
             tokenService.saveTokenToReids(tokenProvider.getUserIdFromJWT(jwt), jwt);
+
             return Response.ok(SigninRespBody.get(jwt));
         } catch (AuthenticationException e) {
             return Response.error(e.getMessage());

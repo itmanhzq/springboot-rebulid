@@ -1,5 +1,6 @@
 package com.fenlibao.pms.mapper.system;
 
+import com.fenlibao.common.core.BaseMapper;
 import com.fenlibao.pms.model.po.idmt.OrganizationPO;
 import com.fenlibao.pms.model.po.idmt.UserPO;
 import org.apache.ibatis.annotations.Param;
@@ -16,7 +17,7 @@ import java.util.Map;
  * @date 2018/11/21
  */
 @Repository
-public interface OrganizationDao extends Mapper<OrganizationPO>, MySqlMapper<OrganizationPO> {
+public interface OrganizationMapper extends BaseMapper<OrganizationPO> {
 
     /**
      * 获取用户所在组别id

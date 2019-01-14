@@ -1,7 +1,7 @@
 package com.fenlibao.pms.listener;
 
 
-import com.fenlibao.pms.mapper.system.UserDao;
+import com.fenlibao.pms.mapper.system.UserMapper;
 import com.fenlibao.pms.model.po.UserStatusEnum;
 import com.fenlibao.pms.model.po.idmt.UserPO;
 import com.fenlibao.pms.security.UserPrincipal;
@@ -25,15 +25,15 @@ public class AuthenticationSuccessEventListener implements ApplicationListener<A
     private static final int ERROR_NUM = 0;
 
     @Autowired
-    UserDao userDao;
+    UserMapper userMapper;
 
     @Override
     public void onApplicationEvent(AuthenticationSuccessEvent authenticationSuccessEvent) {
         UserPrincipal userPrincipal = (UserPrincipal) authenticationSuccessEvent.getAuthentication().getPrincipal();
-        UserPO userPO = userDao.selectByPrimaryKey(userPrincipal.getId());
+        UserPO userPO = userMapper.selectByPrimaryKey(userPrincipal.getId());
         //重置错误次数
         userPO.setErrorNumber(ERROR_NUM);
         userPO.setStatus(UserStatusEnum.OPEN.getStatus());
-        userDao.updateByPrimaryKey(userPO);
+        userMapper.updateByPrimaryKey(userPO);
     }
 }
