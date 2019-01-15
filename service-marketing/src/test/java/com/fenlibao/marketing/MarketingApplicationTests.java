@@ -20,7 +20,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
 public class MarketingApplicationTests {
-
     @Before
     public void init() {
         System.out.println("开始测试-----------------");
@@ -31,4 +30,8 @@ public class MarketingApplicationTests {
         System.out.println("测试结束-----------------");
     }
 
+
+    @Test
+    public void contextLoads() {
+    }
 }

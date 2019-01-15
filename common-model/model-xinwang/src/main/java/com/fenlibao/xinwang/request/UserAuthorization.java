@@ -2,7 +2,10 @@ package com.fenlibao.xinwang.request;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -14,6 +17,9 @@ import java.util.Date;
  */
 @Data
 @ApiModel(value = "用户授权实体类")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserAuthorization extends BasePO{
 
     @NotNull(message = "用户授权列表不能为空")
@@ -21,7 +27,7 @@ public class UserAuthorization extends BasePO{
     private String authList;
 
     @ApiModelProperty(value = "授权期限")
-    private Date failTime;
+    private String failTime;
 
     @ApiModelProperty(value = "授权金额")
     private BigDecimal amount;

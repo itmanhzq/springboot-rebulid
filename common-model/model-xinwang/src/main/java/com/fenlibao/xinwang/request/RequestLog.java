@@ -29,14 +29,18 @@ public class RequestLog {
     @Column(name = "request_no")
     private String requestNo;
 
-    private Integer orderId;
+    @Column(name = "order_id")
+    private int orderId;
 
-    private Integer userId;
+    @Column(name = "user_id")
+    private int userId;
 
+    @Column(name = "interface_user")
     private Integer interfaceUser;
     /**
      * 请求状态
      */
+    @Column(name = "status")
     private Integer status;
 
     @Column(name = "create_time")

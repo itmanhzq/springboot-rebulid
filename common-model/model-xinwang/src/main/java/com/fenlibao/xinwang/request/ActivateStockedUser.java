@@ -37,7 +37,7 @@ public class ActivateStockedUser extends BasePO {
     private String cardChange;
 
     @ApiModelProperty(value = "授权期限")
-    private Date failTime;
+    private String failTime;
 
     @ApiModelProperty(value = "授权金额")
     private BigDecimal amount;
