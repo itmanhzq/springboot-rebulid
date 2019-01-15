@@ -38,5 +38,4 @@ public class RegisterReq  extends BaseReq implements Serializable {
     @NotBlank
     private String deviceType;
 
-
 }
