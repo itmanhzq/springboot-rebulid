@@ -31,6 +31,12 @@ public class PersonalRegisterExpand extends BasePO {
      * 银行预留手机号
      */
     private String mobile;
+
+    /**
+     * 银行卡号
+     */
+    private String bankcardNo;
+
     /**
      * 证件类型
      */

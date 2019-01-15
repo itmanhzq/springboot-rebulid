@@ -30,10 +30,10 @@ public class RequestLog {
     private String requestNo;
 
     @Column(name = "order_id")
-    private int orderId;
+    private Integer orderId;
 
     @Column(name = "user_id")
-    private int userId;
+    private Integer userId;
 
     @Column(name = "interface_user")
     private Integer interfaceUser;
