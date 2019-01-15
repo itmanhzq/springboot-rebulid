@@ -99,7 +99,7 @@ public class XinwangServiceImpl implements XinwangService {
         param1.put(VALUE, config.getPlatformNo());
 
         Map<String, String> param2 = new HashMap<>(2);
-        param2.put(KEY, PLATFORM_NO);
+        param2.put(KEY, KEY_SERIAL);
         param2.put(VALUE, config.getKeySerial());
 
         Map<String, String> param3 = new HashMap<>(2);
