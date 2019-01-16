@@ -176,7 +176,7 @@ public class UserController {
     public Response<Boolean> settingUserRole(@Valid @RequestBody UserRoleReq userRoleReq) {
         try {
             boolean result = userRoleService.updateUserRoleByUserId(userRoleReq);
-            return Response.okOrError(ResponseStatus.COMMON_UPDATE_ERROR, ResponseStatus.COMMON_OPERATION_SUCCESS, result);
+            return Response.okOrError(ResponseStatus.COMMON_OPERATION_SUCCESS, ResponseStatus.COMMON_UPDATE_ERROR, result);
         } catch (Exception e) {
             log.error("设置用户角色异常：", e);
         }
