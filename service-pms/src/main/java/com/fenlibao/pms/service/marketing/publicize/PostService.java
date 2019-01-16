@@ -1,10 +1,9 @@
-package com.fenlibao.marketing.service;
+package com.fenlibao.pms.service.marketing.publicize;
 
 import com.fenlibao.pms.dto.req.marketing.publicize.post.*;
 import com.fenlibao.pms.dto.resp.marketing.publicize.PostListRespBody;
 import com.fenlibao.pms.dto.resp.marketing.publicize.PostRespBody;
-
-import java.util.List;
+import com.github.pagehelper.PageInfo;
 
 /**
  * @author WangBoRan
@@ -17,7 +16,7 @@ public interface PostService {
      * @param postGetListReq
      * @return
      */
-    List<PostListRespBody> getPostList(PostGetListReq postGetListReq);
+    PageInfo<PostListRespBody> getPostList(PostGetListReq postGetListReq);
 
     /**
      * 查询公告信息

@@ -4,6 +4,7 @@ import com.fenlibao.base.dto.Response;
 import com.fenlibao.pms.dto.req.marketing.publicize.article.*;
 import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleListRespBody;
 import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleRespBody;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -30,7 +31,7 @@ public class ArticleController {
     @ApiOperation("文章列表")
     @PostMapping("/getArticleList")
     @ApiResponse(code = 200, message = "请求成功", response = ArticleListRespBody.class)
-    public Response<ArticleListRespBody> getArticleList(@RequestBody @Valid ArticleGetListReq essayGetListReq) {
+    public Response<PageInfo<ArticleListRespBody>> getArticleList(@RequestBody @Valid ArticleGetListReq essayGetListReq) {
         return Response.ok();
     }
 

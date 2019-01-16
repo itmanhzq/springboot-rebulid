@@ -4,6 +4,7 @@ import com.fenlibao.base.dto.Response;
 import com.fenlibao.pms.dto.req.marketing.publicize.frinedlink.*;
 import com.fenlibao.pms.dto.resp.marketing.publicize.FriendLinkListRespBody;
 import com.fenlibao.pms.dto.resp.marketing.publicize.FriendLinkRespBody;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -31,7 +32,7 @@ public class FriendLinkController {
     @PostMapping("/getFriendLinkList")
     @PreAuthorize("hasPermission('friendLink','view')")
     @ApiResponse(code = 200, message = "请求成功", response = FriendLinkListRespBody.class)
-    public Response<FriendLinkListRespBody> getFriendLinkList(@RequestBody @Valid FriendLinkGetListReq friendLinkGetListReq) {
+    public Response<PageInfo<FriendLinkListRespBody>> getFriendLinkList(@RequestBody @Valid FriendLinkGetListReq friendLinkGetListReq) {
         return Response.ok();
     }
 

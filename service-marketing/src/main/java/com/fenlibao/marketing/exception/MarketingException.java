@@ -18,11 +18,11 @@ import com.fenlibao.marketing.dto.ResponseStatus;
  * @author Toby
  * @date 2018/11/3
  */
-public class SystemException extends RuntimeException {
+public class MarketingException extends RuntimeException {
     private static final long serialVersionUID = -5279102685099291009L;
     private final String code;
 
-    public SystemException(String msg, String code) {
+    public MarketingException(String msg, String code) {
         super(msg);
         this.code = code;
     }
@@ -31,7 +31,7 @@ public class SystemException extends RuntimeException {
         return code;
     }
 
-    public SystemException(ResponseStatus response) {
+    public MarketingException(ResponseStatus response) {
         super(response.getMsg());
         this.code = String.valueOf(response.getCode());
     }

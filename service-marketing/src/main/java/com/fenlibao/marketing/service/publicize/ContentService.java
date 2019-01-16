@@ -1,4 +1,4 @@
-package com.fenlibao.marketing.service;
+package com.fenlibao.marketing.service.publicize;
 
 import com.fenlibao.marketing.model.po.publicize.ContentPO;
 

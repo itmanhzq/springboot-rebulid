@@ -4,18 +4,17 @@ import java.util.Date;
 
 
 import com.fenlibao.marketing.MarketingApplicationTests;
-import com.fenlibao.marketing.service.ArticleService;
+import com.fenlibao.marketing.service.publicize.ArticleService;
 import com.fenlibao.pms.dto.req.marketing.publicize.article.ArticleAddReq;
 import com.fenlibao.pms.dto.req.marketing.publicize.article.ArticleGetListReq;
 import com.fenlibao.pms.dto.req.marketing.publicize.article.ArticleGetReq;
 import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleListRespBody;
 import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleRespBody;
+import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 /**
  * @author WangBoRan
@@ -31,8 +30,7 @@ public class ArticlsTest extends MarketingApplicationTests {
     @Test
     public void testGetArticleList() {
         ArticleGetListReq articleGetListReq = new ArticleGetListReq();
-        articleGetListReq.setTitle("投资新锐光大分利宝加入广州互联网金融协会");
-        List<ArticleListRespBody> articleList = articleService.getArticleList(articleGetListReq);
+        PageInfo<ArticleListRespBody> articleList = articleService.getArticleList(articleGetListReq);
         log.debug("查询结果：");
         log.debug(articleList.toString());
     }
@@ -40,7 +38,7 @@ public class ArticlsTest extends MarketingApplicationTests {
     @Test
     public void testGetArticle() {
         ArticleGetReq articleGetReq = new ArticleGetReq();
-        articleGetReq.setId(1406);
+        articleGetReq.setId(1);
         ArticleRespBody articleList = articleService.getArticle(articleGetReq);
         log.debug("查询结果：");
         log.debug(articleList.toString());

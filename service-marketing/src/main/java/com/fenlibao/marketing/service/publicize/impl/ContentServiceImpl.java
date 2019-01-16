@@ -1,8 +1,8 @@
-package com.fenlibao.marketing.service.impl;
+package com.fenlibao.marketing.service.publicize.impl;
 
 import com.fenlibao.marketing.mapper.publicize.ContentMapper;
 import com.fenlibao.marketing.model.po.publicize.ContentPO;
-import com.fenlibao.marketing.service.ContentService;
+import com.fenlibao.marketing.service.publicize.ContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

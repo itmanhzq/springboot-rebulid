@@ -1,11 +1,9 @@
-package com.fenlibao.marketing.service;
+package com.fenlibao.pms.service.marketing.publicize;
 
 import com.fenlibao.pms.dto.req.marketing.publicize.frinedlink.*;
 import com.fenlibao.pms.dto.resp.marketing.publicize.FriendLinkListRespBody;
 import com.fenlibao.pms.dto.resp.marketing.publicize.FriendLinkRespBody;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import java.util.List;
+import com.github.pagehelper.PageInfo;
 
 /**
  * @author WangBoRan
@@ -19,7 +17,7 @@ public interface FriendLinkService {
      * @param friendLinkGetListReq
      * @return
      */
-    List<FriendLinkListRespBody> getFriendLink(FriendLinkGetListReq friendLinkGetListReq);
+    PageInfo<FriendLinkListRespBody> getFriendLink(FriendLinkGetListReq friendLinkGetListReq);
 
     /**
      * 友链信息
