@@ -19,10 +19,11 @@ micro services
 │  ├─model-base 基础类
 │  └─model-pms PMS相关的类（PO、Response、Request）
 ├─common-parent 所有项目的父级
-├─marketing 营销服务
-├─pms-service PMS后台服务
-├─user 用户服务
-└─xinwang 新网服务
+├─service-marketing 营销服务
+├─service-pms PMS后台服务
+├─service-user 用户服务
+├─service-xinwang 新网服务
+└─service-bid 标的服务
 ```
 
 > common-parent
