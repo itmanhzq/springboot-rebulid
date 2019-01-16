@@ -68,8 +68,21 @@ public class AccountController {
     }
 
     @ApiOperation("解绑银行卡")
-    @PostMapping("/modifyMobileExpand")
-    public Response modifyMobileExpand(@RequestBody ModifyMobileExpand req) {
+    @PostMapping("/unbindBankcard")
+    public Response unbindBankcard(@RequestBody UnbindBankcard req) {
+        try {
+            return xinwangService.gatewayRequest(req);
+        } catch (Exception e) {
+            log.error("解绑银行卡失败", e);
+            return Response.error("解绑银行卡失败");
+        }
+    }
+
+
+
+    @ApiOperation("修改密码")
+    @PostMapping("/resetPassword")
+    public Response resetPassword(@RequestBody ResetPassword req) {
         try {
             return xinwangService.gatewayRequest(req);
         } catch (Exception e) {
@@ -77,9 +90,9 @@ public class AccountController {
         }
     }
 
-    @ApiOperation("修改密码")
-    @PostMapping("/resetPassword")
-    public Response resetPassword(@RequestBody ResetPassword req) {
+    @ApiOperation("预留手机号更新")
+    @PostMapping("/modifyMobileExpand")
+    public Response modifyMobileExpand(@RequestBody ModifyMobileExpand req) {
         try {
             return xinwangService.gatewayRequest(req);
         } catch (Exception e) {

@@ -76,7 +76,7 @@ public class EnterpriseRegister extends BasePO {
     private String authList;
 
     @ApiModelProperty(value = "授权期限")
-    private Date failTime;
+    private String failTime;
 
     @ApiModelProperty(value = "授权金额")
     private BigDecimal amount;

@@ -26,7 +26,7 @@ public enum XinwangInterfaceName {
     QUERY_TRANSACTION(QueryTransaction.class,"QUERY_TRANSACTION","单笔交易查询"),
     DEBENTURE_SALE(DebentureSale.class,"DEBENTURE_SALE", "单笔债权出让"),
     CANCEL_DEBENTURE_SALE(CancelDebentureSale.class,"CANCEL_DEBENTURE_SALE", "取消债权出让"),
-    PERSONAL_BIND_BANKCARD_EXPAND(PersonalRegisterExpand.class,"PERSONAL_BIND_BANKCARD_EXPAND", "个人绑卡"),
+    PERSONAL_BIND_BANKCARD_EXPAND(PersonalBindBankcardExpand.class,"PERSONAL_BIND_BANKCARD_EXPAND", "个人绑卡"),
     MODIFY_PROJECT(ModifyProject.class,"MODIFY_PROJECT", "变更标的"),
     ENTERPRISE_INFORMATION_UPDATE(EnterpriseInformationUpdate.class,"ENTERPRISE_INFORMATION_UPDATE", "企业信息修改"),
     ENTERPRISE_REGISTER(EnterpriseRegister.class,"ENTERPRISE_REGISTER", "企业绑卡注册"),
