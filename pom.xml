@@ -33,6 +33,17 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
+    <distributionManagement>
+        <snapshotRepository>
+            <id>flb-1.0-snapshot</id>
+            <url>http://192.168.40.235:8081/nexus/content/repositories/flb-1.0-snapshot</url>
+        </snapshotRepository>
+        <repository>
+            <id>flb-release</id>
+            <url>http://192.168.40.235:8081/nexus/content/repositories/flb-release</url>
+        </repository>
+    </distributionManagement>
+
     <modules>
         <module>common-parent</module>
         <module>common-core</module>
