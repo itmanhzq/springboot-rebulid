@@ -88,7 +88,7 @@ $ git commit -m "update README.md"
 $ git subtree push -P pms-service pms-service-origin dev --squash
 ```
 
-这样就提及到了子项目中。
+这样就添加到了子项目中。
 
 ##### 拉取子项目的代码
 
