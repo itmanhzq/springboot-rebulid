@@ -95,7 +95,7 @@ $ git subtree push -P pms-service pms-service-origin dev --squash
 由于我们是多人协作开发，一个项目可能会有多个人进行开发，所以为了保持代码的一致，我们需要拉取远程仓库中的代码：
 
 ```git
-$ git substree pull -P pms-service pms-service-upstream dev --quash
+$ git subtree pull -P pms-service pms-service-upstream dev --squash
 ```
 
 这样就基本大功告成啦！更多详细的命令可以通过`git substree --help`查看。
