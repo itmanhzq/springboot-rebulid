@@ -26,6 +26,8 @@ pms:
     - /configuration/security
     - /
     - /csrf
+    - /error
+    - /favicon.ico
   excludeUri:
     - swagger
     - csrf
