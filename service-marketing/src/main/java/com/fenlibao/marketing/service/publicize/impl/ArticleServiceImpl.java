@@ -39,9 +39,6 @@ public class ArticleServiceImpl implements ArticleService {
     @SuppressWarnings("Duplicates")
     @Override
     public PageInfo<ArticleListRespBody> getArticleList(ArticleGetListReq articleGetListReq) throws MarketingException {
-        if(articleGetListReq.getShowEndTime()!=null && articleGetListReq.getShowStartTime()!=null){
-            throw new MarketingException(ResponseStatus.COMMON_SELECT_DATE_LACK);
-        }
         Weekend<ArticlePO> weekend = new Weekend<>(ArticlePO.class);
         Example example = new Example(ArticlePO.class);
         Example.Criteria criteria = example.createCriteria();

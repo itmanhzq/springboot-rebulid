@@ -177,7 +177,7 @@
             <dependency>
                 <groupId>com.fenlibao.v2</groupId>
                 <artifactId>model-marketing</artifactId>
-                <version>${model-marketing.version}</version>
+                <version>${model-markting.version}</version>
             </dependency>
             <!-- internal dependencies end -->
         </dependencies>

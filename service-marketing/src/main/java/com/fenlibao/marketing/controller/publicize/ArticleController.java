@@ -26,7 +26,7 @@ import javax.validation.Valid;
 
 @Slf4j
 @RestController
-@RequestMapping("/marketing/publicize/article")
+@RequestMapping("/publicize/article")
 @Api(tags = {"文章管理接口"})
 public class ArticleController {
     @Autowired
