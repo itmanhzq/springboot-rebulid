@@ -2,11 +2,17 @@ package com.fenlibao.pms.service.marketing.publicize.impl;
 
 
 import cn.hutool.http.HttpUtil;
+import com.fenlibao.base.dto.Response;
+import com.fenlibao.pms.common.http.RequestUtil;
+import com.fenlibao.pms.config.Config;
 import com.fenlibao.pms.dto.req.marketing.publicize.article.*;
 import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleListRespBody;
 import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleRespBody;
 import com.fenlibao.pms.service.marketing.publicize.ArticleService;
 import com.github.pagehelper.PageInfo;
+import com.google.gson.Gson;
+import org.modelmapper.TypeToken;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
@@ -17,10 +23,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class ArticleServiceImpl implements ArticleService {
 
+    @Autowired
+    private Config config;
+
     @Override
     public PageInfo<ArticleListRespBody> getArticleList(ArticleGetListReq essayGetListReq) {
-//        HttpUtil.post();
-        return null;
+        Gson gson = new Gson();
+        String url = config.getMarketing() + "/publicize/article/getArticleList";
+        String request = gson.toJson(essayGetListReq);
+        return RequestUtil.postReqPage(url, request);
     }
 
     @Override
