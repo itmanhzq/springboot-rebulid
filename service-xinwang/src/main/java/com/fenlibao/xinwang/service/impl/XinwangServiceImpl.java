@@ -56,10 +56,14 @@ public class XinwangServiceImpl implements XinwangService {
     private static final String KEY = "key";
     private static final String VALUE = "value";
 
+    private static final String SUCCESS_CODE = "0";
+
     /**
      * 超时时间
      */
     private static final int OUT_TIMES = 12000;
+
+
 
     @Retryable(value = {HttpException.class}, maxAttempts = 3)
     @Override
@@ -84,7 +88,7 @@ public class XinwangServiceImpl implements XinwangService {
         } catch (JSONException e) {
             return Response.error(result);
         }
-        return "0".equals(obj.get("code")) ? Response.ok(obj) : Response.error(result);
+        return SUCCESS_CODE.equals(obj.get("code")) ? Response.ok(obj) : Response.error(result);
     }
 
 
@@ -113,7 +117,7 @@ public class XinwangServiceImpl implements XinwangService {
 
         Map<String, String> param5 = new HashMap<>(2);
         param5.put(KEY, SIGN);
-        param5.put(VALUE, sign(reqData));
+        param5.put(VALUE, this.sign(reqData));
 
         Map<String, String> param6 = new HashMap<>(2);
         param6.put(KEY, "userDevice");
@@ -137,18 +141,13 @@ public class XinwangServiceImpl implements XinwangService {
     public Response download(DownloadCheckFile downloadCheckFile) throws GeneralSecurityException, IOException {
         String url = config.getUrl() + DOWNLOAD;
         String reqData = downloadCheckFile.toJsonFilterFlb();
-        HashMap<String, Object> map = new HashMap<>(5);
-        map.put(PLATFORM_NO, config.getPlatformNo());
-        map.put(REQ_DATA, reqData);
-        map.put(KEY_SERIAL, config.getKeySerial());
-        map.put(SIGN, sign(reqData));
 
 
         BasicNameValuePair bn1 = new BasicNameValuePair(SERVICE_NAME, XinwangInterfaceName.getServiceName(downloadCheckFile.getClass()));
         BasicNameValuePair bn2 = new BasicNameValuePair(PLATFORM_NO, config.getPlatformNo());
         BasicNameValuePair bn3 = new BasicNameValuePair(REQ_DATA, reqData);
         BasicNameValuePair bn4 = new BasicNameValuePair(KEY_SERIAL, config.getKeySerial());
-        BasicNameValuePair bn5 = new BasicNameValuePair(SIGN, sign(reqData));
+        BasicNameValuePair bn5 = new BasicNameValuePair(SIGN, this.sign(reqData));
 
         List<BasicNameValuePair> form = new ArrayList<>();
         form.add(bn1);

@@ -19,10 +19,11 @@ micro services
 │  ├─model-base 基础类
 │  └─model-pms PMS相关的类（PO、Response、Request）
 ├─common-parent 所有项目的父级
-├─marketing 营销服务
-├─pms-service PMS后台服务
-├─user 用户服务
-└─xinwang 新网服务
+├─service-marketing 营销服务
+├─service-pms PMS后台服务
+├─service-user 用户服务
+├─service-xinwang 新网服务
+└─service-bid 标的服务
 ```
 
 > common-parent
@@ -88,14 +89,14 @@ $ git commit -m "update README.md"
 $ git subtree push -P pms-service pms-service-origin dev --squash
 ```
 
-这样就提及到了子项目中。
+这样就添加到了子项目中。
 
 ##### 拉取子项目的代码
 
 由于我们是多人协作开发，一个项目可能会有多个人进行开发，所以为了保持代码的一致，我们需要拉取远程仓库中的代码：
 
 ```git
-$ git substree pull -P pms-service pms-service-upstream dev --quash
+$ git subtree pull -P pms-service pms-service-upstream dev --squash
 ```
 
 这样就基本大功告成啦！更多详细的命令可以通过`git substree --help`查看。
