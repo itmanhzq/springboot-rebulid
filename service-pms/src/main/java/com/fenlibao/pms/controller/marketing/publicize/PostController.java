@@ -5,6 +5,7 @@ import com.fenlibao.base.dto.Response;
 import com.fenlibao.pms.dto.req.marketing.publicize.post.*;
 import com.fenlibao.pms.dto.resp.marketing.publicize.PostListRespBody;
 import com.fenlibao.pms.dto.resp.marketing.publicize.PostRespBody;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -30,7 +31,7 @@ public class PostController {
     @ApiOperation("公告列表")
     @PostMapping("/getPostList")
     @ApiResponse(code = 200, message = "请求成功", response = PostListRespBody.class)
-    public Response<PostListRespBody> getPostList(@RequestBody @Valid PostGetListReq postGetListReq) {
+    public Response<PageInfo<PostListRespBody>> getPostList(@RequestBody @Valid PostGetListReq postGetListReq) {
         return Response.ok();
     }
 
@@ -46,7 +47,7 @@ public class PostController {
     @PostMapping("/addPost")
     @PreAuthorize("hasPermission('post','add')")
     @ApiResponse(code = 200, message = "请求成功", response = Boolean.class)
-    public Response<Boolean> addPost(@RequestBody @Valid PostAddReq bulletinAddReq) {
+    public Response<Boolean> addPost(@RequestBody @Valid PostAddReq postAddReq) {
 
         return Response.ok();
     }

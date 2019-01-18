@@ -1,17 +1,16 @@
-package com.fenlibao.marketing.service.impl;
+package com.fenlibao.marketing.service.publicize.impl;
 
-import cn.hutool.core.util.PageUtil;
-import com.fenlibao.marketing.mapper.publicize.ContentMapper;
 import com.fenlibao.marketing.mapper.publicize.PostMapper;
 import com.fenlibao.marketing.model.po.publicize.ContentPO;
 import com.fenlibao.marketing.model.po.publicize.PostPO;
-import com.fenlibao.marketing.service.ContentService;
-import com.fenlibao.marketing.service.PostService;
+import com.fenlibao.marketing.service.publicize.ContentService;
+import com.fenlibao.marketing.service.publicize.PostService;
 import com.fenlibao.pms.dto.req.marketing.publicize.post.*;
 import com.fenlibao.pms.dto.resp.marketing.publicize.PostListRespBody;
 import com.fenlibao.pms.dto.resp.marketing.publicize.PostRespBody;
 import com.fenlibao.pms.model.enums.publicize.PublicizeStats;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +34,7 @@ public class PostServiceImpl implements PostService {
 
     @SuppressWarnings("Duplicates")
     @Override
-    public List<PostListRespBody> getPostList(PostGetListReq postGetListReq) {
+    public PageInfo<PostListRespBody> getPostList(PostGetListReq postGetListReq) {
         Weekend<PostPO> weekend = new Weekend<>(PostPO.class);
         Example example = new Example(PostPO.class);
         Example.Criteria criteria = example.createCriteria();
@@ -46,8 +45,8 @@ public class PostServiceImpl implements PostService {
         criteria.andGreaterThanOrEqualTo("showTime", postGetListReq.getShowStartTime());
         weekend.and(criteria);
         weekend.setOrderByClause("isStickTop DESC,sortTime DESC");
-        PageHelper.startPage(postGetListReq.getPageNum(), postGetListReq.getPageSize());
-        List<PostPO> pos = postMapper.selectByExample(weekend);
+        PageInfo<PostPO> pos=PageHelper.startPage(postGetListReq.getPageNum(), postGetListReq.getPageSize())
+                .doSelectPageInfo(() -> postMapper.selectByExample(weekend));
         return this.posConvertBody(pos, postGetListReq.getPageNum(), postGetListReq.getPageSize());
     }
 
@@ -58,8 +57,8 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void addPost(PostAddReq bulletinAddReq) {
-        postMapper.insert(this.reqConvertPO(bulletinAddReq));
+    public void addPost(PostAddReq postAddReq) {
+        postMapper.insert(this.reqConvertPO(postAddReq));
     }
 
     @Override
@@ -89,17 +88,21 @@ public class PostServiceImpl implements PostService {
      * @param pageSize
      * @return
      */
-    private List<PostListRespBody> posConvertBody(List<PostPO> list, int pageNum, int pageSize) {
+    @SuppressWarnings("Duplicates")
+    private PageInfo<PostListRespBody> posConvertBody(PageInfo<PostPO> list, int pageNum, int pageSize) {
         ModelMapper modelMapper = new ModelMapper();
-        List<PostListRespBody> postListRespBodyList = new ArrayList<>();
+        PageInfo<PostListRespBody> postBodyPage = modelMapper.map(list,PageInfo.class);
+        List<PostListRespBody> postListRespBodies = new ArrayList<>();
         int index = pageNum * pageSize;
-        for (PostPO postPO : list) {
+        for (PostPO postPO : list.getList()) {
             PostListRespBody postListRespBody = modelMapper.map(postPO, PostListRespBody.class);
             postListRespBody.setState(PublicizeStats.getMessage(postPO.getState()));
             postListRespBody.setOrder(index);
+            postListRespBodies.add(postListRespBody);
             index++;
         }
-        return postListRespBodyList;
+        postBodyPage.setList(postListRespBodies);
+        return postBodyPage;
     }
 
     /**

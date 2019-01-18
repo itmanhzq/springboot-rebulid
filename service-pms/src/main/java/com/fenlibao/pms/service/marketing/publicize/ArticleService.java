@@ -1,10 +1,9 @@
-package com.fenlibao.marketing.service;
+package com.fenlibao.pms.service.marketing.publicize;
 
 import com.fenlibao.pms.dto.req.marketing.publicize.article.*;
 import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleListRespBody;
 import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleRespBody;
-
-import java.util.List;
+import com.github.pagehelper.PageInfo;
 
 
 /**
@@ -16,10 +15,10 @@ public interface ArticleService {
     /**
      * 文章列表
      *
-     * @param essayGetListReq
+     * @param articleGetListReq
      * @return
      */
-    List<ArticleListRespBody> getArticleList(ArticleGetListReq essayGetListReq);
+    PageInfo<ArticleListRespBody> getArticleList(ArticleGetListReq articleGetListReq);
 
     /**
      * 查询文章
@@ -32,32 +31,32 @@ public interface ArticleService {
     /**
      * 新增文章
      *
-     * @param essayAddReq
+     * @param articleAddReq
      * @return
      */
-    void addArticle(ArticleAddReq essayAddReq);
+    Boolean addArticle(ArticleAddReq articleAddReq);
 
     /**
      * 修改文章
      *
-     * @param essayUpdateReq
+     * @param articleUpdateReq
      * @return
      */
-    void updateArticle(ArticleUpdateReq essayUpdateReq);
+    Boolean updateArticle(ArticleUpdateReq articleUpdateReq);
 
     /**
      * 设置文章置顶状态
      *
-     * @param bulletinUpdateReq
+     * @param articleStickTopReq
      * @return
      */
-    void topPlaceArticle(ArticleStickTopReq bulletinUpdateReq);
+    Boolean topPlaceArticle(ArticleStickTopReq articleStickTopReq);
 
     /**
      * 删除文章
      *
-     * @param essayDeleteReq
+     * @param articleDeleteReq
      * @return
      */
-    void deleteArticle(ArticleDeleteReq essayDeleteReq);
+    Boolean deleteArticle(ArticleDeleteReq articleDeleteReq);
 }

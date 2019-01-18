@@ -44,6 +44,7 @@
         <common-core.version>1.0-SNAPSHOT</common-core.version>
         <model-base.version>1.0-SNAPSHOT</model-base.version>
         <model-pms.version>1.0-SNAPSHOT</model-pms.version>
+        <model-markting.version>1.0-SNAPSHOT</model-markting.version>
     </properties>
 
     <repositories>
@@ -172,6 +173,11 @@
                 <groupId>com.fenlibao.v2</groupId>
                 <artifactId>model-xinwang</artifactId>
                 <version>${version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fenlibao.v2</groupId>
+                <artifactId>model-marketing</artifactId>
+                <version>${model-markting.version}</version>
             </dependency>
             <!-- internal dependencies end -->
         </dependencies>

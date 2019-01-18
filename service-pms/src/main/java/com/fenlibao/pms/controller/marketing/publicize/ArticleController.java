@@ -4,6 +4,7 @@ import com.fenlibao.base.dto.Response;
 import com.fenlibao.pms.dto.req.marketing.publicize.article.*;
 import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleListRespBody;
 import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleRespBody;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -30,7 +31,7 @@ public class ArticleController {
     @ApiOperation("文章列表")
     @PostMapping("/getArticleList")
     @ApiResponse(code = 200, message = "请求成功", response = ArticleListRespBody.class)
-    public Response<ArticleListRespBody> getArticleList(@RequestBody @Valid ArticleGetListReq essayGetListReq) {
+    public Response<PageInfo<ArticleListRespBody>> getArticleList(@RequestBody @Valid ArticleGetListReq articleGetListReq) {
         return Response.ok();
     }
 
@@ -46,7 +47,7 @@ public class ArticleController {
     @PostMapping("/addArticle")
     @PreAuthorize("hasPermission('article','add')")
     @ApiResponse(code = 200, message = "请求成功", response = Boolean.class)
-    public Response<Boolean> addArticle(@RequestBody @Valid ArticleAddReq essayAddReq) {
+    public Response<Boolean> addArticle(@RequestBody @Valid ArticleAddReq articleAddReq) {
 
         return Response.ok();
     }
@@ -55,7 +56,7 @@ public class ArticleController {
     @PostMapping("/updateArticle")
     @PreAuthorize("hasPermission('article','update')")
     @ApiResponse(code = 200, message = "请求成功", response = Boolean.class)
-    public Response<Boolean> updateArticle(@RequestBody @Valid ArticleUpdateReq essayUpdateReq) {
+    public Response<Boolean> updateArticle(@RequestBody @Valid ArticleUpdateReq articleUpdateReq) {
         return Response.ok();
     }
 
@@ -63,7 +64,7 @@ public class ArticleController {
     @PostMapping("/topPlaceArticle")
     @PreAuthorize("hasPermission('article','update')")
     @ApiResponse(code = 200, message = "请求成功", response = Boolean.class)
-    public Response<Boolean> topPlaceArticle(@RequestBody @Valid ArticleStickTopReq bulletinUpdateReq) {
+    public Response<Boolean> topPlaceArticle(@RequestBody @Valid ArticleStickTopReq articleStickTopReq) {
 
         return Response.ok();
     }
@@ -72,7 +73,7 @@ public class ArticleController {
     @PostMapping("/deleteArticle")
     @PreAuthorize("hasPermission('article','delete')")
     @ApiResponse(code = 200, message = "请求成功", response = Boolean.class)
-    public Response<Boolean> deleteArticle(@RequestBody @Valid ArticleDeleteReq essayDeleteReq) {
+    public Response<Boolean> deleteArticle(@RequestBody @Valid ArticleDeleteReq articleDeleteReq) {
         return Response.ok();
     }
 }
