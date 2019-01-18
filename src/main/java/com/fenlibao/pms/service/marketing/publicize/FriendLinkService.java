@@ -17,7 +17,7 @@ public interface FriendLinkService {
      * @param friendLinkGetListReq
      * @return
      */
-    PageInfo<FriendLinkListRespBody> getFriendLink(FriendLinkGetListReq friendLinkGetListReq);
+    PageInfo<FriendLinkListRespBody> getFriendLinkList(FriendLinkGetListReq friendLinkGetListReq);
 
     /**
      * 友链信息
@@ -32,19 +32,19 @@ public interface FriendLinkService {
      *
      * @param friendLinkAddReq
      */
-    void addFriendLink(FriendLinkAddReq friendLinkAddReq);
+    Boolean addFriendLink(FriendLinkAddReq friendLinkAddReq);
 
     /**
      * 修改友链
      *
      * @param friendLinkUpdateReq
      */
-    void updateFriendLink(FriendLinkUpdateReq friendLinkUpdateReq);
+    Boolean updateFriendLink(FriendLinkUpdateReq friendLinkUpdateReq);
 
     /**
      * 删除友链
      *
      * @param friendLinkDeleteReq
      */
-    void deleteFriendLink(FriendLinkDeleteReq friendLinkDeleteReq);
+    Boolean deleteFriendLink(FriendLinkDeleteReq friendLinkDeleteReq);
 }
