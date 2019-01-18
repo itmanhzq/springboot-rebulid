@@ -57,8 +57,8 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void addPost(PostAddReq bulletinAddReq) {
-        postMapper.insert(this.reqConvertPO(bulletinAddReq));
+    public void addPost(PostAddReq postAddReq) {
+        postMapper.insert(this.reqConvertPO(postAddReq));
     }
 
     @Override

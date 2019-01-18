@@ -18,10 +18,10 @@ public interface ArticleService {
     /**
      * 文章列表
      *
-     * @param essayGetListReq
+     * @param articleGetListReq
      * @return
      */
-    PageInfo<ArticleListRespBody> getArticleList(ArticleGetListReq essayGetListReq)throws MarketingException;
+    PageInfo<ArticleListRespBody> getArticleList(ArticleGetListReq articleGetListReq) throws MarketingException;
 
     /**
      * 查询文章
@@ -34,32 +34,32 @@ public interface ArticleService {
     /**
      * 新增文章
      *
-     * @param essayAddReq
+     * @param articleAddReq
      * @return
      */
-    void addArticle(ArticleAddReq essayAddReq);
+    void addArticle(ArticleAddReq articleAddReq);
 
     /**
      * 修改文章
      *
-     * @param essayUpdateReq
+     * @param articleUpdateReq
      * @return
      */
-    void updateArticle(ArticleUpdateReq essayUpdateReq);
+    void updateArticle(ArticleUpdateReq articleUpdateReq);
 
     /**
      * 设置文章置顶状态
      *
-     * @param bulletinUpdateReq
+     * @param articleStickTopReq
      * @return
      */
-    void topPlaceArticle(ArticleStickTopReq bulletinUpdateReq);
+    void topPlaceArticle(ArticleStickTopReq articleStickTopReq);
 
     /**
      * 删除文章
      *
-     * @param essayDeleteReq
+     * @param articleDeleteReq
      * @return
      */
-    void deleteArticle(ArticleDeleteReq essayDeleteReq);
+    void deleteArticle(ArticleDeleteReq articleDeleteReq);
 }

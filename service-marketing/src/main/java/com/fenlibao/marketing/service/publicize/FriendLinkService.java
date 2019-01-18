@@ -20,7 +20,7 @@ public interface FriendLinkService {
      * @param friendLinkGetListReq
      * @return
      */
-    PageInfo<FriendLinkListRespBody> getFriendLink(FriendLinkGetListReq friendLinkGetListReq);
+    PageInfo<FriendLinkListRespBody> getFriendLinkList(FriendLinkGetListReq friendLinkGetListReq);
 
     /**
      * 友链信息

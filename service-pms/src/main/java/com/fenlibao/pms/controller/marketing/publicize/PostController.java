@@ -47,7 +47,7 @@ public class PostController {
     @PostMapping("/addPost")
     @PreAuthorize("hasPermission('post','add')")
     @ApiResponse(code = 200, message = "请求成功", response = Boolean.class)
-    public Response<Boolean> addPost(@RequestBody @Valid PostAddReq bulletinAddReq) {
+    public Response<Boolean> addPost(@RequestBody @Valid PostAddReq postAddReq) {
 
         return Response.ok();
     }

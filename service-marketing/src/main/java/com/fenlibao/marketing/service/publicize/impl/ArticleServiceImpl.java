@@ -1,6 +1,7 @@
 package com.fenlibao.marketing.service.publicize.impl;
 
 import com.fenlibao.marketing.dto.ResponseStatus;
+import com.fenlibao.marketing.exception.BizException;
 import com.fenlibao.marketing.exception.MarketingException;
 import com.fenlibao.marketing.mapper.publicize.ArticleMapper;
 import com.fenlibao.marketing.model.po.publicize.ArticlePO;

@@ -1,5 +1,6 @@
 package com.fenlibao.common.core.service.marketing.impl;
 
+import cn.hutool.core.util.IdUtil;
 import com.fenlibao.pms.PmsApplication;
 import com.fenlibao.pms.dto.req.marketing.publicize.article.ArticleGetListReq;
 import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleListRespBody;
@@ -17,8 +18,8 @@ import org.springframework.test.context.junit4.SpringRunner;
  * @date 2019/1/16
  */
 @Slf4j
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = PmsApplication.class)
+/*@RunWith(SpringRunner.class)
+@SpringBootTest(classes = PmsApplication.class)*/
 public class ArticleServiceImplTest {
 
     @Autowired
@@ -30,4 +31,12 @@ public class ArticleServiceImplTest {
         PageInfo<ArticleListRespBody> pageInfo = articleService.getArticleList(articleGetListReq);
         log.info(pageInfo.toString());
     }
+
+    @Test
+    public void test() {
+        IdUtil.randomUUID();
+        log.info(IdUtil.fastSimpleUUID());
+    }
+
+
 }

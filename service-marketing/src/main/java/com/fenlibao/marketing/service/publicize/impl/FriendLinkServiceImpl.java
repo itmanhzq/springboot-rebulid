@@ -27,7 +27,7 @@ public class FriendLinkServiceImpl implements FriendLinkService {
     private FriendLinkMapper friendLinkMapper;
 
     @Override
-    public PageInfo<FriendLinkListRespBody> getFriendLink(FriendLinkGetListReq friendLinkGetListReq) {
+    public PageInfo<FriendLinkListRespBody> getFriendLinkList(FriendLinkGetListReq friendLinkGetListReq) {
         Weekend<FriendLinkPO> weekend = new Weekend<>(FriendLinkPO.class);
         Example example = new Example(FriendLinkPO.class);
         Example.Criteria criteria = example.createCriteria();

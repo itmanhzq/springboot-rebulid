@@ -21,7 +21,7 @@ public class FriendLinkTest extends MarketingApplicationTests {
     @Test
     public void testGetFriendLinkList() {
         FriendLinkGetListReq friendLinkGetListReq = new FriendLinkGetListReq();
-        PageInfo<FriendLinkListRespBody> friendLinks = friendLinkService.getFriendLink(friendLinkGetListReq);
+        PageInfo<FriendLinkListRespBody> friendLinks = friendLinkService.getFriendLinkList(friendLinkGetListReq);
         log.debug("查询结果：");
         log.debug(friendLinks.toString());
     }

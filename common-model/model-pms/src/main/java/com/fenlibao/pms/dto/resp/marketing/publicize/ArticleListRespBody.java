@@ -54,5 +54,5 @@ public class ArticleListRespBody {
     private Boolean isStickTop;
 
     @ApiModelProperty(value = "user_id")
-    private String userId;
+    private Integer userId;
 }

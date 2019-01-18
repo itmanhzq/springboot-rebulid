@@ -35,9 +35,8 @@ public class ArticleController {
     @ApiOperation("文章列表")
     @PostMapping("/getArticleList")
     @ApiResponse(code = 200, message = "请求成功", response = ArticleListRespBody.class)
-    public Response<PageInfo<ArticleListRespBody>> getArticleList(@RequestBody @Valid ArticleGetListReq essayGetListReq) {
-        PageInfo<ArticleListRespBody> pageInfo = articleService.getArticleList(essayGetListReq);
-        return Response.ok(pageInfo);
+    public Response<PageInfo<ArticleListRespBody>> getArticleList(@RequestBody @Valid ArticleGetListReq articleGetListReq) {
+        return Response.ok(articleService.getArticleList(articleGetListReq));
     }
 
     @ApiOperation("查询文章")
@@ -52,8 +51,8 @@ public class ArticleController {
     @PostMapping("/addArticle")
     @PreAuthorize("hasPermission('article','add')")
     @ApiResponse(code = 200, message = "请求成功", response = Boolean.class)
-    public Response<Boolean> addArticle(@RequestBody @Valid ArticleAddReq essayAddReq) {
-        articleService.addArticle(essayAddReq);
+    public Response<Boolean> addArticle(@RequestBody @Valid ArticleAddReq articleAddReq) {
+        articleService.addArticle(articleAddReq);
         return Response.ok(true);
     }
 
@@ -61,8 +60,8 @@ public class ArticleController {
     @PostMapping("/updateArticle")
     @PreAuthorize("hasPermission('article','update')")
     @ApiResponse(code = 200, message = "请求成功", response = Boolean.class)
-    public Response<Boolean> updateArticle(@RequestBody @Valid ArticleUpdateReq essayUpdateReq) {
-        articleService.updateArticle(essayUpdateReq);
+    public Response<Boolean> updateArticle(@RequestBody @Valid ArticleUpdateReq articleUpdateReq) {
+        articleService.updateArticle(articleUpdateReq);
         return Response.ok(true);
     }
 
@@ -70,8 +69,8 @@ public class ArticleController {
     @PostMapping("/topPlaceArticle")
     @PreAuthorize("hasPermission('article','update')")
     @ApiResponse(code = 200, message = "请求成功", response = Boolean.class)
-    public Response<Boolean> topPlaceArticle(@RequestBody @Valid ArticleStickTopReq bulletinUpdateReq) {
-        articleService.topPlaceArticle(bulletinUpdateReq);
+    public Response<Boolean> topPlaceArticle(@RequestBody @Valid ArticleStickTopReq articleStickTopReq) {
+        articleService.topPlaceArticle(articleStickTopReq);
         return Response.ok(true);
     }
 
@@ -79,8 +78,8 @@ public class ArticleController {
     @PostMapping("/deleteArticle")
     @PreAuthorize("hasPermission('article','delete')")
     @ApiResponse(code = 200, message = "请求成功", response = Boolean.class)
-    public Response<Boolean> deleteArticle(@RequestBody @Valid ArticleDeleteReq essayDeleteReq) {
-        articleService.deleteArticle(essayDeleteReq);
+    public Response<Boolean> deleteArticle(@RequestBody @Valid ArticleDeleteReq articleDeleteReq) {
+        articleService.deleteArticle(articleDeleteReq);
         return Response.ok(true);
     }
 }

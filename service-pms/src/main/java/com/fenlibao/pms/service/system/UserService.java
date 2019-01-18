@@ -5,6 +5,7 @@ import com.fenlibao.pms.model.bo.idmt.UserBO;
 import com.fenlibao.pms.model.po.idmt.UserPO;
 import com.fenlibao.pms.dto.req.system.SaveUserReq;
 import com.github.pagehelper.PageInfo;
+import io.swagger.models.auth.In;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -58,6 +59,13 @@ public interface UserService {
      */
     UserBO getUser(String name);
 
+    /**
+     * 根据id获取用户
+     *
+     * @param id
+     * @return
+     */
+    UserBO getUserById(Integer id);
 
     /**
      * 通过角色ID获取用户信息

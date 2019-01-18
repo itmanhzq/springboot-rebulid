@@ -39,5 +39,8 @@ public class Constants {
      */
     public static final String PHONE_PATTERN = "^(13|14|15|16|17|18|19)[0-9]{9}$";
 
-
+    /**
+     * 图片类型.jpg
+     */
+    public static final String IMAGE_TYPE_JPG = ".jpg";
 }

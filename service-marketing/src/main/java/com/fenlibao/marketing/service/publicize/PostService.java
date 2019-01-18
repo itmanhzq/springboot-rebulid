@@ -31,9 +31,9 @@ public interface PostService {
     /**
      * 添加公告
      *
-     * @param bulletinAddReq
+     * @param postAddReq
      */
-    void addPost(PostAddReq bulletinAddReq);
+    void addPost(PostAddReq postAddReq);
 
     /**
      * 修改公告

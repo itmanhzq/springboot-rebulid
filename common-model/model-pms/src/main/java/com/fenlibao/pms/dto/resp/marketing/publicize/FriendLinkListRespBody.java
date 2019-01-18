@@ -45,5 +45,5 @@ public class FriendLinkListRespBody {
     private Integer sort;
 
     @ApiModelProperty(value = "user_id")
-    private String userId;
+    private Integer userId;
 }

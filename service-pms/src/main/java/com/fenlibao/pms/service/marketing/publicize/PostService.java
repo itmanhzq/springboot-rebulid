@@ -29,29 +29,29 @@ public interface PostService {
     /**
      * 添加公告
      *
-     * @param bulletinAddReq
+     * @param postAddReq
      */
-    void addPost(PostAddReq bulletinAddReq);
+    Boolean addPost(PostAddReq postAddReq);
 
     /**
      * 修改公告
      *
      * @param postUpdateReq
      */
-    void updatePost(PostUpdateReq postUpdateReq);
+    Boolean updatePost(PostUpdateReq postUpdateReq);
 
     /**
      * 指定公告
      *
      * @param postStickTopReq
      */
-    void stickTopPost(PostStickTopReq postStickTopReq);
+    Boolean stickTopPost(PostStickTopReq postStickTopReq);
 
     /**
      * 删除公告
      *
      * @param postDeleteReq
      */
-    void deletePost(PostDeleteReq postDeleteReq);
+    Boolean deletePost(PostDeleteReq postDeleteReq);
 
 }
