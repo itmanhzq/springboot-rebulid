@@ -21,7 +21,7 @@ public interface ArticleService {
      * @param articleGetListReq
      * @return
      */
-    PageInfo<ArticleListRespBody> getArticleList(ArticleGetListReq articleGetListReq) throws MarketingException;
+    PageInfo<ArticleListRespBody> getArticleList(ArticleGetListReq articleGetListReq);
 
     /**
      * 查询文章

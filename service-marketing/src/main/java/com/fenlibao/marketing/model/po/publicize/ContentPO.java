@@ -1,6 +1,5 @@
 package com.fenlibao.marketing.model.po.publicize;
 
-import com.fenlibao.base.po.BasePO;
 
 import javax.persistence.*;
 

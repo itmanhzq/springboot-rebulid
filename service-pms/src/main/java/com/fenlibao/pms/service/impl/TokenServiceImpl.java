@@ -42,7 +42,7 @@ public class TokenServiceImpl implements TokenService {
     }
 
     @Override
-    public void deleteCache(String userName) throws Exception {
+    public void deleteCache(String userName) {
         EhCacheBasedUserCache userCache = new EhCacheBasedUserCache();
         val cacheManager = CacheManager.getInstance();
         val cache = cacheManager.getCache(CACHE_NAME);

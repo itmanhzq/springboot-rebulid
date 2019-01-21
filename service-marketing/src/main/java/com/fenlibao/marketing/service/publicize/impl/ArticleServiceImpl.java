@@ -1,7 +1,5 @@
 package com.fenlibao.marketing.service.publicize.impl;
 
-import com.fenlibao.marketing.dto.ResponseStatus;
-import com.fenlibao.marketing.exception.BizException;
 import com.fenlibao.marketing.exception.MarketingException;
 import com.fenlibao.marketing.mapper.publicize.ArticleMapper;
 import com.fenlibao.marketing.model.po.publicize.ArticlePO;
@@ -39,7 +37,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @SuppressWarnings("Duplicates")
     @Override
-    public PageInfo<ArticleListRespBody> getArticleList(ArticleGetListReq articleGetListReq) throws MarketingException {
+    public PageInfo<ArticleListRespBody> getArticleList(ArticleGetListReq articleGetListReq) {
         Weekend<ArticlePO> weekend = new Weekend<>(ArticlePO.class);
         Example example = new Example(ArticlePO.class);
         Example.Criteria criteria = example.createCriteria();
