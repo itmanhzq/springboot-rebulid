@@ -43,7 +43,6 @@ public class FriendLinkController {
 
     @ApiOperation("查询友情链接")
     @PostMapping("/getFriendLink")
-    @PreAuthorize("hasPermission('friendLink','view')")
     @ApiResponse(code = 200, message = "请求成功", response = FriendLinkRespBody.class)
     public Response<FriendLinkRespBody> getFriendLink(@RequestBody @Valid FriendLinkGetReq friendLinkGetReq) {
         return Response.ok(friendLinkService.getFriendLink(friendLinkGetReq));
@@ -51,7 +50,6 @@ public class FriendLinkController {
 
     @ApiOperation("新增友情链接")
     @PostMapping("/addFriendLink")
-    @PreAuthorize("hasPermission('friendLink','add')")
     @ApiResponse(code = 200, message = "请求成功", response = Boolean.class)
     public Response<Boolean> addFriendLink(@RequestBody @Valid FriendLinkAddReq friendLinkAddReq) {
         return Response.ok(friendLinkService.addFriendLink(friendLinkAddReq));
@@ -59,7 +57,6 @@ public class FriendLinkController {
 
     @ApiOperation("修改友情链接")
     @PostMapping("/updateFriendLink")
-    @PreAuthorize("hasPermission('friendLink','update')")
     @ApiResponse(code = 200, message = "请求成功", response = Boolean.class)
     public Response<Boolean> updateFriendLink(@RequestBody @Valid FriendLinkUpdateReq friendLinkUpdateReq) {
         return Response.ok(friendLinkService.updateFriendLink(friendLinkUpdateReq));
@@ -67,7 +64,6 @@ public class FriendLinkController {
 
     @ApiOperation("删除友情链接")
     @PostMapping("/deleteFriendLink")
-    @PreAuthorize("hasPermission('friendLink','delete')")
     @ApiResponse(code = 200, message = "请求成功", response = Boolean.class)
     public Response<Boolean> deleteFriendLink(@RequestBody @Valid FriendLinkDeleteReq friendLinkDeleteReq) {
         return Response.ok(friendLinkService.deleteFriendLink(friendLinkDeleteReq));
