@@ -35,6 +35,7 @@ public class PostController {
 
     @ApiOperation("公告列表")
     @PostMapping("/getPostList")
+    @PreAuthorize("hasPermission('post','view')")
     @ApiResponse(code = 200, message = "请求成功", response = PostListRespBody.class)
     public Response<PageInfo<PostListRespBody>> getPostList(@RequestBody @Valid PostGetListReq postGetListReq) {
         return Response.ok(postService.getPostList(postGetListReq));
@@ -42,7 +43,6 @@ public class PostController {
 
     @ApiOperation("查询公告")
     @PostMapping("/getPost")
-    @PreAuthorize("hasPermission('post','view')")
     @ApiResponse(code = 200, message = "请求成功", response = PostListRespBody.class)
     public Response<PostRespBody> getPost(@RequestBody @Valid PostGetReq postGetReq) {
         return Response.ok(postService.getPost(postGetReq));
@@ -50,7 +50,6 @@ public class PostController {
 
     @ApiOperation("新增公告")
     @PostMapping("/addPost")
-    @PreAuthorize("hasPermission('post','add')")
     @ApiResponse(code = 200, message = "请求成功", response = Boolean.class)
     public Response<Boolean> addPost(@RequestBody @Valid PostAddReq postAddReq) {
 
@@ -59,7 +58,6 @@ public class PostController {
 
     @ApiOperation("修改公告")
     @PostMapping("/updatePost")
-    @PreAuthorize("hasPermission('post','update')")
     @ApiResponse(code = 200, message = "请求成功", response = Boolean.class)
     public Response<Boolean> updatePost(@RequestBody @Valid PostUpdateReq postUpdateReq) {
         return Response.ok(postService.updatePost(postUpdateReq));
@@ -67,7 +65,6 @@ public class PostController {
 
     @ApiOperation("设置公告置顶状态")
     @PostMapping("/stickTopPost")
-    @PreAuthorize("hasPermission('post','update')")
     @ApiResponse(code = 200, message = "请求成功", response = Boolean.class)
     public Response<Boolean> stickTopPost(@RequestBody @Valid PostStickTopReq postStickTopReq) {
         return Response.ok(postService.stickTopPost(postStickTopReq));
@@ -75,7 +72,6 @@ public class PostController {
 
     @ApiOperation("删除公告")
     @PostMapping("/deletePost")
-    @PreAuthorize("hasPermission('post','delete')")
     @ApiResponse(code = 200, message = "请求成功", response = Boolean.class)
     public Response<Boolean> deletePost(@RequestBody @Valid PostDeleteReq postDeleteReq) {
         return Response.ok(postService.deletePost(postDeleteReq));
