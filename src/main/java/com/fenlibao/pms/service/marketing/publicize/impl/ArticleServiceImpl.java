@@ -2,14 +2,11 @@ package com.fenlibao.pms.service.marketing.publicize.impl;
 
 
 import cn.hutool.core.util.IdUtil;
-import cn.hutool.core.util.ImageUtil;
-import cn.hutool.core.util.RandomUtil;
 import com.fenlibao.common.core.Constants;
 import com.fenlibao.pms.common.http.QiniuFileUpload;
 import com.fenlibao.pms.common.http.RequestUtil;
 import com.fenlibao.pms.config.Config;
 import com.fenlibao.pms.dto.req.marketing.publicize.article.*;
-import com.fenlibao.pms.dto.req.marketing.publicize.frinedlink.FriendLinkGetListReq;
 import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleListRespBody;
 import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleRespBody;
 import com.fenlibao.pms.model.bo.idmt.UserBO;
@@ -20,7 +17,6 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.awt.image.BufferedImage;
 
 
 /**
@@ -51,8 +47,7 @@ public class ArticleServiceImpl implements ArticleService {
     public ArticleRespBody getArticle(ArticleGetReq articleGetReq) {
         String url = config.getMarketing() + "/publicize/article/getArticle";
         String request = RequestUtil.toJson(articleGetReq);
-        ArticleRespBody body = RequestUtil.postReqBody(url, request);
-        return body;
+        return RequestUtil.postReqBody(url, request);
     }
 
     @Override

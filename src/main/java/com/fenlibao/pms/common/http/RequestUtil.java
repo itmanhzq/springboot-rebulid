@@ -1,23 +1,18 @@
 package com.fenlibao.pms.common.http;
 
 import cn.hutool.core.date.DatePattern;
-import cn.hutool.core.date.DateUtil;
 import cn.hutool.http.HttpUtil;
 import com.fenlibao.base.dto.Response;
 import com.fenlibao.pms.dto.base.ResponseStatus;
-import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleListRespBody;
 import com.fenlibao.pms.exception.BizException;
 import com.github.pagehelper.PageInfo;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.LongSerializationPolicy;
-import com.google.gson.reflect.TypeToken;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.Array;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.*;
@@ -89,8 +84,7 @@ public class RequestUtil {
 
     public static <T> List<T> toList(String jsonString, Class typeClass) {
         Type type = new ParameterizedTypeImpl(typeClass);
-        List<T> t = GSON.fromJson(jsonString, type);
-        return t;
+        return GSON.fromJson(jsonString, type);
     }
 
     private static class ParameterizedTypeImpl implements ParameterizedType {
