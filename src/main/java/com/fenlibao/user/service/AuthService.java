@@ -1,6 +1,5 @@
 package com.fenlibao.user.service;
 
-import com.fenlibao.pms.dto.req.RegisterReq;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,9 +10,4 @@ import org.springframework.stereotype.Service;
 @Service
 public interface AuthService {
 
-    /**
-     * 用户注册
-     * @param registerReq
-     */
-    void register(RegisterReq registerReq);
 }
