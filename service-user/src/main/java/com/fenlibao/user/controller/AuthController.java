@@ -1,6 +1,5 @@
 package com.fenlibao.user.controller;
 import com.fenlibao.base.dto.Response;
-import com.fenlibao.pms.dto.req.RegisterReq;
 import com.fenlibao.user.common.json.ExtDataJson;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,19 +20,6 @@ import javax.validation.Valid;
 @Slf4j
 @RestController
 @RequestMapping("/user")
-@Api(tags = {"用户相关接口"})
+@Api(tags = {"用户鉴权相关接口"})
 public class AuthController {
-
-    @ApiOperation("用户注册")
-    @ApiResponse(code = 200, message = "请求成功", response = String.class)
-    @PostMapping("/register")
-    public Response<String> register(@Valid @RequestBody RegisterReq registerReq) {
-        try {
-
-            return Response.ok("hello");
-        } catch (Exception e) {
-            log.error("注册失败", e);
-        }
-        return Response.error("错误");
-    }
 }
