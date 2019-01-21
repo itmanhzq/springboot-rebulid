@@ -4,9 +4,6 @@ import com.fenlibao.pms.dto.req.marketing.publicize.frinedlink.*;
 import com.fenlibao.pms.dto.resp.marketing.publicize.FriendLinkListRespBody;
 import com.fenlibao.pms.dto.resp.marketing.publicize.FriendLinkRespBody;
 import com.github.pagehelper.PageInfo;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import java.util.List;
 
 /**
  * @author WangBoRan

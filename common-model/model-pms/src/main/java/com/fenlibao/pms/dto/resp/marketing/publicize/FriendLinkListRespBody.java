@@ -1,5 +1,7 @@
 package com.fenlibao.pms.dto.resp.marketing.publicize;
 
+import cn.hutool.core.date.DatePattern;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -38,6 +40,7 @@ public class FriendLinkListRespBody {
     @ApiModelProperty(value = "链接地址", required = true)
     private String url;
 
+    @JsonFormat(pattern = DatePattern.NORM_DATETIME_PATTERN)
     @ApiModelProperty(value = "最后修改时间", required = true)
     private Date updatedTime;
 

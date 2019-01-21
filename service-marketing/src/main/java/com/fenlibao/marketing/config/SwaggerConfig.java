@@ -1,25 +1,17 @@
 package com.fenlibao.marketing.config;
 
 import cn.hutool.core.util.ArrayUtil;
-import com.fasterxml.classmate.TypeResolver;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
-import springfox.documentation.service.Parameter;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Toby
@@ -32,11 +24,8 @@ public class SwaggerConfig {
     public static final String PRO = "pro";
     private static final String PACKAGE = "com.fenlibao.marketing.controller";
 
-    @Autowired
-    Environment env;
-
     @Bean
-    public Docket api() {
+    public Docket api(Environment env) {
         String[] activeProfiles = env.getActiveProfiles();
         if (ArrayUtil.isNotEmpty(activeProfiles) && activeProfiles[0].equalsIgnoreCase(PRO)) {
             return getProDocket();
