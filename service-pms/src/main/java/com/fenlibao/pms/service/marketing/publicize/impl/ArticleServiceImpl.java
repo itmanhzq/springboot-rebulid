@@ -9,12 +9,14 @@ import com.fenlibao.pms.common.http.QiniuFileUpload;
 import com.fenlibao.pms.common.http.RequestUtil;
 import com.fenlibao.pms.config.Config;
 import com.fenlibao.pms.dto.req.marketing.publicize.article.*;
+import com.fenlibao.pms.dto.req.marketing.publicize.frinedlink.FriendLinkGetListReq;
 import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleListRespBody;
 import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleRespBody;
 import com.fenlibao.pms.model.bo.idmt.UserBO;
 import com.fenlibao.pms.service.marketing.publicize.ArticleService;
 import com.fenlibao.pms.service.system.UserService;
 import com.github.pagehelper.PageInfo;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,12 +39,11 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public PageInfo<ArticleListRespBody> getArticleList(ArticleGetListReq articleGetListReq) {
-        UserBO user = userService.getUser(articleGetListReq.getUserName());
-        articleGetListReq.setUserId(user.getId());
+        addUserIdValue(articleGetListReq);
         String url = config.getMarketing() + "/publicize/article/getArticleList";
         String request = RequestUtil.toJson(articleGetListReq);
-        PageInfo<ArticleListRespBody> pageInfo = RequestUtil.postReqPage(url, request);
-        this.addInfo(pageInfo);
+        PageInfo<ArticleListRespBody> pageInfo = RequestUtil.postReqPage(url, request, ArticleListRespBody.class);
+        addInfo(pageInfo);
         return pageInfo;
     }
 
@@ -84,6 +85,19 @@ public class ArticleServiceImpl implements ArticleService {
         String url = config.getMarketing() + "/publicize/article/updateArticle";
         String request = RequestUtil.toJson(essayDeleteReq);
         return RequestUtil.postReqBody(url, request);
+    }
+
+    /**
+     * 添加userId字段
+     *
+     * @param articleGetListReq
+     */
+    private void addUserIdValue(ArticleGetListReq articleGetListReq) {
+        String userName = articleGetListReq.getUserName();
+        if (Strings.isNotEmpty(userName)) {
+            UserBO user = userService.getUser(userName);
+            articleGetListReq.setUserId(user.getId());
+        }
     }
 
     /**

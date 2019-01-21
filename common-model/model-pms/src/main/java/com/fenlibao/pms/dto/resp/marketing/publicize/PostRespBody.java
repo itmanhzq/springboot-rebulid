@@ -1,5 +1,7 @@
 package com.fenlibao.pms.dto.resp.marketing.publicize;
 
+import cn.hutool.core.date.DatePattern;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fenlibao.base.dto.BaseReq;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
@@ -25,9 +27,11 @@ public class PostRespBody extends BaseReq {
     @ApiModelProperty(value = "公告标题", required = true)
     private String title;
 
+    @JsonFormat(pattern = DatePattern.NORM_DATETIME_PATTERN)
     @ApiModelProperty(value = "展示时间", required = true)
     private Date showTime;
 
+    @JsonFormat(pattern = DatePattern.NORM_DATETIME_PATTERN)
     @ApiModelProperty(value = "排序时间", required = true)
     private Date sortTime;
 
@@ -37,6 +41,7 @@ public class PostRespBody extends BaseReq {
     @ApiModelProperty(value = "公告状态 [1.未发布，2.已发布，3.预发布]", required = true)
     private String state;
 
+    @JsonFormat(pattern = DatePattern.NORM_DATETIME_PATTERN)
     @ApiModelProperty(value = "预发布时间")
     private Date onlineTime;
 

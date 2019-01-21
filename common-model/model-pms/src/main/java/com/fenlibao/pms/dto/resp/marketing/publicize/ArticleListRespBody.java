@@ -1,11 +1,15 @@
 package com.fenlibao.pms.dto.resp.marketing.publicize;
 
+import cn.hutool.core.date.DatePattern;
+import cn.hutool.core.date.DateUtil;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -41,9 +45,11 @@ public class ArticleListRespBody {
     @ApiModelProperty(value = "文章状态 [1.未发布，2.已发布，3.预发布]", required = true)
     private String state;
 
+    @JsonFormat(pattern = DatePattern.NORM_DATETIME_PATTERN)
     @ApiModelProperty(value = "展示时间", required = true)
     private Date showTime;
 
+    @JsonFormat(pattern = DatePattern.NORM_DATETIME_PATTERN)
     @ApiModelProperty(value = "排序时间", required = true)
     private Date sortTime;
 
