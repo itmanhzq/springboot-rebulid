@@ -19,7 +19,7 @@
         </plugin>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://192.168.40.239:3306/v2_pms?characterEncoding=utf8"
+                        connectionURL="jdbc:mysql://192.168.40.239:3306/v2_user?characterEncoding=utf8"
                         userId="root" password="fenlibao.123">
         </jdbcConnection>
 
@@ -36,6 +36,6 @@
                              targetProject="src/main/java"
                              type="XMLMAPPER"/>
 
-        <table tableName="idmt_request_log" domainObjectName="RequestLogPO"/>
+        <table tableName="ext_info" domainObjectName="ExtInfoPO"/>
     </context>
 </generatorConfiguration>
