@@ -23,10 +23,7 @@ import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.util.Sqls;
 import tk.mybatis.mapper.util.StringUtil;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author chen
@@ -145,6 +142,16 @@ public class UserServiceImpl implements UserService {
             return userBO;
         }
         return null;
+    }
+
+    @Override
+    public UserBO getUserById(Integer id) {
+        UserPO userPO = userMapper.selectByPrimaryKey(id);
+        UserBO userBO = new UserBO();
+        if (Objects.nonNull(userPO)) {
+            BeanUtils.copyProperties(userPO, userBO);
+        }
+        return userBO;
     }
 
     @Override
