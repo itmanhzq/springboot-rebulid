@@ -29,6 +29,6 @@ public interface TokenService {
      * 删除用户缓存
      * @param userName
      */
-    void deleteCache(String userName) throws Exception;
+    void deleteCache(String userName);
 
 }
