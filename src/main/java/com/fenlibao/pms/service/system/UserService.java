@@ -58,6 +58,13 @@ public interface UserService {
      */
     UserBO getUser(String name);
 
+    /**
+     * 根据id获取用户
+     *
+     * @param id
+     * @return
+     */
+    UserBO getUserById(Integer id);
 
     /**
      * 通过角色ID获取用户信息

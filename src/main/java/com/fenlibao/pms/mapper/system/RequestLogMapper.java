@@ -5,8 +5,6 @@ import com.fenlibao.pms.model.po.idmt.RequestLogPO;
 import com.fenlibao.pms.dto.req.system.RequestLogReq;
 import com.fenlibao.pms.dto.resp.system.RequestLogRespBody;
 import org.springframework.stereotype.Repository;
-import tk.mybatis.mapper.common.Mapper;
-import tk.mybatis.mapper.common.MySqlMapper;
 
 import java.util.List;
 
