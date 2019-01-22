@@ -23,10 +23,12 @@ import java.io.ByteArrayInputStream;
 @Component
 public class QiniuFileUpload {
 
+    private static Config config;
 
     @Autowired
-    private Config config;
-
+    public void setConfig(Config config) {
+        QiniuFileUpload.config = config;
+    }
     /**
      * 七牛文件上传
      *
@@ -34,7 +36,7 @@ public class QiniuFileUpload {
      * @param fileName 文件名
      * @return
      */
-    public boolean putBaes64(String file, String fileName) {
+    public static boolean putBaes64(String file, String fileName) {
         Configuration cfg = new Configuration(Zone.zone2());
         UploadManager uploadManager = new UploadManager(cfg);
         //生成上传凭证，然后准备上传

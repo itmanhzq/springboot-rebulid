@@ -26,6 +26,10 @@ public class Config {
     private String jwtSecret;
     private int jwtExpirationInMs;
 
+    @NotBlank
+    private String marketing;
+
+
     private Config.Example example;
 
     private Config.Qiniu qiniu;
