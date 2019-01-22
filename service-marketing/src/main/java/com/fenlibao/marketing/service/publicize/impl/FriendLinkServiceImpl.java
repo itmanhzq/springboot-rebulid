@@ -1,13 +1,13 @@
-package com.fenlibao.marketing.service.impl;
+package com.fenlibao.marketing.service.publicize.impl;
 
-import cn.hutool.core.util.PageUtil;
 import com.fenlibao.marketing.mapper.publicize.FriendLinkMapper;
 import com.fenlibao.marketing.model.po.publicize.FriendLinkPO;
-import com.fenlibao.marketing.service.FriendLinkService;
+import com.fenlibao.marketing.service.publicize.FriendLinkService;
 import com.fenlibao.pms.dto.req.marketing.publicize.frinedlink.*;
 import com.fenlibao.pms.dto.resp.marketing.publicize.FriendLinkListRespBody;
 import com.fenlibao.pms.dto.resp.marketing.publicize.FriendLinkRespBody;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,7 @@ public class FriendLinkServiceImpl implements FriendLinkService {
     private FriendLinkMapper friendLinkMapper;
 
     @Override
-    public List<FriendLinkListRespBody> getFriendLink(FriendLinkGetListReq friendLinkGetListReq) {
+    public PageInfo<FriendLinkListRespBody> getFriendLinkList(FriendLinkGetListReq friendLinkGetListReq) {
         Weekend<FriendLinkPO> weekend = new Weekend<>(FriendLinkPO.class);
         Example example = new Example(FriendLinkPO.class);
         Example.Criteria criteria = example.createCriteria();
@@ -38,8 +38,9 @@ public class FriendLinkServiceImpl implements FriendLinkService {
         weekend.and(criteria);
         String orderBySort = "sort DESC";
         PageHelper.startPage(friendLinkGetListReq.getPageNum(), friendLinkGetListReq.getPageSize(), orderBySort);
-        List<FriendLinkPO> pos = friendLinkMapper.selectByExample(weekend);
-        return this.posConvertRespBody(pos, friendLinkGetListReq.getPageNum(), friendLinkGetListReq.getPageSize());
+        PageInfo<FriendLinkPO> poPageInfo=PageHelper.startPage(friendLinkGetListReq.getPageNum(), friendLinkGetListReq.getPageSize(), orderBySort)
+                .doSelectPageInfo(()->friendLinkMapper.selectByExample(weekend));
+        return this.posConvertRespBody(poPageInfo, friendLinkGetListReq.getPageNum(), friendLinkGetListReq.getPageSize());
     }
 
     @Override
@@ -72,16 +73,19 @@ public class FriendLinkServiceImpl implements FriendLinkService {
      * @param pageSize
      * @return
      */
-    private List<FriendLinkListRespBody> posConvertRespBody(List<FriendLinkPO> list, int pageNum, int pageSize) {
+    @SuppressWarnings("Duplicates")
+    private PageInfo<FriendLinkListRespBody> posConvertRespBody(PageInfo<FriendLinkPO> list, int pageNum, int pageSize) {
         ModelMapper modelMapper = new ModelMapper();
-        List<FriendLinkListRespBody> friendLinkRespBodyList = new ArrayList<>();
+        PageInfo<FriendLinkListRespBody> friendLinkRespBodyList =modelMapper.map(list, PageInfo.class);
+        List<FriendLinkListRespBody> friendLinkList = new ArrayList<>();
         int index = pageNum * pageSize;
-        for (FriendLinkPO friendLinkPO : list) {
+        for (FriendLinkPO friendLinkPO : list.getList()) {
             FriendLinkListRespBody friendLink = modelMapper.map(friendLinkPO, FriendLinkListRespBody.class);
             friendLink.setOrder(index);
             index++;
-            friendLinkRespBodyList.add(friendLink);
+            friendLinkList.add(friendLink);
         }
+        friendLinkRespBodyList.setList(friendLinkList);
         return friendLinkRespBodyList;
     }
 

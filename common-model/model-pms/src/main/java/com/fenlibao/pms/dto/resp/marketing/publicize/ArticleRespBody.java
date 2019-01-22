@@ -1,5 +1,7 @@
 package com.fenlibao.pms.dto.resp.marketing.publicize;
 
+import cn.hutool.core.date.DatePattern;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fenlibao.base.dto.BaseReq;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
@@ -38,14 +40,16 @@ public class ArticleRespBody extends BaseReq {
     @ApiModelProperty("原文链接")
     private String originalUrl;
 
-    @ApiModelProperty(value = "展示时间", required = true)
-    private Date showTime;
+ @JsonFormat(pattern = DatePattern.NORM_DATETIME_PATTERN)
+ @ApiModelProperty(value = "展示时间", required = true)
+ private Date showTime;
 
     @ApiModelProperty(value = "列表页图片", required = true)
     private String imageUrl;
 
-    @ApiModelProperty(value = "排序时间", required = true)
-    private Date sortTime;
+ @JsonFormat(pattern = DatePattern.NORM_DATETIME_PATTERN)
+ @ApiModelProperty(value = "排序时间", required = true)
+ private Date sortTime;
 
     @ApiModelProperty(value = "是否置顶 0:是; 1:否", required = true)
     private Boolean isStickTop;
@@ -53,8 +57,9 @@ public class ArticleRespBody extends BaseReq {
     @ApiModelProperty(value = "文章状态 [1.未发布，2.已发布，3.预发布]", required = true)
     private String state;
 
-    @ApiModelProperty(value = "预发布时间")
-    private Date onlineTime;
+ @JsonFormat(pattern = DatePattern.NORM_DATETIME_PATTERN)
+ @ApiModelProperty(value = "预发布时间")
+ private Date onlineTime;
 
     @ApiModelProperty(value = "文章关键字")
     private String keyword;

@@ -14,7 +14,10 @@ import lombok.Getter;
 public enum ResponseStatus {
 
     COMMON_OPERATION_SUCCESS("200", "操作成功"),
-    COMMON_OPERATION_FAIL("200", "失败");
+    COMMON_OPERATION_FAIL("200", "失败"),
+
+    COMMON_SELECT_DATE_LACK("200","查询时间缺失");
+
 
     private String code;
 

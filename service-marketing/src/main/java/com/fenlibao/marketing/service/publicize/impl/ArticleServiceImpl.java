@@ -1,16 +1,18 @@
-package com.fenlibao.marketing.service.impl;
+package com.fenlibao.marketing.service.publicize.impl;
 
+import com.fenlibao.marketing.exception.MarketingException;
 import com.fenlibao.marketing.mapper.publicize.ArticleMapper;
 import com.fenlibao.marketing.model.po.publicize.ArticlePO;
 import com.fenlibao.marketing.model.po.publicize.ContentPO;
-import com.fenlibao.marketing.service.ArticleService;
-import com.fenlibao.marketing.service.ContentService;
+import com.fenlibao.marketing.service.publicize.ArticleService;
+import com.fenlibao.marketing.service.publicize.ContentService;
 import com.fenlibao.pms.dto.req.marketing.publicize.article.*;
 import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleListRespBody;
 import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleRespBody;
 import com.fenlibao.pms.model.enums.publicize.PublicizeStats;
 import com.fenlibao.pms.model.enums.publicize.AticleType;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,21 +37,21 @@ public class ArticleServiceImpl implements ArticleService {
 
     @SuppressWarnings("Duplicates")
     @Override
-    public List<ArticleListRespBody> getArticleList(ArticleGetListReq essayGetListReq) {
+    public PageInfo<ArticleListRespBody> getArticleList(ArticleGetListReq articleGetListReq) {
         Weekend<ArticlePO> weekend = new Weekend<>(ArticlePO.class);
         Example example = new Example(ArticlePO.class);
         Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("title", essayGetListReq.getTitle());
-        criteria.andEqualTo("type", essayGetListReq.getType());
-        criteria.andEqualTo("userId", essayGetListReq.getUserId());
-        criteria.andEqualTo("state", essayGetListReq.getState());
-        criteria.andLessThanOrEqualTo("showTime", essayGetListReq.getShowEndTime());
-        criteria.andGreaterThanOrEqualTo("showTime", essayGetListReq.getShowStartTime());
+        criteria.andEqualTo("title", articleGetListReq.getTitle());
+        criteria.andEqualTo("type", articleGetListReq.getType());
+        criteria.andEqualTo("userId", articleGetListReq.getUserId());
+        criteria.andEqualTo("state", articleGetListReq.getState());
+        criteria.andLessThanOrEqualTo("showTime", articleGetListReq.getShowEndTime());
+        criteria.andGreaterThanOrEqualTo("showTime", articleGetListReq.getShowStartTime());
         weekend.and(criteria);
         weekend.setOrderByClause("is_stick_top DESC,sort_time DESC");
-        PageHelper.startPage(essayGetListReq.getPageNum(), essayGetListReq.getPageSize());
-        List<ArticlePO> pos = articleMapper.selectByExample(weekend);
-        return this.posConvertRespBody(pos, essayGetListReq.getPageNum(), essayGetListReq.getPageSize());
+        PageInfo<ArticlePO> pos=PageHelper.startPage(articleGetListReq.getPageNum(), articleGetListReq.getPageSize())
+                .doSelectPageInfo(() -> articleMapper.selectByExample(weekend));
+        return this.posConvertRespBody(pos, articleGetListReq.getPageNum(), articleGetListReq.getPageSize());
     }
 
 
@@ -61,31 +63,31 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public void addArticle(ArticleAddReq essayAddReq) {
-        ArticlePO articlePO = this.reqConvertPO(essayAddReq);
-        int contentId = contentService.addContent(essayAddReq.getContent());
+    public void addArticle(ArticleAddReq articleAddReq) {
+        ArticlePO articlePO = this.reqConvertPO(articleAddReq);
+        int contentId = contentService.addContent(articleAddReq.getContent());
         articlePO.setContentId(contentId);
         articleMapper.insert(articlePO);
 
     }
 
     @Override
-    public void updateArticle(ArticleUpdateReq essayUpdateReq) {
-        ArticlePO articlePO = articleMapper.selectByPrimaryKey(essayUpdateReq.getId());
-        articleMapper.updateByPrimaryKey(this.reqConvertPO(essayUpdateReq));
-        contentService.updateContent(new ContentPO(articlePO.getContentId(), essayUpdateReq.getContent()));
+    public void updateArticle(ArticleUpdateReq articleUpdateReq) {
+        ArticlePO articlePO = articleMapper.selectByPrimaryKey(articleUpdateReq.getId());
+        articleMapper.updateByPrimaryKey(this.reqConvertPO(articleUpdateReq));
+        contentService.updateContent(new ContentPO(articlePO.getContentId(), articleUpdateReq.getContent()));
     }
 
     @Override
-    public void topPlaceArticle(ArticleStickTopReq bulletinUpdateReq) {
-        ArticlePO articlePO = articleMapper.selectByPrimaryKey(bulletinUpdateReq.getId());
-        articlePO.setIsStickTop(bulletinUpdateReq.getIsStickTop());
+    public void topPlaceArticle(ArticleStickTopReq articleStickTopReq) {
+        ArticlePO articlePO = articleMapper.selectByPrimaryKey(articleStickTopReq.getId());
+        articlePO.setIsStickTop(articleStickTopReq.getIsStickTop());
         articleMapper.updateByPrimaryKey(articlePO);
     }
 
     @Override
-    public void deleteArticle(ArticleDeleteReq essayDeleteReq) {
-        List<Integer> ids = essayDeleteReq.getIds();
+    public void deleteArticle(ArticleDeleteReq articleDeleteReq) {
+        List<Integer> ids = articleDeleteReq.getIds();
         ids.forEach(id -> articleMapper.deleteByPrimaryKey(id));
     }
 
@@ -95,11 +97,13 @@ public class ArticleServiceImpl implements ArticleService {
      * @param list
      * @return
      */
-    private List<ArticleListRespBody> posConvertRespBody(List<ArticlePO> list, int pageNum, int pageSize) {
+    @SuppressWarnings("Duplicates")
+    private PageInfo<ArticleListRespBody> posConvertRespBody(PageInfo<ArticlePO> list, int pageNum, int pageSize) {
         ModelMapper modelMapper = new ModelMapper();
+        PageInfo<ArticleListRespBody> pageInfo = modelMapper.map(list, PageInfo.class);
         List<ArticleListRespBody> articleList = new ArrayList<>();
         int index = pageNum * pageSize;
-        for (ArticlePO articlePO : list) {
+        for (ArticlePO articlePO : list.getList()) {
             ArticleListRespBody article = modelMapper.map(articlePO, ArticleListRespBody.class);
             article.setOrder(index);
             article.setState(PublicizeStats.getMessage(articlePO.getState()));
@@ -107,8 +111,10 @@ public class ArticleServiceImpl implements ArticleService {
             articleList.add(article);
             index++;
         }
-        return articleList;
+        pageInfo.setList(articleList);
+        return pageInfo;
     }
+
 
     /**
      * 转换文章对象到Body

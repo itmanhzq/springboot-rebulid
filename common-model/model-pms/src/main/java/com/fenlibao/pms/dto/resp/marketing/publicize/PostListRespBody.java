@@ -1,5 +1,7 @@
 package com.fenlibao.pms.dto.resp.marketing.publicize;
 
+import cn.hutool.core.date.DatePattern;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -35,9 +37,11 @@ public class PostListRespBody {
     @ApiModelProperty(value = "公告状态", required = true)
     private String state;
 
+    @JsonFormat(pattern = DatePattern.NORM_DATETIME_PATTERN)
     @ApiModelProperty(value = "展示时间", required = true)
     private Date showTime;
 
+    @JsonFormat(pattern = DatePattern.NORM_DATETIME_PATTERN)
     @ApiModelProperty(value = "排序时间", required = true)
     private Date sortTime;
 
@@ -48,5 +52,5 @@ public class PostListRespBody {
     private Boolean isStickTop;
 
     @ApiModelProperty(value = "user_id")
-    private String userId;
+    private Integer userId;
 }
