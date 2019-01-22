@@ -44,6 +44,7 @@
         <common-core.version>1.0-SNAPSHOT</common-core.version>
         <model-base.version>1.0-SNAPSHOT</model-base.version>
         <model-pms.version>1.0-SNAPSHOT</model-pms.version>
+        <model-user.version>1.0-SNAPSHOT</model-user.version>
         <model-markting.version>1.0-SNAPSHOT</model-markting.version>
     </properties>
 
@@ -168,6 +169,11 @@
                 <groupId>com.fenlibao.v2</groupId>
                 <artifactId>model-pms</artifactId>
                 <version>${model-pms.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fenlibao.v2</groupId>
+                <artifactId>model-user</artifactId>
+                <version>${model-user.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.fenlibao.v2</groupId>

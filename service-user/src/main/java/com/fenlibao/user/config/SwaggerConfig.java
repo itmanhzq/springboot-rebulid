@@ -1,7 +1,6 @@
 package com.fenlibao.user.config;
 
 import cn.hutool.core.util.ArrayUtil;
-import com.fasterxml.classmate.TypeResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,8 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author chen
- * @date 2019/01/03
+ * @author Toby
+ * @date 2018/11/19
  */
 @Configuration
 @EnableSwagger2
@@ -43,12 +42,41 @@ public class SwaggerConfig {
         return getInternalDocket();
     }
 
+    private List<Parameter> getParameters() {
+        List<Parameter> parameters = new ArrayList<>();
+        parameters.add(getHeaderParameter("nonce", "请求头随机字符串"));
+        parameters.add(getHeaderParameter("timestamp", "请求头时间戳"));
+        parameters.add(getHeaderParameter("Authorization", "请求头令牌"));
+        parameters.add(getHeaderParameter("sign", "请求头签名"));
+        return parameters;
+    }
+
+    private Parameter getHeaderParameter(String headerName, String description) {
+        ParameterBuilder parameterBuilder = new ParameterBuilder();
+        parameterBuilder.name(headerName).description(description)
+                .modelRef(new ModelRef("string")).parameterType("header")
+                .required(true).build();
+        return parameterBuilder.build();
+    }
+
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
+                .title("PMS-API")
+                .description("可点击下面（Terms of service）链接生成相关参数,然后在本页调用相关接口进行测试")
+                .version("0.0.1-SNAPSHOT")
+                .termsOfServiceUrl("http://192.168.40.227:7801")
+                .contact(new Contact("Toby", "-", "toby.xiong@qq.com"))
+                .build();
+    }
+
     private Docket getInternalDocket() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.fenlibao.user.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.fenlibao.pms.controller"))
                 .paths(PathSelectors.any())
-                .build();
+                .build()
+                .globalOperationParameters(getParameters())
+                .apiInfo(apiInfo());
     }
 
     private Docket getProDocket() {
