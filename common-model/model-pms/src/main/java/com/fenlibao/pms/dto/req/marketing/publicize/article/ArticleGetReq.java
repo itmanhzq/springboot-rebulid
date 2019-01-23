@@ -14,7 +14,7 @@ import javax.validation.constraints.NotBlank;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@ApiModel("ArticleGetListReq[获取文章列表请求类]")
+@ApiModel("ArticleGetReq[获取文章请求类]")
 public class ArticleGetReq extends BaseReq {
 
     @ApiModelProperty(value = "文章Id", required = true)

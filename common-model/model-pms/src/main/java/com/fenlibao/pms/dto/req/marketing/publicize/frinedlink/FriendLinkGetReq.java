@@ -14,7 +14,7 @@ import javax.validation.constraints.NotBlank;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Api("FriendLinkGetListReq[获取文章列表请求体]")
+@Api("FriendLinkGetReq[获取文章请求类]")
 public class FriendLinkGetReq extends BaseReq {
     @ApiModelProperty(value = "友情链接Id", required = true)
     @NotBlank(message = "友情链接Id不能为空")
