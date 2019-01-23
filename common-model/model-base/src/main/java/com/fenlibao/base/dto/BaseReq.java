@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class BaseReq implements Serializable {
     private static final long serialVersionUID = 307891809330512278L;
 
-    @ApiModelProperty(value = "属性字段", required = true,example = "{ \"name\": \"cxh\", \"sex\": \"man\" }")
+    @ApiModelProperty(value = "属性字段",example = "{ \"name\": \"cxh\", \"sex\": \"man\" }")
     private String extData;
 
 }
