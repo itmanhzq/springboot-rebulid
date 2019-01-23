@@ -44,7 +44,7 @@ public class PostServiceImpl implements PostService {
         criteria.andLessThanOrEqualTo("showTime", postGetListReq.getShowEndTime());
         criteria.andGreaterThanOrEqualTo("showTime", postGetListReq.getShowStartTime());
         weekend.and(criteria);
-        weekend.setOrderByClause("isStickTop DESC,sortTime DESC");
+        weekend.setOrderByClause("is_stick_top DESC,sort_time DESC");
         PageInfo<PostPO> pos=PageHelper.startPage(postGetListReq.getPageNum(), postGetListReq.getPageSize())
                 .doSelectPageInfo(() -> postMapper.selectByExample(weekend));
         return this.posConvertBody(pos, postGetListReq.getPageNum(), postGetListReq.getPageSize());
