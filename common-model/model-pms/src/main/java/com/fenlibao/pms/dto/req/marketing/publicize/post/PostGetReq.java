@@ -14,7 +14,7 @@ import javax.validation.constraints.NotBlank;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@ApiModel("PostGetListReq[获取公告列表请求类]")
+@ApiModel("PostGetReq[获取公告请求类]")
 public class PostGetReq extends AbstractPagingReq {
     @ApiModelProperty(value = "公告Id", required = true)
     @NotBlank(message = "公告Id不能为空")
