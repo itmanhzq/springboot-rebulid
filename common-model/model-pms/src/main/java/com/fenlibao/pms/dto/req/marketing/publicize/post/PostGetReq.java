@@ -1,6 +1,6 @@
 package com.fenlibao.pms.dto.req.marketing.publicize.post;
 
-import com.fenlibao.base.dto.AbstractPagingReq;
+import com.fenlibao.base.dto.BaseReq;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -15,7 +15,7 @@ import javax.validation.constraints.NotBlank;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @ApiModel("PostGetReq[获取公告请求类]")
-public class PostGetReq extends AbstractPagingReq {
+public class PostGetReq extends BaseReq {
     @ApiModelProperty(value = "公告Id", required = true)
     @NotBlank(message = "公告Id不能为空")
     private String id;
