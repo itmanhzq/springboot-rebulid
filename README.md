@@ -1,3 +1,2 @@
-# service-bid
+# bid-service
 
-标的服务
