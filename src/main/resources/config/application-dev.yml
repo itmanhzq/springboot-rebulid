@@ -2,7 +2,8 @@ spring:
   profiles: dev
   datasource:
     name: pms
-    url: jdbc:mysql://192.168.40.239:3306/v2_bid?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai&useSSL=true
+    # url: jdbc:mysql://192.168.40.239:3306/v2_bid?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai&useSSL=true
+    url: jdbc:mysql://192.168.40.239:3306/useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai&useSSL=true
     username: develop
     password: ENC(zxdr+EZmduSn4L0bsWeJ0zgL7zqKE0tNcD7TTXM88Lw=)
 
