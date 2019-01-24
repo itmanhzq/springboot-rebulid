@@ -3,13 +3,14 @@ package com.fenlibao.pms.service.marketing.publicize.impl;
 
 import com.fenlibao.pms.common.http.RequestUtil;
 import com.fenlibao.pms.config.Config;
-import com.fenlibao.pms.dto.req.marketing.publicize.post.*;
-import com.fenlibao.pms.dto.resp.marketing.publicize.PostListRespBody;
-import com.fenlibao.pms.dto.resp.marketing.publicize.PostRespBody;
+import com.fenlibao.marketing.dto.req.publicize.post.*;
+import com.fenlibao.marketing.dto.resp.publicize.PostListRespBody;
+import com.fenlibao.marketing.dto.resp.publicize.PostRespBody;
 import com.fenlibao.pms.model.bo.idmt.UserBO;
 import com.fenlibao.pms.service.marketing.publicize.PostService;
 import com.fenlibao.pms.service.system.UserService;
 import com.github.pagehelper.PageInfo;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,11 +28,12 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PageInfo<PostListRespBody> getPostList(PostGetListReq postGetListReq) {
-        UserBO userBO = userService.getUser(postGetListReq.getUserName());
-        postGetListReq.setUserId(userBO.getId());
+        addUserIdValue(postGetListReq);
         String url = config.getMarketing() + "/publicize/post/getPostList";
         String request = RequestUtil.toJson(postGetListReq);
-        return RequestUtil.postReqPage(url, request);
+        PageInfo<PostListRespBody> pageInfo = RequestUtil.postReqPage(url, request, PostListRespBody.class);
+        addInfo(pageInfo);
+        return pageInfo;
     }
 
     @Override
@@ -70,8 +72,19 @@ public class PostServiceImpl implements PostService {
     }
 
     /**
-     * FriendLinkListRespBody
-     *
+     * 添加userId字段
+     * @param postGetListReq
+     */
+    private void addUserIdValue(PostGetListReq postGetListReq) {
+        String userName = postGetListReq.getUserName();
+        if (Strings.isNotEmpty(userName)) {
+            UserBO user = userService.getUser(userName);
+            postGetListReq.setUserId(user.getId());
+        }
+    }
+
+    /**
+     * 添加PostListRespBody字段信息
      * @param pageInfo
      */
     private void addInfo(PageInfo<PostListRespBody> pageInfo) {
