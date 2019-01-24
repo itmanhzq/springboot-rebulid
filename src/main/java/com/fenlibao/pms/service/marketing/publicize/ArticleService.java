@@ -5,7 +5,6 @@ import com.fenlibao.marketing.dto.resp.publicize.ArticleListRespBody;
 import com.fenlibao.marketing.dto.resp.publicize.ArticleRespBody;
 import com.github.pagehelper.PageInfo;
 
-
 /**
  * @author WangBoRan
  * @date 2018-12-27
