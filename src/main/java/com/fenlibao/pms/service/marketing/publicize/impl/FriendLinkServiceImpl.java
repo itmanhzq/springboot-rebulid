@@ -1,10 +1,10 @@
 package com.fenlibao.pms.service.marketing.publicize.impl;
 
-import com.fenlibao.pms.common.http.RequestUtil;
-import com.fenlibao.pms.config.Config;
 import com.fenlibao.marketing.dto.req.publicize.frinedlink.*;
 import com.fenlibao.marketing.dto.resp.publicize.FriendLinkListRespBody;
 import com.fenlibao.marketing.dto.resp.publicize.FriendLinkRespBody;
+import com.fenlibao.pms.common.http.RequestUtil;
+import com.fenlibao.pms.config.Config;
 import com.fenlibao.pms.model.bo.idmt.UserBO;
 import com.fenlibao.pms.service.marketing.publicize.FriendLinkService;
 import com.fenlibao.pms.service.system.UserService;
@@ -65,6 +65,7 @@ public class FriendLinkServiceImpl implements FriendLinkService {
 
     /**
      * 添加userId字段
+     *
      * @param friendLinkGetListReq
      */
     private void addUserIdValue(FriendLinkGetListReq friendLinkGetListReq) {
@@ -77,6 +78,7 @@ public class FriendLinkServiceImpl implements FriendLinkService {
 
     /**
      * 添加FriendLinkListRespBody字段信息
+     *
      * @param pageInfo
      */
     private void addInfo(PageInfo<FriendLinkListRespBody> pageInfo) {
