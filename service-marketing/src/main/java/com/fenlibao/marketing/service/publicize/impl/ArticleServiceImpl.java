@@ -1,18 +1,15 @@
 package com.fenlibao.marketing.service.publicize.impl;
 
-import com.fenlibao.marketing.dto.ResponseStatus;
-import com.fenlibao.marketing.exception.BizException;
-import com.fenlibao.marketing.exception.MarketingException;
 import com.fenlibao.marketing.mapper.publicize.ArticleMapper;
 import com.fenlibao.marketing.model.po.publicize.ArticlePO;
 import com.fenlibao.marketing.model.po.publicize.ContentPO;
 import com.fenlibao.marketing.service.publicize.ArticleService;
 import com.fenlibao.marketing.service.publicize.ContentService;
-import com.fenlibao.pms.dto.req.marketing.publicize.article.*;
-import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleListRespBody;
-import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleRespBody;
-import com.fenlibao.pms.model.enums.publicize.PublicizeStats;
-import com.fenlibao.pms.model.enums.publicize.AticleType;
+import com.fenlibao.marketing.dto.req.publicize.article.*;
+import com.fenlibao.marketing.dto.resp.publicize.ArticleListRespBody;
+import com.fenlibao.marketing.dto.resp.publicize.ArticleRespBody;
+import com.fenlibao.marketing.model.enums.publicize.PublicizeStats;
+import com.fenlibao.marketing.model.enums.publicize.AticleType;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.modelmapper.ModelMapper;
@@ -39,7 +36,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @SuppressWarnings("Duplicates")
     @Override
-    public PageInfo<ArticleListRespBody> getArticleList(ArticleGetListReq articleGetListReq) throws MarketingException {
+    public PageInfo<ArticleListRespBody> getArticleList(ArticleGetListReq articleGetListReq) {
         Weekend<ArticlePO> weekend = new Weekend<>(ArticlePO.class);
         Example example = new Example(ArticlePO.class);
         Example.Criteria criteria = example.createCriteria();

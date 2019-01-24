@@ -1,12 +1,10 @@
 package com.fenlibao.marketing.service.publicize;
 
-import com.fenlibao.marketing.exception.MarketingException;
-import com.fenlibao.pms.dto.req.marketing.publicize.article.*;
-import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleListRespBody;
-import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleRespBody;
+import com.fenlibao.marketing.dto.req.publicize.article.*;
+import com.fenlibao.marketing.dto.resp.publicize.ArticleListRespBody;
+import com.fenlibao.marketing.dto.resp.publicize.ArticleRespBody;
 import com.github.pagehelper.PageInfo;
 
-import java.util.List;
 
 
 /**
@@ -21,7 +19,7 @@ public interface ArticleService {
      * @param articleGetListReq
      * @return
      */
-    PageInfo<ArticleListRespBody> getArticleList(ArticleGetListReq articleGetListReq) throws MarketingException;
+    PageInfo<ArticleListRespBody> getArticleList(ArticleGetListReq articleGetListReq);
 
     /**
      * 查询文章

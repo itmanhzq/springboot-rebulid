@@ -1,8 +1,8 @@
 package com.fenlibao.pms.service.marketing.publicize;
 
-import com.fenlibao.pms.dto.req.marketing.publicize.article.*;
-import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleListRespBody;
-import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleRespBody;
+import com.fenlibao.marketing.dto.req.publicize.article.*;
+import com.fenlibao.marketing.dto.resp.publicize.ArticleListRespBody;
+import com.fenlibao.marketing.dto.resp.publicize.ArticleRespBody;
 import com.github.pagehelper.PageInfo;
 
 

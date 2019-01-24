@@ -24,6 +24,7 @@
     <modules>
         <module>model-base</module>
         <module>model-pms</module>
+        <module>model-user</module>
         <module>model-xinwang</module>
         <module>model-marketing</module>
         <module>model-bid</module>
