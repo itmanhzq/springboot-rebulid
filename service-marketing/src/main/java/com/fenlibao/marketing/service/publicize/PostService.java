@@ -1,11 +1,9 @@
 package com.fenlibao.marketing.service.publicize;
 
-import com.fenlibao.pms.dto.req.marketing.publicize.post.*;
-import com.fenlibao.pms.dto.resp.marketing.publicize.PostListRespBody;
-import com.fenlibao.pms.dto.resp.marketing.publicize.PostRespBody;
+import com.fenlibao.marketing.dto.req.publicize.post.*;
+import com.fenlibao.marketing.dto.resp.publicize.PostListRespBody;
+import com.fenlibao.marketing.dto.resp.publicize.PostRespBody;
 import com.github.pagehelper.PageInfo;
-
-import java.util.List;
 
 /**
  * @author WangBoRan

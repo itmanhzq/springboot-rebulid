@@ -2,8 +2,8 @@ package com.fenlibao.marketing.mapper.publiceize;
 
 import com.fenlibao.marketing.MarketingApplicationTests;
 import com.fenlibao.marketing.service.publicize.FriendLinkService;
-import com.fenlibao.pms.dto.req.marketing.publicize.frinedlink.FriendLinkGetListReq;
-import com.fenlibao.pms.dto.resp.marketing.publicize.FriendLinkListRespBody;
+import com.fenlibao.marketing.dto.req.publicize.frinedlink.FriendLinkGetListReq;
+import com.fenlibao.marketing.dto.resp.publicize.FriendLinkListRespBody;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;

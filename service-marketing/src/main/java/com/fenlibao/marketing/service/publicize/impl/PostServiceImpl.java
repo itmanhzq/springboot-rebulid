@@ -1,14 +1,14 @@
 package com.fenlibao.marketing.service.publicize.impl;
 
+import com.fenlibao.marketing.dto.resp.publicize.PostListRespBody;
 import com.fenlibao.marketing.mapper.publicize.PostMapper;
 import com.fenlibao.marketing.model.po.publicize.ContentPO;
 import com.fenlibao.marketing.model.po.publicize.PostPO;
 import com.fenlibao.marketing.service.publicize.ContentService;
 import com.fenlibao.marketing.service.publicize.PostService;
-import com.fenlibao.pms.dto.req.marketing.publicize.post.*;
-import com.fenlibao.pms.dto.resp.marketing.publicize.PostListRespBody;
-import com.fenlibao.pms.dto.resp.marketing.publicize.PostRespBody;
-import com.fenlibao.pms.model.enums.publicize.PublicizeStats;
+import com.fenlibao.marketing.dto.req.publicize.post.*;
+import com.fenlibao.marketing.dto.resp.publicize.PostRespBody;
+import com.fenlibao.marketing.model.enums.publicize.PublicizeStats;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.modelmapper.ModelMapper;

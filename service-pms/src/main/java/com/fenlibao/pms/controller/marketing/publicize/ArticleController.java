@@ -1,9 +1,9 @@
 package com.fenlibao.pms.controller.marketing.publicize;
 
 import com.fenlibao.base.dto.Response;
-import com.fenlibao.pms.dto.req.marketing.publicize.article.*;
-import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleListRespBody;
-import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleRespBody;
+import com.fenlibao.marketing.dto.req.publicize.article.*;
+import com.fenlibao.marketing.dto.resp.publicize.ArticleListRespBody;
+import com.fenlibao.marketing.dto.resp.publicize.ArticleRespBody;
 import com.fenlibao.pms.service.marketing.publicize.ArticleService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;

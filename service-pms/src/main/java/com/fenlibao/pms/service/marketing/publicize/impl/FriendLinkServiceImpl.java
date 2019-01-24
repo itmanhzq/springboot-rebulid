@@ -2,9 +2,9 @@ package com.fenlibao.pms.service.marketing.publicize.impl;
 
 import com.fenlibao.pms.common.http.RequestUtil;
 import com.fenlibao.pms.config.Config;
-import com.fenlibao.pms.dto.req.marketing.publicize.frinedlink.*;
-import com.fenlibao.pms.dto.resp.marketing.publicize.FriendLinkListRespBody;
-import com.fenlibao.pms.dto.resp.marketing.publicize.FriendLinkRespBody;
+import com.fenlibao.marketing.dto.req.publicize.frinedlink.*;
+import com.fenlibao.marketing.dto.resp.publicize.FriendLinkListRespBody;
+import com.fenlibao.marketing.dto.resp.publicize.FriendLinkRespBody;
 import com.fenlibao.pms.model.bo.idmt.UserBO;
 import com.fenlibao.pms.service.marketing.publicize.FriendLinkService;
 import com.fenlibao.pms.service.system.UserService;

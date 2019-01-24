@@ -4,4 +4,4 @@ MAINTAINER  Br <wangboran@fenlibao.com>
 ARG JAR_FILE
 ADD target/${JAR_FILE} /usr/share/services/marketing.jar
 
-ENTRYPOINT ["/usr/bin/java", "-jar", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=7511", "/usr/share/services/marketing.jar"]
+ENTRYPOINT ["/usr/bin/java", "-jar", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=7512", "/usr/share/services/marketing.jar"]
