@@ -5,11 +5,11 @@ import java.util.Date;
 
 import com.fenlibao.marketing.MarketingApplicationTests;
 import com.fenlibao.marketing.service.publicize.ArticleService;
-import com.fenlibao.pms.dto.req.marketing.publicize.article.ArticleAddReq;
-import com.fenlibao.pms.dto.req.marketing.publicize.article.ArticleGetListReq;
-import com.fenlibao.pms.dto.req.marketing.publicize.article.ArticleGetReq;
-import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleListRespBody;
-import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleRespBody;
+import com.fenlibao.marketing.dto.req.publicize.article.ArticleAddReq;
+import com.fenlibao.marketing.dto.req.publicize.article.ArticleGetListReq;
+import com.fenlibao.marketing.dto.req.publicize.article.ArticleGetReq;
+import com.fenlibao.marketing.dto.resp.publicize.ArticleListRespBody;
+import com.fenlibao.marketing.dto.resp.publicize.ArticleRespBody;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;

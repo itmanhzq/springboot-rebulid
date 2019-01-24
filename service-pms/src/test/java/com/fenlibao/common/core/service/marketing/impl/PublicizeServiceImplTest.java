@@ -1,12 +1,10 @@
 package com.fenlibao.common.core.service.marketing.impl;
 
-import cn.hutool.core.util.IdUtil;
+import com.fenlibao.marketing.dto.req.publicize.article.ArticleGetListReq;
+import com.fenlibao.marketing.dto.req.publicize.frinedlink.FriendLinkGetListReq;
+import com.fenlibao.marketing.dto.resp.publicize.ArticleListRespBody;
+import com.fenlibao.marketing.dto.resp.publicize.FriendLinkListRespBody;
 import com.fenlibao.pms.PmsApplication;
-import com.fenlibao.pms.common.http.RequestUtil;
-import com.fenlibao.pms.dto.req.marketing.publicize.article.ArticleGetListReq;
-import com.fenlibao.pms.dto.req.marketing.publicize.frinedlink.FriendLinkGetListReq;
-import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleListRespBody;
-import com.fenlibao.pms.dto.resp.marketing.publicize.FriendLinkListRespBody;
 import com.fenlibao.pms.service.marketing.publicize.ArticleService;
 import com.fenlibao.pms.service.marketing.publicize.FriendLinkService;
 import com.github.pagehelper.PageInfo;

@@ -2,8 +2,8 @@ package com.fenlibao.marketing.mapper.publiceize;
 
 import com.fenlibao.marketing.MarketingApplicationTests;
 import com.fenlibao.marketing.service.publicize.PostService;
-import com.fenlibao.pms.dto.req.marketing.publicize.post.PostGetListReq;
-import com.fenlibao.pms.dto.resp.marketing.publicize.PostListRespBody;
+import com.fenlibao.marketing.dto.req.publicize.post.PostGetListReq;
+import com.fenlibao.marketing.dto.resp.publicize.PostListRespBody;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
