@@ -29,6 +29,10 @@
             <artifactId>model-base</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.fenlibao.v2</groupId>
+            <artifactId>model-bid</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <exclusions>
