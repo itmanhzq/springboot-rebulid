@@ -43,6 +43,7 @@ public class ArticleController {
 
     @ApiOperation("查询文章")
     @PostMapping("/getArticle")
+    @PreAuthorize("hasPermission('article','view')")
     @ApiResponse(code = 200, message = "请求成功", response = ArticleRespBody.class)
     public Response<ArticleRespBody> getArticle(@RequestBody @Valid ArticleGetReq articleGetReq) {
         return Response.ok(articleService.getArticle(articleGetReq));
@@ -50,10 +51,11 @@ public class ArticleController {
 
     @ApiOperation("新增文章")
     @PostMapping("/addArticle")
+    @PreAuthorize("hasPermission('article','add')")
     @ApiResponse(code = 200, message = "请求成功", response = Boolean.class)
-    public Response<Boolean> addArticle(@RequestBody @Valid ArticleAddReq articleAddReq) {
+    public Response<Boolean> addArticle(@RequestBody @Valid ArticleAddReq essayAddReq) {
 
-        return Response.ok(articleService.addArticle(articleAddReq));
+        return Response.ok();
     }
 
     @ApiOperation("修改文章")
@@ -65,6 +67,7 @@ public class ArticleController {
 
     @ApiOperation("设置文章置顶状态")
     @PostMapping("/topPlaceArticle")
+    @PreAuthorize("hasPermission('article','update')")
     @ApiResponse(code = 200, message = "请求成功", response = Boolean.class)
     public Response<Boolean> topPlaceArticle(@RequestBody @Valid ArticleStickTopReq articleStickTopReq) {
         return Response.ok(articleService.topPlaceArticle(articleStickTopReq));
