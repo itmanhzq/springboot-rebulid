@@ -1,11 +1,11 @@
 package com.fenlibao.pms.service.marketing.publicize.impl;
 
 
+import com.fenlibao.pms.common.http.RequestUtil;
+import com.fenlibao.pms.config.Config;
 import com.fenlibao.marketing.dto.req.publicize.post.*;
 import com.fenlibao.marketing.dto.resp.publicize.PostListRespBody;
 import com.fenlibao.marketing.dto.resp.publicize.PostRespBody;
-import com.fenlibao.pms.common.http.RequestUtil;
-import com.fenlibao.pms.config.Config;
 import com.fenlibao.pms.model.bo.idmt.UserBO;
 import com.fenlibao.pms.service.marketing.publicize.PostService;
 import com.fenlibao.pms.service.system.UserService;
@@ -73,7 +73,6 @@ public class PostServiceImpl implements PostService {
 
     /**
      * 添加userId字段
-     *
      * @param postGetListReq
      */
     private void addUserIdValue(PostGetListReq postGetListReq) {
@@ -86,7 +85,6 @@ public class PostServiceImpl implements PostService {
 
     /**
      * 添加PostListRespBody字段信息
-     *
      * @param pageInfo
      */
     private void addInfo(PageInfo<PostListRespBody> pageInfo) {

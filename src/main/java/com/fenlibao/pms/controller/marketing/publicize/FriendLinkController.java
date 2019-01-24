@@ -1,10 +1,7 @@
 package com.fenlibao.pms.controller.marketing.publicize;
 
 import com.fenlibao.base.dto.Response;
-import com.fenlibao.marketing.dto.req.publicize.article.*;
 import com.fenlibao.marketing.dto.req.publicize.frinedlink.*;
-import com.fenlibao.marketing.dto.resp.publicize.ArticleListRespBody;
-import com.fenlibao.marketing.dto.resp.publicize.ArticleRespBody;
 import com.fenlibao.marketing.dto.resp.publicize.FriendLinkListRespBody;
 import com.fenlibao.marketing.dto.resp.publicize.FriendLinkRespBody;
 import com.fenlibao.pms.service.marketing.publicize.FriendLinkService;

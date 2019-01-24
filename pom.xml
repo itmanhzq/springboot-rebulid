@@ -37,11 +37,11 @@
         </dependency>
         <dependency>
             <groupId>com.fenlibao.v2</groupId>
-            <artifactId>model-user</artifactId>
+            <artifactId>model-marketing</artifactId>
         </dependency>
         <dependency>
             <groupId>com.fenlibao.v2</groupId>
-            <artifactId>model-marketing</artifactId>
+            <artifactId>model-user</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
