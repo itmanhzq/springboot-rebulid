@@ -30,11 +30,10 @@ public class SwaggerConfig {
 
     public static final String PRO = "pro";
 
-    @Autowired
-    Environment env;
+
 
     @Bean
-    public Docket api() {
+    public Docket api(Environment env) {
         String[] activeProfiles = env.getActiveProfiles();
         if (ArrayUtil.isNotEmpty(activeProfiles) && activeProfiles[0].equalsIgnoreCase(PRO)) {
             return getProDocket();
