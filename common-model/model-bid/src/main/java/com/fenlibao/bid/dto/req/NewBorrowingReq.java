@@ -2,10 +2,8 @@ package com.fenlibao.bid.dto.req;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -19,8 +17,6 @@ import java.math.BigDecimal;
  */
 @Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @ApiModel("NewBorrowingReq[新增借款请求类]")
 public class NewBorrowingReq {
     private Integer id;
