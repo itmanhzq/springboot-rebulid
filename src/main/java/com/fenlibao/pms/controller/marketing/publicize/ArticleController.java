@@ -4,6 +4,8 @@ import com.fenlibao.base.dto.Response;
 import com.fenlibao.marketing.dto.req.publicize.article.*;
 import com.fenlibao.marketing.dto.resp.publicize.ArticleListRespBody;
 import com.fenlibao.marketing.dto.resp.publicize.ArticleRespBody;
+import com.fenlibao.pms.security.CurrentUser;
+import com.fenlibao.pms.security.UserPrincipal;
 import com.fenlibao.pms.service.marketing.publicize.ArticleService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 
@@ -51,11 +54,10 @@ public class ArticleController {
 
     @ApiOperation("新增文章")
     @PostMapping("/addArticle")
-    @PreAuthorize("hasPermission('article','add')")
     @ApiResponse(code = 200, message = "请求成功", response = Boolean.class)
-    public Response<Boolean> addArticle(@RequestBody @Valid ArticleAddReq essayAddReq) {
-
-        return Response.ok();
+    public Response<Boolean> addArticle(@ApiIgnore @CurrentUser UserPrincipal currentUser, @RequestBody @Valid ArticleAddReq essayAddReq) {
+        essayAddReq.setUserId(currentUser.getUserBO().getId());
+        return Response.ok(articleService.addArticle(essayAddReq));
     }
 
     @ApiOperation("修改文章")
@@ -67,7 +69,6 @@ public class ArticleController {
 
     @ApiOperation("设置文章置顶状态")
     @PostMapping("/topPlaceArticle")
-    @PreAuthorize("hasPermission('article','update')")
     @ApiResponse(code = 200, message = "请求成功", response = Boolean.class)
     public Response<Boolean> topPlaceArticle(@RequestBody @Valid ArticleStickTopReq articleStickTopReq) {
         return Response.ok(articleService.topPlaceArticle(articleStickTopReq));
