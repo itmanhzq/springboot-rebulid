@@ -4,6 +4,7 @@ import com.fenlibao.pms.config.Config;
 import com.google.gson.Gson;
 import com.qiniu.common.Zone;
 import com.qiniu.http.Response;
+import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.storage.model.DefaultPutRet;
@@ -23,11 +24,18 @@ import java.io.ByteArrayInputStream;
 @Component
 public class QiniuFileUpload {
 
-    private static Config config;
+    private static String ACCESSKEY;
+    private static String SECRETKEY;
+    private static String BUCKET;
+    private static String URL;
 
     @Autowired
     public void setConfig(Config config) {
-        QiniuFileUpload.config = config;
+        Config.Qiniu qiniu = config.getQiniu();
+        ACCESSKEY = qiniu.getQinniuAccessKey();
+        SECRETKEY = qiniu.getQinniuSecretKey();
+        BUCKET = qiniu.getBucket();
+        URL = qiniu.getUrl();
     }
     /**
      * 七牛文件上传
@@ -39,22 +47,35 @@ public class QiniuFileUpload {
     public static boolean putBaes64(String file, String fileName) {
         Configuration cfg = new Configuration(Zone.zone2());
         UploadManager uploadManager = new UploadManager(cfg);
-        //生成上传凭证，然后准备上传
-        String accessKey = config.getQiniu().getQinniuAccessKey();
-        String secretKey = config.getQiniu().getQinniuSecretKey();
-        String bucket = config.getQiniu().getBucket();
         try {
             byte[] uploadBytes = Base64.decodeBase64(file);
             ByteArrayInputStream byteInputStream = new ByteArrayInputStream(uploadBytes);
-            Auth auth = Auth.create(accessKey, secretKey);
-            String upToken = auth.uploadToken(bucket);
+            Auth auth = Auth.create(ACCESSKEY, SECRETKEY);
+            String upToken = auth.uploadToken(BUCKET);
             Response response = uploadManager.put(byteInputStream, fileName, upToken, null, null);
             //解析上传成功的结果
             new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
-        } catch (Exception ex) {
-            log.error("[QinniuFileUpload.putBaes64]", ex);
+        } catch (Exception e) {
+            log.error("[QinniuFileUpload.putBaes64]文件上传失败", e);
         }
         return true;
+    }
+
+    public static boolean deleteImage(String fileName) {
+        Auth auth = Auth.create(ACCESSKEY, SECRETKEY);
+        Configuration config = new Configuration(Zone.autoZone());
+        BucketManager bucketMgr = new BucketManager(auth, config);
+        try {
+            Response delete = bucketMgr.delete(fileName, BUCKET);
+            delete.close();
+        } catch (Exception e) {
+            log.error("[QinniuFileUpload.deleteImage]文件上传成功", e);
+        }
+        return true;
+    }
+
+    public static String getUrl(String fileName) {
+        return URL.concat(fileName);
     }
 
 }

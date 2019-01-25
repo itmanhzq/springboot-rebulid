@@ -39,28 +39,28 @@ public class FriendLinkServiceImpl implements FriendLinkService {
     public FriendLinkRespBody getFriendLink(FriendLinkGetReq friendLinkGetReq) {
         String url = config.getMarketing() + "/publicize/friendLink/getFriendLink";
         String request = RequestUtil.toJson(friendLinkGetReq);
-        return RequestUtil.postReqBody(url, request);
+        return RequestUtil.postReqBody(url, request, FriendLinkRespBody.class);
     }
 
     @Override
     public Boolean addFriendLink(FriendLinkAddReq friendLinkAddReq) {
         String url = config.getMarketing() + "/publicize/friendLink/addFriendLink";
         String request = RequestUtil.toJson(friendLinkAddReq);
-        return RequestUtil.postReqBody(url, request);
+        return RequestUtil.postReqBody(url, request, Boolean.class);
     }
 
     @Override
     public Boolean updateFriendLink(FriendLinkUpdateReq friendLinkUpdateReq) {
         String url = config.getMarketing() + "/publicize/friendLink/updateFriendLink";
         String request = RequestUtil.toJson(friendLinkUpdateReq);
-        return RequestUtil.postReqBody(url, request);
+        return RequestUtil.postReqBody(url, request, Boolean.class);
     }
 
     @Override
     public Boolean deleteFriendLink(FriendLinkDeleteReq friendLinkDeleteReq) {
         String url = config.getMarketing() + "/publicize/friendLink/deleteFriendLink";
         String request = RequestUtil.toJson(friendLinkDeleteReq);
-        return RequestUtil.postReqBody(url, request);
+        return RequestUtil.postReqBody(url, request, Boolean.class);
     }
 
     /**

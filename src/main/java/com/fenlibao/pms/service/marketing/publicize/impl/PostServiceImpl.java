@@ -40,35 +40,35 @@ public class PostServiceImpl implements PostService {
     public PostRespBody getPost(PostGetReq postGetReq) {
         String url = config.getMarketing() + "/publicize/post/getPost";
         String request = RequestUtil.toJson(postGetReq);
-        return RequestUtil.postReqBody(url, request);
+        return RequestUtil.postReqBody(url, request, PostRespBody.class);
     }
 
     @Override
     public Boolean addPost(PostAddReq postAddReq) {
         String url = config.getMarketing() + "/publicize/post/addPost";
         String request = RequestUtil.toJson(postAddReq);
-        return RequestUtil.postReqBody(url, request);
+        return RequestUtil.postReqBody(url, request, Boolean.class);
     }
 
     @Override
     public Boolean updatePost(PostUpdateReq postUpdateReq) {
         String url = config.getMarketing() + "/publicize/post/updatePost";
         String request = RequestUtil.toJson(postUpdateReq);
-        return RequestUtil.postReqBody(url, request);
+        return RequestUtil.postReqBody(url, request, Boolean.class);
     }
 
     @Override
     public Boolean stickTopPost(PostStickTopReq postStickTopReq) {
         String url = config.getMarketing() + "/publicize/post/stickTopPost";
         String request = RequestUtil.toJson(postStickTopReq);
-        return RequestUtil.postReqBody(url, request);
+        return RequestUtil.postReqBody(url, request, Boolean.class);
     }
 
     @Override
     public Boolean deletePost(PostDeleteReq postDeleteReq) {
         String url = config.getMarketing() + "/publicize/post/deletePost";
         String request = RequestUtil.toJson(postDeleteReq);
-        return RequestUtil.postReqBody(url, request);
+        return RequestUtil.postReqBody(url, request, Boolean.class);
     }
 
     /**

@@ -4,6 +4,8 @@ import com.fenlibao.base.dto.Response;
 import com.fenlibao.marketing.dto.req.publicize.frinedlink.*;
 import com.fenlibao.marketing.dto.resp.publicize.FriendLinkListRespBody;
 import com.fenlibao.marketing.dto.resp.publicize.FriendLinkRespBody;
+import com.fenlibao.pms.security.CurrentUser;
+import com.fenlibao.pms.security.UserPrincipal;
 import com.fenlibao.pms.service.marketing.publicize.FriendLinkService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 
@@ -51,7 +54,8 @@ public class FriendLinkController {
     @ApiOperation("新增友情链接")
     @PostMapping("/addFriendLink")
     @ApiResponse(code = 200, message = "请求成功", response = Boolean.class)
-    public Response<Boolean> addFriendLink(@RequestBody @Valid FriendLinkAddReq friendLinkAddReq) {
+    public Response<Boolean> addFriendLink(@ApiIgnore @CurrentUser UserPrincipal currentUser, @RequestBody @Valid FriendLinkAddReq friendLinkAddReq) {
+        friendLinkAddReq.setUserId(currentUser.getUserBO().getId());
         return Response.ok(friendLinkService.addFriendLink(friendLinkAddReq));
     }
 
