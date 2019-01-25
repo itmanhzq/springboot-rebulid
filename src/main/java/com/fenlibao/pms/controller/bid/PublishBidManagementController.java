@@ -1,8 +1,8 @@
 package com.fenlibao.pms.controller.bid;
 
 import com.fenlibao.base.dto.Response;
-import com.fenlibao.bid.dto.req.ReviewBidReq;
-import com.fenlibao.bid.dto.resp.RehearListRespBody;
+import com.fenlibao.bid.dto.req.PublishBidManagementReq;
+import com.fenlibao.bid.dto.resp.PublishBidListRespBody;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,19 +11,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 复审列表接口
+ * 发标管理接口
  *
  * @author LeiXinXin
- * @date 2019/1/23
+ * @date 2019/1/24
  */
 @RestController
 @RequestMapping("/rehearBid")
-@Api(tags = {"复审列表接口"})
-public class RehearBidController {
-    @PostMapping("/rehearList")
-    @ApiOperation("复审列表")
-    public Response<RehearListRespBody> rehearList(@RequestBody ReviewBidReq req) {
+@Api(tags = {"发标管理接口"})
+public class PublishBidManagementController {
+    @PostMapping("/bidManagement")
+    @ApiOperation("发标管理列表")
+    public Response<PublishBidListRespBody> bidManagement(@RequestBody PublishBidManagementReq req) {
         return null;
     }
-
 }
