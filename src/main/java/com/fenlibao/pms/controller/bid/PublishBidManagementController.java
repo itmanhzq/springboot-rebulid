@@ -3,6 +3,7 @@ package com.fenlibao.pms.controller.bid;
 import com.fenlibao.base.dto.Response;
 import com.fenlibao.bid.dto.req.PublishBidManagementReq;
 import com.fenlibao.bid.dto.resp.PublishBidListRespBody;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PublishBidManagementController {
     @PostMapping("/bidManagement")
     @ApiOperation("发标管理列表")
-    public Response<PublishBidListRespBody> bidManagement(@RequestBody PublishBidManagementReq req) {
+    public Response<PageInfo<PublishBidListRespBody>> bidManagement(@RequestBody PublishBidManagementReq req) {
         return null;
     }
 }

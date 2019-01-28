@@ -3,6 +3,7 @@ package com.fenlibao.pms.controller.bid;
 import com.fenlibao.base.dto.Response;
 import com.fenlibao.bid.dto.req.ReviewBidReq;
 import com.fenlibao.bid.dto.resp.RehearListRespBody;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class RehearBidController {
     @PostMapping("/rehearList")
     @ApiOperation("复审列表")
-    public Response<RehearListRespBody> rehearList(@RequestBody ReviewBidReq req) {
+    public Response<PageInfo<RehearListRespBody>> rehearList(@RequestBody ReviewBidReq req) {
         return null;
     }
 
