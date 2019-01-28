@@ -1,6 +1,6 @@
 package com.fenlibao.pms.model.po.idmt;
 
-import com.fenlibao.base.po.BasePO;
+import com.fenlibao.pms.model.po.BasePO;
 import lombok.*;
 import tk.mybatis.mapper.annotation.KeySql;
 
