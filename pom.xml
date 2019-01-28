@@ -157,6 +157,10 @@
             <artifactId>mybatis-generator-core</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.fenlibao.v2</groupId>
+            <artifactId>model-marketing</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
