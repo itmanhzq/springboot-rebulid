@@ -1,8 +1,6 @@
 package com.fenlibao.common.core.service.marketing.impl;
 
-import cn.hutool.core.util.IdUtil;
 import com.fenlibao.pms.PmsApplication;
-import com.fenlibao.pms.common.http.RequestUtil;
 import com.fenlibao.pms.dto.req.marketing.publicize.article.ArticleGetListReq;
 import com.fenlibao.pms.dto.req.marketing.publicize.frinedlink.FriendLinkGetListReq;
 import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleListRespBody;
