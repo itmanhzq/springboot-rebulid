@@ -6,6 +6,7 @@ import com.fenlibao.bid.dto.req.BorrowingListReq;
 import com.fenlibao.bid.dto.req.BorrowingReq;
 import com.fenlibao.bid.dto.req.NewBorrowingReq;
 import com.fenlibao.bid.dto.resp.*;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,7 +35,7 @@ public class LoanManagementController {
 
     @PostMapping("/queryBorrowingList")
     @ApiOperation("借款管理列表")
-    public Response<BorrowingRespBody> queryBorrowingList(@RequestBody BorrowingListReq req) {
+    public Response<PageInfo<BorrowingRespBody>> queryBorrowingList(@RequestBody BorrowingListReq req) {
         return null;
     }
 
