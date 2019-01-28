@@ -17,6 +17,8 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Objects;
 
 
 /**
@@ -35,11 +37,16 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public PageInfo<ArticleListRespBody> getArticleList(ArticleGetListReq articleGetListReq) {
-        addUserIdListReq(articleGetListReq);
-        String url = config.getMarketing() + "/publicize/article/getArticleList";
-        String request = RequestUtil.toJson(articleGetListReq);
-        PageInfo<ArticleListRespBody> pageInfo = RequestUtil.postReqPage(url, request, ArticleListRespBody.class);
-        addInfo(pageInfo);
+        PageInfo<ArticleListRespBody> pageInfo = new PageInfo<>();
+        pageInfo.setList(new ArrayList<>());
+        UserBO userBO = userService.getUser(articleGetListReq.getUserName());
+        if (Objects.nonNull(userBO)) {
+            articleGetListReq.setUserId(userBO.getId());
+            String url = config.getMarketing() + "/publicize/article/getArticleList";
+            String request = RequestUtil.toJson(articleGetListReq);
+            pageInfo = RequestUtil.postReqPage(url, request, ArticleListRespBody.class);
+            addInfo(pageInfo);
+        }
         return pageInfo;
     }
 
@@ -107,19 +114,6 @@ public class ArticleServiceImpl implements ArticleService {
         String fileName = FILE_NAME + IdUtil.fastSimpleUUID() + Constants.IMAGE_TYPE_JPG;
         QiniuFileUpload.putBaes64(articleReq.getImageUrl(), fileName);
         articleReq.setImageUrl(fileName);
-    }
-
-    /**
-     * addReq添加userId字段
-     *
-     * @param articleGetListReq
-     */
-    private void addUserIdListReq(ArticleGetListReq articleGetListReq) {
-        String userName = articleGetListReq.getUserName();
-        if (Strings.isNotEmpty(userName)) {
-            UserBO user = userService.getUser(userName);
-            articleGetListReq.setUserId(user.getId());
-        }
     }
 
     /**

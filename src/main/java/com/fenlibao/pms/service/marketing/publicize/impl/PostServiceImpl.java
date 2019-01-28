@@ -1,6 +1,7 @@
 package com.fenlibao.pms.service.marketing.publicize.impl;
 
 
+import com.fenlibao.marketing.dto.resp.publicize.ArticleListRespBody;
 import com.fenlibao.pms.common.http.RequestUtil;
 import com.fenlibao.pms.config.Config;
 import com.fenlibao.marketing.dto.req.publicize.post.*;
@@ -13,6 +14,9 @@ import com.github.pagehelper.PageInfo;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * @author WangBoRan
@@ -28,11 +32,17 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PageInfo<PostListRespBody> getPostList(PostGetListReq postGetListReq) {
-        addUserIdValue(postGetListReq);
-        String url = config.getMarketing() + "/publicize/post/getPostList";
-        String request = RequestUtil.toJson(postGetListReq);
-        PageInfo<PostListRespBody> pageInfo = RequestUtil.postReqPage(url, request, PostListRespBody.class);
-        addInfo(pageInfo);
+        UserBO userBO = userService.getUser(postGetListReq.getUserName());
+        PageInfo<PostListRespBody> pageInfo = new PageInfo<>();
+        pageInfo.setList(new ArrayList<>());
+        if (Objects.nonNull(userBO)) {
+            postGetListReq.setUserId(userBO.getId());
+            addUserIdValue(postGetListReq);
+            String url = config.getMarketing() + "/publicize/post/getPostList";
+            String request = RequestUtil.toJson(postGetListReq);
+            pageInfo = RequestUtil.postReqPage(url, request, PostListRespBody.class);
+            addInfo(pageInfo);
+        }
         return pageInfo;
     }
 
@@ -77,10 +87,7 @@ public class PostServiceImpl implements PostService {
      */
     private void addUserIdValue(PostGetListReq postGetListReq) {
         String userName = postGetListReq.getUserName();
-        if (Strings.isNotEmpty(userName)) {
-            UserBO user = userService.getUser(userName);
-            postGetListReq.setUserId(user.getId());
-        }
+        userService.getUser(userName);
     }
 
     /**
