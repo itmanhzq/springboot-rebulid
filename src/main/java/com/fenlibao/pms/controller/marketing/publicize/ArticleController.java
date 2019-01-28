@@ -1,9 +1,11 @@
 package com.fenlibao.pms.controller.marketing.publicize;
 
 import com.fenlibao.base.dto.Response;
-import com.fenlibao.pms.dto.req.marketing.publicize.article.*;
-import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleListRespBody;
-import com.fenlibao.pms.dto.resp.marketing.publicize.ArticleRespBody;
+import com.fenlibao.marketing.dto.req.publicize.article.*;
+import com.fenlibao.marketing.dto.resp.publicize.ArticleListRespBody;
+import com.fenlibao.marketing.dto.resp.publicize.ArticleRespBody;
+import com.fenlibao.pms.security.CurrentUser;
+import com.fenlibao.pms.security.UserPrincipal;
 import com.fenlibao.pms.service.marketing.publicize.ArticleService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 
@@ -43,6 +46,7 @@ public class ArticleController {
 
     @ApiOperation("查询文章")
     @PostMapping("/getArticle")
+    @PreAuthorize("hasPermission('article','view')")
     @ApiResponse(code = 200, message = "请求成功", response = ArticleRespBody.class)
     public Response<ArticleRespBody> getArticle(@RequestBody @Valid ArticleGetReq articleGetReq) {
         return Response.ok(articleService.getArticle(articleGetReq));
@@ -51,9 +55,9 @@ public class ArticleController {
     @ApiOperation("新增文章")
     @PostMapping("/addArticle")
     @ApiResponse(code = 200, message = "请求成功", response = Boolean.class)
-    public Response<Boolean> addArticle(@RequestBody @Valid ArticleAddReq articleAddReq) {
-
-        return Response.ok(articleService.addArticle(articleAddReq));
+    public Response<Boolean> addArticle(@ApiIgnore @CurrentUser UserPrincipal currentUser, @RequestBody @Valid ArticleAddReq essayAddReq) {
+        essayAddReq.setUserId(currentUser.getUserBO().getId());
+        return Response.ok(articleService.addArticle(essayAddReq));
     }
 
     @ApiOperation("修改文章")

@@ -51,11 +51,9 @@ public class Config {
 
     @Data
     public static class Qiniu {
-
         private String qinniuAccessKey;
-
         private String qinniuSecretKey;
-
         private String bucket;
+        private String url;
     }
 }

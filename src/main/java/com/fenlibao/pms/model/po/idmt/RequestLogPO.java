@@ -1,6 +1,6 @@
 package com.fenlibao.pms.model.po.idmt;
 
-import com.fenlibao.pms.model.po.BasePO;
+import com.fenlibao.base.po.BasePO;
 import lombok.*;
 
 import javax.persistence.Column;
@@ -39,10 +39,4 @@ public class RequestLogPO extends BasePO {
      */
     @Column(name = "cost_time")
     private Long costTime;
-
-    /**
-     * 请求参数
-     */
-    @Column(name = "req_content")
-    private String reqContent;
 }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import javax.validation.Valid;
 
 
@@ -46,8 +47,10 @@ public class BorrowerController {
     @ApiOperation("拉黑/取消拉黑")
     @ApiResponse(code = 200, message = "请求成功", response = SignUpRespBody.class)
     @PostMapping("/defriend")
+
+
     public Response<SignUpRespBody> defriend(@Valid @RequestBody DefriendReq defriendReq) {
-       try {
+        try {
             return Response.ok(ResponseStatus.COMMON_OPERATION_SUCCESS);
         } catch (Exception e) {
             log.error("拉黑成功：", e);

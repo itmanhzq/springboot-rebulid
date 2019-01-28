@@ -33,8 +33,9 @@ pms:
     qinniuAccessKey: ENC(vFi/pZrnyiAAeN+jMUAgsfUJdUeWsszkwik/+QH1B9M6FBAf3VHfPtTsCCZ1Hyw9PlaS1l8a2gU=)
     qinniuSecretKey: ENC(r/Bqh+US8tJWWN5S2TukED2cpqZ6oeI/iwWV+rm+59FN8d4pwION+BN7r5NOyk0nTyPX3qN7a6c=)
     bucket: fenlibao-test
+    url: http://testoss.fenlibao.com/
 
   origin: "*"
 
-  marketing: http://192.168.40.227:7002/
+  marketing: http://192.168.40.227:7002
 
