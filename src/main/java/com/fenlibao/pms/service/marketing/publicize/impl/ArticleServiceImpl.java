@@ -17,6 +17,8 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Objects;
 
 
 /**
@@ -35,11 +37,16 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public PageInfo<ArticleListRespBody> getArticleList(ArticleGetListReq articleGetListReq) {
-        addUserIdValue(articleGetListReq);
-        String url = config.getMarketing() + "/publicize/article/getArticleList";
-        String request = RequestUtil.toJson(articleGetListReq);
-        PageInfo<ArticleListRespBody> pageInfo = RequestUtil.postReqPage(url, request, ArticleListRespBody.class);
-        addInfo(pageInfo);
+        PageInfo<ArticleListRespBody> pageInfo = new PageInfo<>();
+        pageInfo.setList(new ArrayList<>());
+        UserBO userBO = userService.getUser(articleGetListReq.getUserName());
+        if (Objects.nonNull(userBO)) {
+            articleGetListReq.setUserId(userBO.getId());
+            String url = config.getMarketing() + "/publicize/article/getArticleList";
+            String request = RequestUtil.toJson(articleGetListReq);
+            pageInfo = RequestUtil.postReqPage(url, request, ArticleListRespBody.class);
+            addInfo(pageInfo);
+        }
         return pageInfo;
     }
 
@@ -47,52 +54,66 @@ public class ArticleServiceImpl implements ArticleService {
     public ArticleRespBody getArticle(ArticleGetReq articleGetReq) {
         String url = config.getMarketing() + "/publicize/article/getArticle";
         String request = RequestUtil.toJson(articleGetReq);
-        return RequestUtil.postReqBody(url, request);
+        ArticleRespBody body = RequestUtil.postReqBody(url, request, ArticleRespBody.class);
+        body.setImageUrl(QiniuFileUpload.getUrl(body.getImageUrl()));
+        return body;
     }
 
     @Override
     public Boolean addArticle(ArticleAddReq articleAddReq) {
-        String fileName = FILE_NAME + IdUtil.fastSimpleUUID() + Constants.IMAGE_TYPE_JPG;
-        QiniuFileUpload.putBaes64(articleAddReq.getImageUrl(), fileName);
-        articleAddReq.setImageUrl(fileName);
-
+        addArticleImage(articleAddReq);
         String url = config.getMarketing() + "/publicize/article/addArticle";
         String request = RequestUtil.toJson(articleAddReq);
-        return RequestUtil.postReqBody(url, request);
+        return RequestUtil.postReqBody(url, request, Boolean.class);
     }
 
     @Override
     public Boolean updateArticle(ArticleUpdateReq articleUpdateReq) {
+        if (Strings.isNotEmpty(articleUpdateReq.getImageUrl())) {
+            addArticleImage(articleUpdateReq);
+        }
         String url = config.getMarketing() + "/publicize/article/updateArticle";
         String request = RequestUtil.toJson(articleUpdateReq);
-        return RequestUtil.postReqBody(url, request);
+        return RequestUtil.postReqBody(url, request, Boolean.class);
     }
 
     @Override
     public Boolean topPlaceArticle(ArticleStickTopReq articleStickTopReq) {
-        String url = config.getMarketing() + "/publicize/article/articleStickTopReq";
+        String url = config.getMarketing() + "/publicize/article/stickTopArticle";
         String request = RequestUtil.toJson(articleStickTopReq);
-        return RequestUtil.postReqBody(url, request);
+        return RequestUtil.postReqBody(url, request, Boolean.class);
     }
 
     @Override
     public Boolean deleteArticle(ArticleDeleteReq essayDeleteReq) {
-        String url = config.getMarketing() + "/publicize/article/updateArticle";
+        String url = config.getMarketing() + "/publicize/article/deleteArticle";
         String request = RequestUtil.toJson(essayDeleteReq);
-        return RequestUtil.postReqBody(url, request);
+        return RequestUtil.postReqBody(url, request, Boolean.class);
     }
 
     /**
-     * 添加userId字段
+     * 删除文章图片
      *
-     * @param articleGetListReq
+     * @param articleDeleteReq
      */
-    private void addUserIdValue(ArticleGetListReq articleGetListReq) {
-        String userName = articleGetListReq.getUserName();
-        if (Strings.isNotEmpty(userName)) {
-            UserBO user = userService.getUser(userName);
-            articleGetListReq.setUserId(user.getId());
-        }
+    private void delteArticleImage(ArticleDeleteReq articleDeleteReq) {
+        articleDeleteReq.getIds().forEach(id -> {
+            ArticleGetReq articleGetReq = new ArticleGetReq();
+            articleGetReq.setId(id);
+            ArticleRespBody articleRespBody = getArticle(articleGetReq);
+            QiniuFileUpload.deleteImage(articleRespBody.getImageUrl());
+        });
+    }
+
+    /**
+     * 上传文章图片
+     *
+     * @param articleReq
+     */
+    private void addArticleImage(ArticleReq articleReq) {
+        String fileName = FILE_NAME + IdUtil.fastSimpleUUID() + Constants.IMAGE_TYPE_JPG;
+        QiniuFileUpload.putBaes64(articleReq.getImageUrl(), fileName);
+        articleReq.setImageUrl(fileName);
     }
 
     /**

@@ -9,16 +9,6 @@ import com.fenlibao.pms.dto.base.ResponseStatus;
 import com.fenlibao.pms.exception.BizException;
 import com.fenlibao.pms.model.enums.JacksonMapperEnum;
 import com.github.pagehelper.PageInfo;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import cn.hutool.core.date.DatePattern;
-import cn.hutool.http.HttpUtil;
-import com.fenlibao.base.dto.Response;
-import com.fenlibao.pms.dto.base.ResponseStatus;
-import com.fenlibao.pms.exception.BizException;
-import com.github.pagehelper.PageInfo;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.util.StringUtils;
@@ -27,10 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.List;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.*;
 
 /**
  * @author WangBoRan
@@ -61,10 +47,10 @@ public class RequestUtil {
 
 
     public static <T> PageInfo<T> postReqPage(String url, String request, Class typeClass) {
-        String responseText = HttpUtil.post(url, request);
         JavaType javaType = mapper.getTypeFactory().constructParametricType(PageInfo.class, typeClass);
-        PageInfo<T> pageInfo = new PageInfo<>();
+        PageInfo<T> pageInfo;
         try {
+            String responseText = HttpUtil.post(url, request);
             Response response = mapper.readValue(responseText, Response.class);
             if (response.getCode().equals(ResponseStatus.COMMON_OPERATION_SUCCESS.getCode())) {
                 String body = mapper.writeValueAsString(response.getBody());
@@ -79,11 +65,12 @@ public class RequestUtil {
         return pageInfo;
     }
 
-    public static <T> T postReqBody(String url, String request) {
-        String responseText = HttpUtil.post(url, request);
-        Response<T> response = null;
+    public static <T> T postReqBody(String url, String request, Class typeClass) {
+        Response<T> response;
         try {
-            response = mapper.readValue(responseText, Response.class);
+            String responseText = HttpUtil.post(url, request);
+            JavaType javaType = mapper.getTypeFactory().constructParametricType(Response.class, typeClass);
+            response = mapper.readValue(responseText, javaType);
         } catch (IOException e) {
             log.error(e.getMessage());
             throw new BizException(ResponseStatus.COMMON_GAIN_ERROR);

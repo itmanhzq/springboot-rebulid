@@ -59,6 +59,14 @@ public interface UserService {
     UserBO getUser(String name);
 
     /**
+     * 根据用户名获取用户Id
+     *
+     * @param name
+     * @return
+     */
+    Integer getUserId(String name);
+
+    /**
      * 根据id获取用户
      *
      * @param id

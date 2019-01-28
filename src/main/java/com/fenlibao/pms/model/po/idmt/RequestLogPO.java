@@ -39,10 +39,4 @@ public class RequestLogPO extends BasePO {
      */
     @Column(name = "cost_time")
     private Long costTime;
-
-    /**
-     * 请求参数
-     */
-    @Column(name = "req_content")
-    private String reqContent;
 }
