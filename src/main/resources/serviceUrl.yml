@@ -1,0 +1,45 @@
+# 微服务调用url
+serverUrl:
+ #营销服务
+ marketingService:
+   #文章列表
+   articleList : /publicize/article/getArticleList
+   #查询文章
+   searchArticle : /publicize/article/getArticle
+   #新增文章
+   addArticle : /publicize/article/addArticle
+   #修改文章
+   updateArticle : /publicize/article/updateArticle
+   #设置文章置顶状态
+   stickTopArticle : /publicize/article/stickTopArticle
+   #删除文章
+   deleteArticle : /publicize/article/deleteArticle
+   #友情链接列表
+   friendLinkList : /publicize/friendLink/getFriendLinkList
+   #查询友情链接
+   searchFriendLink : /publicize/friendLink/getFriendLink
+   #新增友情链接
+   addFriendLink : /publicize/friendLink/addFriendLink
+   #修改友情链接
+   updateFriendLink : /publicize/friendLink/updateFriendLink
+   #删除友情链接
+   deleteFriendLink : /publicize/friendLink/deleteFriendLink
+   #公告列表
+   postList : /publicize/post/getPostList
+   #查询公告
+   searchPost : /publicize/post/getPost
+   #新增公告
+   addPost : /publicize/post/addPost
+   #修改公告
+   updatePost : "/publicize/post/updatePost
+   #设置公告置顶状态
+   stickTopPost : /publicize/post/stickTopPost
+   #删除公告
+   deletePost : /publicize/post/deletePost
+ #用户服务
+ userService:
+
+
+
+
+
