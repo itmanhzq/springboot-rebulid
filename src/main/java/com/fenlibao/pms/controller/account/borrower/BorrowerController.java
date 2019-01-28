@@ -2,6 +2,7 @@ package com.fenlibao.pms.controller.account.borrower;
 
 import com.fenlibao.base.dto.Response;
 
+import com.fenlibao.pms.dto.base.ResponseStatus;
 import com.fenlibao.user.dto.req.borrower.BorrowerDetailReq;
 import com.fenlibao.user.dto.req.borrower.DefriendReq;
 import com.fenlibao.user.dto.req.borrower.SearchBorrowerReq;
