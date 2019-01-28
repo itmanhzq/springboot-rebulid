@@ -1,6 +1,6 @@
 package com.fenlibao.pms.model.po.idmt;
 
-import com.fenlibao.pms.model.po.BasePO;
+import com.fenlibao.base.po.BasePO;
 import lombok.*;
 
 import javax.persistence.Column;
