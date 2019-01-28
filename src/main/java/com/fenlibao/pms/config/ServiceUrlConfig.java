@@ -1,3 +1,4 @@
+/*
 package com.fenlibao.pms.config;
 
 import lombok.Data;
@@ -6,10 +7,12 @@ import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotBlank;
 
+*/
 /**
  * @author chen
  * @date 2018/11/29
- */
+ *//*
+
 @Data
 @Component
 @ConfigurationProperties(prefix = "serverUrl")
@@ -31,3 +34,4 @@ public class ServiceUrlConfig {
         private String deleteArticle;
     }
 }
+*/
