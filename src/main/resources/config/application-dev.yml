@@ -37,5 +37,6 @@ pms:
 
   origin: "*"
 
-  marketing: http://192.168.40.227:7002
+  #  marketing: http://192.168.40.227:7002
+  marketing: http://192.168.40.25:7002
 

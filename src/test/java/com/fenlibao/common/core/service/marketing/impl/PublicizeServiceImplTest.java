@@ -1,7 +1,6 @@
 package com.fenlibao.common.core.service.marketing.impl;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -13,11 +12,11 @@ import com.fenlibao.marketing.dto.req.publicize.frinedlink.FriendLinkUpdateReq;
 import com.fenlibao.marketing.dto.req.publicize.post.*;
 import com.fenlibao.marketing.dto.resp.publicize.*;
 import com.fenlibao.pms.PmsApplication;
+import com.fenlibao.pms.common.http.RequestUtil;
 import com.fenlibao.pms.service.marketing.publicize.ArticleService;
 import com.fenlibao.pms.service.marketing.publicize.FriendLinkService;
 import com.fenlibao.pms.service.marketing.publicize.PostService;
 import com.github.pagehelper.PageInfo;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,9 +43,11 @@ public class PublicizeServiceImplTest {
     @Test
     public void getArticleList() {
         ArticleGetListReq articleGetListReq = new ArticleGetListReq();
-        articleGetListReq.setTitle("广州市");
+        articleGetListReq.setUserName("toby");
+        articleGetListReq.setTitle("");
+        articleGetListReq.setState(1);
         PageInfo<ArticleListRespBody> pageInfo = articleService.getArticleList(articleGetListReq);
-        log.info(pageInfo.toString());
+        log.info(RequestUtil.toJson(pageInfo));
     }
 
     @Test
