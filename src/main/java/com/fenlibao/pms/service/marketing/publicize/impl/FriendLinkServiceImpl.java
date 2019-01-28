@@ -1,5 +1,6 @@
 package com.fenlibao.pms.service.marketing.publicize.impl;
 
+import com.fenlibao.marketing.dto.resp.publicize.PostListRespBody;
 import com.fenlibao.pms.common.http.RequestUtil;
 import com.fenlibao.pms.config.Config;
 import com.fenlibao.marketing.dto.req.publicize.frinedlink.*;
@@ -12,6 +13,9 @@ import com.github.pagehelper.PageInfo;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * @author WangBoRan
@@ -27,11 +31,16 @@ public class FriendLinkServiceImpl implements FriendLinkService {
 
     @Override
     public PageInfo<FriendLinkListRespBody> getFriendLinkList(FriendLinkGetListReq friendLinkGetListReq) {
-        addUserIdValue(friendLinkGetListReq);
-        String url = config.getMarketing() + "/publicize/friendLink/getFriendLinkList";
-        String request = RequestUtil.toJson(friendLinkGetListReq);
-        PageInfo<FriendLinkListRespBody> pageInfo = RequestUtil.postReqPage(url, request, FriendLinkListRespBody.class);
-        addInfo(pageInfo);
+        UserBO userBO = userService.getUser(friendLinkGetListReq.getUserName());
+        PageInfo<FriendLinkListRespBody> pageInfo = new PageInfo<>();
+        pageInfo.setList(new ArrayList<>());
+        if (Objects.nonNull(userBO)) {
+            friendLinkGetListReq.setUserId(userBO.getId());
+            String url = config.getMarketing() + "/publicize/friendLink/getFriendLinkList";
+            String request = RequestUtil.toJson(friendLinkGetListReq);
+            pageInfo = RequestUtil.postReqPage(url, request, FriendLinkListRespBody.class);
+            addInfo(pageInfo);
+        }
         return pageInfo;
     }
 
@@ -39,40 +48,28 @@ public class FriendLinkServiceImpl implements FriendLinkService {
     public FriendLinkRespBody getFriendLink(FriendLinkGetReq friendLinkGetReq) {
         String url = config.getMarketing() + "/publicize/friendLink/getFriendLink";
         String request = RequestUtil.toJson(friendLinkGetReq);
-        return RequestUtil.postReqBody(url, request);
+        return RequestUtil.postReqBody(url, request, FriendLinkRespBody.class);
     }
 
     @Override
     public Boolean addFriendLink(FriendLinkAddReq friendLinkAddReq) {
         String url = config.getMarketing() + "/publicize/friendLink/addFriendLink";
         String request = RequestUtil.toJson(friendLinkAddReq);
-        return RequestUtil.postReqBody(url, request);
+        return RequestUtil.postReqBody(url, request, Boolean.class);
     }
 
     @Override
     public Boolean updateFriendLink(FriendLinkUpdateReq friendLinkUpdateReq) {
         String url = config.getMarketing() + "/publicize/friendLink/updateFriendLink";
         String request = RequestUtil.toJson(friendLinkUpdateReq);
-        return RequestUtil.postReqBody(url, request);
+        return RequestUtil.postReqBody(url, request, Boolean.class);
     }
 
     @Override
     public Boolean deleteFriendLink(FriendLinkDeleteReq friendLinkDeleteReq) {
         String url = config.getMarketing() + "/publicize/friendLink/deleteFriendLink";
         String request = RequestUtil.toJson(friendLinkDeleteReq);
-        return RequestUtil.postReqBody(url, request);
-    }
-
-    /**
-     * 添加userId字段
-     * @param friendLinkGetListReq
-     */
-    private void addUserIdValue(FriendLinkGetListReq friendLinkGetListReq) {
-        String userName = friendLinkGetListReq.getUserName();
-        if (Strings.isNotEmpty(userName)) {
-            UserBO user = userService.getUser(userName);
-            friendLinkGetListReq.setUserId(user.getId());
-        }
+        return RequestUtil.postReqBody(url, request, Boolean.class);
     }
 
     /**

@@ -14,6 +14,7 @@ import com.fenlibao.pms.model.po.idmt.UserRolePO;
 import com.fenlibao.pms.dto.req.system.SaveUserReq;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -134,14 +135,31 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserBO getUser(String name) {
-        Example example = Example.builder(UserPO.class).where(Sqls.custom().andEqualTo("userName", name)).build();
-        UserPO userPO = userMapper.selectOneByExample(example);
-        UserBO userBO = new UserBO();
-        if(userPO!=null) {
-            BeanUtils.copyProperties(userPO, userBO);
-            return userBO;
+        if (name != null) {
+            if (name.length() == 0) {
+                return new UserBO();
+            }
+            Example example = Example.builder(UserPO.class).where(Sqls.custom().andEqualTo("userName", name)).build();
+            UserPO userPO = userMapper.selectOneByExample(example);
+            UserBO userBO = new UserBO();
+            if (userPO != null) {
+                BeanUtils.copyProperties(userPO, userBO);
+                return userBO;
+            }
         }
         return null;
+    }
+
+    @Override
+    public Integer getUserId(String name) {
+        Integer id = null;
+        if (Strings.isNotEmpty(name)) {
+            UserBO user = getUser(name);
+            if (Objects.nonNull(user)) {
+                id = user.getId();
+            }
+        }
+        return id;
     }
 
     @Override

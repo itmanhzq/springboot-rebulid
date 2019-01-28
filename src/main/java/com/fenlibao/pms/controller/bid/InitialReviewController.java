@@ -7,6 +7,7 @@ import com.fenlibao.bid.dto.req.ReviewBidReq;
 import com.fenlibao.bid.dto.resp.ReviewBidInfoRespBody;
 import com.fenlibao.bid.dto.resp.InitialReviewListRespBody;
 import com.fenlibao.bid.dto.resp.ReviewBorrowingRespBody;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +29,7 @@ import javax.validation.Valid;
 public class InitialReviewController {
     @PostMapping("/initialReviewList")
     @ApiOperation("初审列表")
-    public Response<InitialReviewListRespBody> initialReviewList(@RequestBody InitialReviewBidListReq req) {
+    public Response<PageInfo<InitialReviewListRespBody>> initialReviewList(@RequestBody InitialReviewBidListReq req) {
         return null;
     }
 

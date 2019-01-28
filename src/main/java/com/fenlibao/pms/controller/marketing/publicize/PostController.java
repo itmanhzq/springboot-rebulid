@@ -5,6 +5,8 @@ import com.fenlibao.base.dto.Response;
 import com.fenlibao.marketing.dto.req.publicize.post.*;
 import com.fenlibao.marketing.dto.resp.publicize.PostListRespBody;
 import com.fenlibao.marketing.dto.resp.publicize.PostRespBody;
+import com.fenlibao.pms.security.CurrentUser;
+import com.fenlibao.pms.security.UserPrincipal;
 import com.fenlibao.pms.service.marketing.publicize.PostService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 
@@ -43,6 +46,7 @@ public class PostController {
 
     @ApiOperation("查询公告")
     @PostMapping("/getPost")
+    @PreAuthorize("hasPermission('post','view')")
     @ApiResponse(code = 200, message = "请求成功", response = PostListRespBody.class)
     public Response<PostRespBody> getPost(@RequestBody @Valid PostGetReq postGetReq) {
         return Response.ok(postService.getPost(postGetReq));
@@ -51,8 +55,8 @@ public class PostController {
     @ApiOperation("新增公告")
     @PostMapping("/addPost")
     @ApiResponse(code = 200, message = "请求成功", response = Boolean.class)
-    public Response<Boolean> addPost(@RequestBody @Valid PostAddReq postAddReq) {
-
+    public Response<Boolean> addPost(@ApiIgnore @CurrentUser UserPrincipal currentUser, @RequestBody @Valid PostAddReq postAddReq) {
+        postAddReq.setUserId(currentUser.getUserBO().getId());
         return Response.ok(postService.addPost(postAddReq));
     }
 
