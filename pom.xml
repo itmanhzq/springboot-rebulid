@@ -33,6 +33,14 @@
         </dependency>
         <dependency>
             <groupId>com.fenlibao.v2</groupId>
+            <artifactId>model-bid</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fenlibao.v2</groupId>
+            <artifactId>model-marketing</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fenlibao.v2</groupId>
             <artifactId>model-user</artifactId>
         </dependency>
         <dependency>
@@ -175,7 +183,6 @@
                         <id>default</id>
                         <goals>
                             <goal>build</goal>
-                            <goal>push</goal>
                         </goals>
                     </execution>
                 </executions>
