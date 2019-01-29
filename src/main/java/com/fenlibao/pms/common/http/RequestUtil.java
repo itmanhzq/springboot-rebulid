@@ -15,8 +15,6 @@ import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 
 /**
  * @author WangBoRan
@@ -25,7 +23,7 @@ import java.lang.reflect.Type;
 @Slf4j
 public class RequestUtil {
     private static final String BEARER = "Bearer";
-    private static final ObjectMapper mapper = JacksonMapperEnum.INSTANCE.getInstance();
+    private static final ObjectMapper MAPPER = JacksonMapperEnum.INSTANCE.getInstance();
 
     private RequestUtil() {
     }
@@ -47,14 +45,14 @@ public class RequestUtil {
 
 
     public static <T> PageInfo<T> postReqPage(String url, String request, Class typeClass) {
-        JavaType javaType = mapper.getTypeFactory().constructParametricType(PageInfo.class, typeClass);
+        JavaType javaType = MAPPER.getTypeFactory().constructParametricType(PageInfo.class, typeClass);
         PageInfo<T> pageInfo;
         try {
             String responseText = HttpUtil.post(url, request);
-            Response response = mapper.readValue(responseText, Response.class);
+            Response response = MAPPER.readValue(responseText, Response.class);
             if (response.getCode().equals(ResponseStatus.COMMON_OPERATION_SUCCESS.getCode())) {
-                String body = mapper.writeValueAsString(response.getBody());
-                pageInfo = mapper.readValue(body, javaType);
+                String body = MAPPER.writeValueAsString(response.getBody());
+                pageInfo = MAPPER.readValue(body, javaType);
             } else {
                 throw new BizException(ResponseStatus.COMMON_GAIN_ERROR);
             }
@@ -69,8 +67,8 @@ public class RequestUtil {
         Response<T> response;
         try {
             String responseText = HttpUtil.post(url, request);
-            JavaType javaType = mapper.getTypeFactory().constructParametricType(Response.class, typeClass);
-            response = mapper.readValue(responseText, javaType);
+            JavaType javaType = MAPPER.getTypeFactory().constructParametricType(Response.class, typeClass);
+            response = MAPPER.readValue(responseText, javaType);
         } catch (IOException e) {
             log.error(e.getMessage());
             throw new BizException(ResponseStatus.COMMON_GAIN_ERROR);
@@ -87,35 +85,10 @@ public class RequestUtil {
 
     public static String toJson(Object src) {
         try {
-            return mapper.writeValueAsString(src);
+            return MAPPER.writeValueAsString(src);
         } catch (JsonProcessingException e) {
             log.error(e.getMessage());
             throw new BizException(ResponseStatus.COMMON_GAIN_ERROR);
-        }
-    }
-
-    public static class ParameterizedTypeImpl implements ParameterizedType {
-        private final Class raw;
-        private final Class args;
-
-        public ParameterizedTypeImpl(Class raw, Class args) {
-            this.raw = raw;
-            this.args = args;
-        }
-
-        @Override
-        public Type[] getActualTypeArguments() {
-            return new Type[]{args};
-        }
-
-        @Override
-        public Type getRawType() {
-            return raw;
-        }
-
-        @Override
-        public Type getOwnerType() {
-            return null;
         }
     }
 }

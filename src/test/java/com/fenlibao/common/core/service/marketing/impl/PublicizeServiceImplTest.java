@@ -173,7 +173,7 @@ public class PublicizeServiceImplTest {
     @Test
     public void getPost() {
         PostGetReq postGetReq = new PostGetReq();
-        postGetReq.setId(8);
+        postGetReq.setId(383);
         PostRespBody postRespBody = postService.getPost(postGetReq);
         log.info(postRespBody.toString());
     }
