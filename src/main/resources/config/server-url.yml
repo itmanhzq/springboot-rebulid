@@ -4,7 +4,7 @@ url:
     article:
       articleList: /publicize/article/getArticleList
       getArticle: /publicize/article/getArticle
-      articleAddReq: /publicize/article/addArticle
+      addArticle: /publicize/article/addArticle
       updateArticle: /publicize/article/updateArticle
       stickTopArticle: /publicize/article/stickTopArticle
       deleteArticle: /publicize/article/deleteArticle
