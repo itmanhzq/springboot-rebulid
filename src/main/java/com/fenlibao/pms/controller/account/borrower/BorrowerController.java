@@ -1,15 +1,15 @@
 package com.fenlibao.pms.controller.account.borrower;
 
 import com.fenlibao.base.dto.Response;
+
 import com.fenlibao.pms.dto.base.ResponseStatus;
-import com.fenlibao.pms.dto.req.borrower.BorrowerDetailReq;
-import com.fenlibao.pms.dto.req.borrower.DefiendReq;
-import com.fenlibao.pms.dto.req.borrower.SearchBorrowerReq;
+import com.fenlibao.user.dto.req.borrower.BorrowerDetailReq;
+import com.fenlibao.user.dto.req.borrower.DefriendReq;
+import com.fenlibao.user.dto.req.borrower.SearchBorrowerReq;
 import com.fenlibao.pms.dto.resp.SignUpRespBody;
-import com.fenlibao.pms.dto.resp.SigninRespBody;
-import com.fenlibao.pms.model.bo.borrower.BorrowerInfoBO;
-import com.fenlibao.pms.model.bo.borrower.EnterpriseDetailBO;
-import com.fenlibao.pms.model.bo.borrower.PersonalDetailBO;
+import com.fenlibao.user.dto.resp.borrower.BorrowerInfoRespBody;
+import com.fenlibao.user.dto.resp.borrower.EnterpriseDetailRespBody;
+import com.fenlibao.user.dto.resp.borrower.PersonalDetailRespBody;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -34,9 +34,9 @@ import javax.validation.Valid;
 public class BorrowerController {
 
     @ApiOperation("查询借款用户列表")
-    @ApiResponse(code = 200, message = "请求成功", response = BorrowerInfoBO.class)
+    @ApiResponse(code = 200, message = "请求成功", response = BorrowerInfoRespBody.class)
     @PostMapping("/list")
-    public Response<PageInfo<BorrowerInfoBO>> borrowerList(@Valid @RequestBody SearchBorrowerReq searchBorrowerReq) {
+    public Response<PageInfo<BorrowerInfoRespBody>> borrowerList(@Valid @RequestBody SearchBorrowerReq searchBorrowerReq) {
         try {
             return Response.ok("hello");
         } catch (Exception e) {
@@ -48,7 +48,7 @@ public class BorrowerController {
     @ApiOperation("拉黑/取消拉黑")
     @ApiResponse(code = 200, message = "请求成功", response = SignUpRespBody.class)
     @PostMapping("/defriend")
-    public Response<SignUpRespBody> defriend(@Valid @RequestBody DefiendReq defiendReq) {
+    public Response<SignUpRespBody> defriend(@Valid @RequestBody DefriendReq defriendReq) {
         try {
             return Response.ok(ResponseStatus.COMMON_OPERATION_SUCCESS);
         } catch (Exception e) {
@@ -58,9 +58,9 @@ public class BorrowerController {
     }
 
     @ApiOperation("个人借款人信息")
-    @ApiResponse(code = 200, message = "请求成功", response = PersonalDetailBO.class)
+    @ApiResponse(code = 200, message = "请求成功", response = PersonalDetailRespBody.class)
     @PostMapping("/personalBorrower")
-    public Response<PersonalDetailBO> personalBorrower(@Valid @RequestBody BorrowerDetailReq detailReq) {
+    public Response<PersonalDetailRespBody> personalBorrower(@Valid @RequestBody BorrowerDetailReq detailReq) {
         try {
             return Response.ok(ResponseStatus.COMMON_OPERATION_SUCCESS);
         } catch (Exception e) {
@@ -71,9 +71,9 @@ public class BorrowerController {
 
 
     @ApiOperation("企业借款人信息")
-    @ApiResponse(code = 200, message = "请求成功", response = EnterpriseDetailBO.class)
+    @ApiResponse(code = 200, message = "请求成功", response = EnterpriseDetailRespBody.class)
     @PostMapping("/enteroriseBorrower")
-    public Response<EnterpriseDetailBO> enteroriseBorrower(@Valid @RequestBody BorrowerDetailReq detailReq) {
+    public Response<EnterpriseDetailRespBody> enteroriseBorrower(@Valid @RequestBody BorrowerDetailReq detailReq) {
         try {
             return Response.ok(ResponseStatus.COMMON_OPERATION_SUCCESS);
         } catch (Exception e) {
