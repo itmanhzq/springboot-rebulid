@@ -9,6 +9,7 @@ import com.fenlibao.pms.config.Config;
 import com.fenlibao.marketing.dto.req.publicize.article.*;
 import com.fenlibao.marketing.dto.resp.publicize.ArticleListRespBody;
 import com.fenlibao.marketing.dto.resp.publicize.ArticleRespBody;
+import com.fenlibao.pms.config.PropertiesConfig;
 import com.fenlibao.pms.model.bo.idmt.UserBO;
 import com.fenlibao.pms.service.marketing.publicize.ArticleService;
 import com.fenlibao.pms.service.system.UserService;
@@ -35,6 +36,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     private static final String FILE_NAME = "article_";
 
+    @Autowired
+    private PropertiesConfig propertiesConfig;
+
     @Override
     public PageInfo<ArticleListRespBody> getArticleList(ArticleGetListReq articleGetListReq) {
         PageInfo<ArticleListRespBody> pageInfo = new PageInfo<>();
@@ -42,7 +46,7 @@ public class ArticleServiceImpl implements ArticleService {
         UserBO userBO = userService.getUser(articleGetListReq.getUserName());
         if (Objects.nonNull(userBO)) {
             articleGetListReq.setUserId(userBO.getId());
-            String url = config.getMarketing() + "/publicize/article/getArticleList";
+            String url = config.getMarketing() + propertiesConfig.getArticleList();
             String request = RequestUtil.toJson(articleGetListReq);
             pageInfo = RequestUtil.postReqPage(url, request, ArticleListRespBody.class);
             addInfo(pageInfo);
