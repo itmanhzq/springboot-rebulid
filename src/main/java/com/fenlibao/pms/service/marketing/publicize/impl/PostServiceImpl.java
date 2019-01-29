@@ -7,6 +7,7 @@ import com.fenlibao.pms.config.Config;
 import com.fenlibao.marketing.dto.req.publicize.post.*;
 import com.fenlibao.marketing.dto.resp.publicize.PostListRespBody;
 import com.fenlibao.marketing.dto.resp.publicize.PostRespBody;
+import com.fenlibao.pms.config.PropertiesConfig;
 import com.fenlibao.pms.model.bo.idmt.UserBO;
 import com.fenlibao.pms.service.marketing.publicize.PostService;
 import com.fenlibao.pms.service.system.UserService;
@@ -29,6 +30,8 @@ public class PostServiceImpl implements PostService {
     private Config config;
     @Autowired
     private UserService userService;
+    @Autowired
+    private PropertiesConfig propertiesConfig;
 
     @Override
     public PageInfo<PostListRespBody> getPostList(PostGetListReq postGetListReq) {
@@ -38,7 +41,7 @@ public class PostServiceImpl implements PostService {
         if (Objects.nonNull(userBO)) {
             postGetListReq.setUserId(userBO.getId());
             addUserIdValue(postGetListReq);
-            String url = config.getMarketing() + "/publicize/post/getPostList";
+            String url = config.getMarketing() + propertiesConfig.getGetPostList();
             String request = RequestUtil.toJson(postGetListReq);
             pageInfo = RequestUtil.postReqPage(url, request, PostListRespBody.class);
             addInfo(pageInfo);
@@ -48,28 +51,28 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostRespBody getPost(PostGetReq postGetReq) {
-        String url = config.getMarketing() + "/publicize/post/getPost";
+        String url = config.getMarketing() + propertiesConfig.getGetPost();
         String request = RequestUtil.toJson(postGetReq);
         return RequestUtil.postReqBody(url, request, PostRespBody.class);
     }
 
     @Override
     public Boolean addPost(PostAddReq postAddReq) {
-        String url = config.getMarketing() + "/publicize/post/addPost";
+        String url = config.getMarketing() + propertiesConfig.getAddPost();
         String request = RequestUtil.toJson(postAddReq);
         return RequestUtil.postReqBody(url, request, Boolean.class);
     }
 
     @Override
     public Boolean updatePost(PostUpdateReq postUpdateReq) {
-        String url = config.getMarketing() + "/publicize/post/updatePost";
+        String url = config.getMarketing() + propertiesConfig.getUpdatePost();
         String request = RequestUtil.toJson(postUpdateReq);
         return RequestUtil.postReqBody(url, request, Boolean.class);
     }
 
     @Override
     public Boolean stickTopPost(PostStickTopReq postStickTopReq) {
-        String url = config.getMarketing() + "/publicize/post/stickTopPost";
+        String url = config.getMarketing() + propertiesConfig.getStickTopPost();
         String request = RequestUtil.toJson(postStickTopReq);
         return RequestUtil.postReqBody(url, request, Boolean.class);
     }

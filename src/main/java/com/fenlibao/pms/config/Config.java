@@ -36,6 +36,8 @@ public class Config {
 
     private Config.Request request;
 
+    private Config.MarketingService marketingService;
+
     @NotBlank
     private String origin;
 
@@ -55,5 +57,26 @@ public class Config {
         private String qinniuSecretKey;
         private String bucket;
         private String url;
+    }
+
+    @Data
+    public static class MarketingService {
+        private String articleList;
+        private String searchArticle;
+        private String addArticle;
+        private String updateArticle;
+        private String stickTopArticle;
+        private String deleteArticle;
+        private String friendLinkList;
+        private String searchFriendLink;
+        private String addFriendLink;
+        private String updateFriendLink;
+        private String deleteFriendLink;
+        private String postList;
+        private String searchPost;
+        private String addPost;
+        private String updatePost;
+        private String stickTopPost;
+        private String deletePost;
     }
 }

@@ -6,6 +6,7 @@ import com.fenlibao.pms.config.Config;
 import com.fenlibao.marketing.dto.req.publicize.frinedlink.*;
 import com.fenlibao.marketing.dto.resp.publicize.FriendLinkListRespBody;
 import com.fenlibao.marketing.dto.resp.publicize.FriendLinkRespBody;
+import com.fenlibao.pms.config.PropertiesConfig;
 import com.fenlibao.pms.model.bo.idmt.UserBO;
 import com.fenlibao.pms.service.marketing.publicize.FriendLinkService;
 import com.fenlibao.pms.service.system.UserService;
@@ -28,6 +29,8 @@ public class FriendLinkServiceImpl implements FriendLinkService {
     private Config config;
     @Autowired
     private UserService userService;
+    @Autowired
+    private PropertiesConfig propertiesConfig;
 
     @Override
     public PageInfo<FriendLinkListRespBody> getFriendLinkList(FriendLinkGetListReq friendLinkGetListReq) {
@@ -36,7 +39,7 @@ public class FriendLinkServiceImpl implements FriendLinkService {
         pageInfo.setList(new ArrayList<>());
         if (Objects.nonNull(userBO)) {
             friendLinkGetListReq.setUserId(userBO.getId());
-            String url = config.getMarketing() + "/publicize/friendLink/getFriendLinkList";
+            String url = config.getMarketing() + propertiesConfig.getGetFriendLinkList();
             String request = RequestUtil.toJson(friendLinkGetListReq);
             pageInfo = RequestUtil.postReqPage(url, request, FriendLinkListRespBody.class);
             addInfo(pageInfo);
@@ -46,28 +49,28 @@ public class FriendLinkServiceImpl implements FriendLinkService {
 
     @Override
     public FriendLinkRespBody getFriendLink(FriendLinkGetReq friendLinkGetReq) {
-        String url = config.getMarketing() + "/publicize/friendLink/getFriendLink";
+        String url = config.getMarketing() + propertiesConfig.getGetFriendLink();
         String request = RequestUtil.toJson(friendLinkGetReq);
         return RequestUtil.postReqBody(url, request, FriendLinkRespBody.class);
     }
 
     @Override
     public Boolean addFriendLink(FriendLinkAddReq friendLinkAddReq) {
-        String url = config.getMarketing() + "/publicize/friendLink/addFriendLink";
+        String url = config.getMarketing() + propertiesConfig.getAddFriendLink();
         String request = RequestUtil.toJson(friendLinkAddReq);
         return RequestUtil.postReqBody(url, request, Boolean.class);
     }
 
     @Override
     public Boolean updateFriendLink(FriendLinkUpdateReq friendLinkUpdateReq) {
-        String url = config.getMarketing() + "/publicize/friendLink/updateFriendLink";
+        String url = config.getMarketing() + propertiesConfig.getUpdateFriendLink();
         String request = RequestUtil.toJson(friendLinkUpdateReq);
         return RequestUtil.postReqBody(url, request, Boolean.class);
     }
 
     @Override
     public Boolean deleteFriendLink(FriendLinkDeleteReq friendLinkDeleteReq) {
-        String url = config.getMarketing() + "/publicize/friendLink/deleteFriendLink";
+        String url = config.getMarketing() + propertiesConfig.getDeleteFriendLink();
         String request = RequestUtil.toJson(friendLinkDeleteReq);
         return RequestUtil.postReqBody(url, request, Boolean.class);
     }

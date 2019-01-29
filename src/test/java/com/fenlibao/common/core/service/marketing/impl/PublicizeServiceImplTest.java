@@ -73,7 +73,7 @@ public class PublicizeServiceImplTest {
         ArticleStickTopReq articleStickTopReq = new ArticleStickTopReq();
         articleStickTopReq.setId(862);
         articleStickTopReq.setIsStickTop(false);
-        articleService.topPlaceArticle(articleStickTopReq);
+        articleService.stickTopArticle(articleStickTopReq);
         log.debug("添加成功：");
     }
 
@@ -91,7 +91,7 @@ public class PublicizeServiceImplTest {
         articleAddReq.setSortTime(new Date());
         articleAddReq.setIsStickTop(false);
         articleAddReq.setState(0);
-        articleAddReq.setOnlineTime(new Date());
+        articleAddReq.setPreOnlineTime(new Date());
         articleAddReq.setKeyword("wer");
         articleAddReq.setSummary("waer");
         articleAddReq.setContent("<p>zdfaegaeg W</p>");
@@ -153,7 +153,7 @@ public class PublicizeServiceImplTest {
         postAddReq.setSortTime(new Date());
         postAddReq.setIsStickTop(false);
         postAddReq.setState(1);
-        postAddReq.setOnlineTime(new Date());
+        postAddReq.setPreOnlineTime(new Date());
         postAddReq.setKeyword("阿萨大大");
         postAddReq.setSummary("afgesafaf");
         postAddReq.setContent("asfaf");

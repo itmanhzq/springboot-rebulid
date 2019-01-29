@@ -68,10 +68,10 @@ public class ArticleController {
     }
 
     @ApiOperation("设置文章置顶状态")
-    @PostMapping("/topPlaceArticle")
+    @PostMapping("/stickTopArticle")
     @ApiResponse(code = 200, message = "请求成功", response = Boolean.class)
-    public Response<Boolean> topPlaceArticle(@RequestBody @Valid ArticleStickTopReq articleStickTopReq) {
-        return Response.ok(articleService.topPlaceArticle(articleStickTopReq));
+    public Response<Boolean> isStickTopArticle(@RequestBody @Valid ArticleStickTopReq articleStickTopReq) {
+        return Response.ok(articleService.stickTopArticle(articleStickTopReq));
     }
 
     @ApiOperation("删除文章")

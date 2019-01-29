@@ -49,7 +49,7 @@ public interface ArticleService {
      * @param articleStickTopReq
      * @return
      */
-    Boolean topPlaceArticle(ArticleStickTopReq articleStickTopReq);
+    Boolean stickTopArticle(ArticleStickTopReq articleStickTopReq);
 
     /**
      * 删除文章

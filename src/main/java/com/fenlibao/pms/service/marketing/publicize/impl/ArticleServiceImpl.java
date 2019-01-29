@@ -9,6 +9,7 @@ import com.fenlibao.marketing.dto.resp.publicize.ArticleRespBody;
 import com.fenlibao.pms.common.http.QiniuFileUpload;
 import com.fenlibao.pms.common.http.RequestUtil;
 import com.fenlibao.pms.config.Config;
+import com.fenlibao.pms.config.PropertiesConfig;
 import com.fenlibao.pms.model.bo.idmt.UserBO;
 import com.fenlibao.pms.service.marketing.publicize.ArticleService;
 import com.fenlibao.pms.service.system.UserService;
@@ -32,6 +33,8 @@ public class ArticleServiceImpl implements ArticleService {
     private Config config;
     @Autowired
     private UserService userService;
+    @Autowired
+    private PropertiesConfig propertiesConfig;
 
     private static final String FILE_NAME = "article_";
 
@@ -42,7 +45,7 @@ public class ArticleServiceImpl implements ArticleService {
         UserBO userBO = userService.getUser(articleGetListReq.getUserName());
         if (Objects.nonNull(userBO)) {
             articleGetListReq.setUserId(userBO.getId());
-            String url = config.getMarketing() + "/publicize/article/getArticleList";
+            String url = config.getMarketing() + propertiesConfig.getArticleList();
             String request = RequestUtil.toJson(articleGetListReq);
             pageInfo = RequestUtil.postReqPage(url, request, ArticleListRespBody.class);
             addInfo(pageInfo);
@@ -52,7 +55,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public ArticleRespBody getArticle(ArticleGetReq articleGetReq) {
-        String url = config.getMarketing() + "/publicize/article/getArticle";
+        String url = config.getMarketing() + propertiesConfig.getGetArticle();
         String request = RequestUtil.toJson(articleGetReq);
         ArticleRespBody body = RequestUtil.postReqBody(url, request, ArticleRespBody.class);
         body.setImageUrl(QiniuFileUpload.getUrl(body.getImageUrl()));
@@ -62,7 +65,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Boolean addArticle(ArticleAddReq articleAddReq) {
         addArticleImage(articleAddReq);
-        String url = config.getMarketing() + "/publicize/article/addArticle";
+        String url = config.getMarketing() + propertiesConfig.getAddArticle();
         String request = RequestUtil.toJson(articleAddReq);
         return RequestUtil.postReqBody(url, request, Boolean.class);
     }
@@ -72,22 +75,23 @@ public class ArticleServiceImpl implements ArticleService {
         if (Strings.isNotEmpty(articleUpdateReq.getImageUrl())) {
             addArticleImage(articleUpdateReq);
         }
-        String url = config.getMarketing() + "/publicize/article/updateArticle";
+        String url = config.getMarketing() + propertiesConfig.getUpdateArticle();
         String request = RequestUtil.toJson(articleUpdateReq);
         return RequestUtil.postReqBody(url, request, Boolean.class);
     }
 
     @Override
-    public Boolean topPlaceArticle(ArticleStickTopReq articleStickTopReq) {
-        String url = config.getMarketing() + "/publicize/article/stickTopArticle";
+    public Boolean stickTopArticle(ArticleStickTopReq articleStickTopReq) {
+        String url = config.getMarketing() + propertiesConfig.getStickTopArticle();
         String request = RequestUtil.toJson(articleStickTopReq);
         return RequestUtil.postReqBody(url, request, Boolean.class);
     }
 
     @Override
-    public Boolean deleteArticle(ArticleDeleteReq essayDeleteReq) {
-        String url = config.getMarketing() + "/publicize/article/deleteArticle";
-        String request = RequestUtil.toJson(essayDeleteReq);
+    public Boolean deleteArticle(ArticleDeleteReq articleDeleteReq) {
+        delteArticleImage(articleDeleteReq);
+        String url = config.getMarketing() + propertiesConfig.getDeleteArticle();
+        String request = RequestUtil.toJson(articleDeleteReq);
         return RequestUtil.postReqBody(url, request, Boolean.class);
     }
 
