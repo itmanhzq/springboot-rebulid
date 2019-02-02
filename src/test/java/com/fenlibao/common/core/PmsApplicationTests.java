@@ -36,6 +36,9 @@ public class PmsApplicationTests {
 
     @Test
     public void testEncryptPassword() {
+        String encrypt = stringEncryptor.encrypt("fenlibao.123");
+        String decrypt = stringEncryptor.decrypt(encrypt);
+
         String a =passwordEncoder.encode("passwd");
         String dbPasswordKey = "spring.datasource.password";
         String encryptDBPassword = stringEncryptor.encrypt(env.getProperty(dbPasswordKey));
